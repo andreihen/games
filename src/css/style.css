@@ -1,0 +1,524 @@
+body { 
+    font-family: 'Inter', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    background-color: #111827; /* Tailwind gray-900 */
+    color: #e5e7eb; /* Tailwind gray-200 */
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    min-height: 100vh; 
+    padding: 1rem;
+}
+.game-container { 
+    background-color: #1f2937; /* Tailwind gray-800 */
+    border: 1px solid #374151; /* Tailwind gray-700 */
+    width: 100%; 
+    max-width: 700px; 
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+}
+.phase-title { 
+    color: #60a5fa; /* Tailwind blue-400 */
+}
+.button { 
+    transition: all 0.2s ease-in-out; 
+    border-radius: 8px; 
+}
+.button:hover { 
+    transform: translateY(-2px); 
+}
+.button-primary { 
+    background-color: #2563eb; /* Tailwind blue-600 */
+    color: white; 
+}
+.button-primary:hover { 
+    background-color: #1d4ed8; /* Tailwind blue-700 */
+}
+.button-secondary { 
+    background-color: #4b5563; /* Tailwind gray-600 */
+    color: white; 
+}
+.button-secondary:hover { 
+    background-color: #374151; /* Tailwind gray-700 */
+}
+.button-choice { 
+    background-color: #3b82f6; /* Tailwind blue-500 */
+    color:white; 
+    margin: 5px; 
+} 
+.button-choice:hover { 
+    background-color: #2563eb; 
+}
+.input-field { 
+    background-color: #374151; 
+    border: 1px solid #4b5563; 
+    color: #e5e7eb; 
+    border-radius: 6px; 
+}
+.disabled-button { 
+    background-color: #4b5563 !important; 
+    cursor: not-allowed !important; 
+    opacity: 0.7; 
+}
+.limit-display { 
+    font-size: 0.9rem; 
+    color: #f59e0b; /* Tailwind amber-500 */
+    margin-bottom: 10px; 
+    text-align: center; 
+    min-height: 20px; 
+}
+.si-modal-overlay.hidden {
+  display: none;
+}
+
+/* Estilos BlocoFit */
+.blockfit-main-area { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+.blockfit-target-grid { display: grid; border: 2px solid #60a5fa; background-color: #2b3440; }
+.blockfit-cell { background-color: #374151; border: 1px solid #1e293b; }
+.blockfit-cell.filled { background-color: #818cf8; } /* indigo-400 */
+.blockfit-piece-preview { border: 1px dashed #4b5563; padding: 5px; margin: 5px; cursor: grab; display: inline-block; }
+.blockfit-piece-preview.dragging { opacity: 0.7; border-style: solid; }
+.blockfit-piece-cell { width: 20px; height: 20px; background-color: #a78bfa; /* violet-400 */ border: 1px solid #1e293b; display: inline-block; margin:1px; }
+.blockfit-controls button { margin: 0 5px; }
+.blockfit-pieces-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top:10px; max-height: 150px; overflow-y: auto; padding: 5px; background-color: #2b3440; border-radius: 8px;}
+
+/* Estilos Labirinto */
+.maze-grid { display: grid; border: 2px solid #60a5fa; background-color: #1e293b; margin: 10px auto; }
+.maze-cell { background-color: #4b5563; /* Parede */ display: flex; align-items: center; justify-content: center; }
+.maze-cell.path { background-color: #374151; /* Caminho */ }
+.maze-cell.player { background-color: #facc15 !important; /* Amarelo */ border-radius: 50%; width: 70% !important; height: 70% !important; margin: auto; }
+.maze-cell.start { background-color: #22c55e !important; /* Verde */ }
+.maze-cell.exit { background-color: #ef4444 !important; /* Vermelho */ }
+.maze-cell.key { background-color: #eab308 !important; /* Dourado */ font-size: 0.8em; }
+.maze-cell.door { background-color: #a16207 !important; /* Castanho */ }
+.maze-cell.door.open { background-color: #52525b !important; /* Cinza escuro - porta aberta */}
+.maze-inventory { text-align: center; margin-top: 5px; font-size: 0.9rem; color: #fde047; }
+
+/* Estilos Resta Um */
+.restaum-board { display: grid; gap: 2px; margin: 10px auto; padding: 5px; background-color: #2b3440; border: 2px solid #60a5fa; }
+.restaum-cell { width: 35px; height: 35px; border-radius: 50%; background-color: #4b5563; /* Furo vazio */ display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.restaum-cell.peg { background-color: #818cf8; /* Peça (indigo-400) */ }
+.restaum-cell.selected { box-shadow: 0 0 10px 3px #60a5fa; }
+.restaum-cell.invalid { background-color: #111827 !important; cursor: not-allowed; /* Espaço inválido do tabuleiro */ }
+
+.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); }
+.modal-content { background-color: #1f2937; margin: 10% auto; padding: 25px; border: 1px solid #374151; border-radius: 10px; width: 90%; max-width: 500px; text-align: center; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+.modal-close-button { background-color: #2563eb; color: white; padding: 10px 20px; margin-top: 20px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; }
+.modal-close-button:hover { background-color: #1d4ed8; }
+
+/* Estilos de outros jogos (abreviados para manter o foco) */
+.sudoku-grid { display: grid; border: 2px solid #60a5fa; margin: 10px auto; }
+.sudoku-cell { width: 35px; height: 35px; border: 1px solid #4b5563; display: flex; align-items: center; justify-content: center; }
+.sudoku-cell input { width: 100%; height: 100%; text-align: center; background-color: #374151; color: #e5e7eb; border: none; font-size: 1.1rem; outline: none; }
+.sudoku-cell input:disabled { background-color: #2b3440; color: #9ca3af; }
+.sudoku-cell.subgrid-border-right { border-right-width: 2px; border-right-color: #60a5fa; }
+.sudoku-cell.subgrid-border-bottom { border-bottom-width: 2px; border-bottom-color: #60a5fa;}
+.crypto-text { font-size: 1rem; letter-spacing: 1px; margin-bottom: 10px; text-align: center; word-break: break-all; }
+.crypto-char-placeholder { display: inline-block; width: 18px; text-align: center; border-bottom: 1px solid #60a5fa; margin: 0 1px; color: #fde047; min-height: 22px; }
+.hanoi-peg-container { height: 160px; }
+.hanoi-disk { height: 18px; }
+.lights-out-grid { display: grid; gap: 5px; margin: 15px auto; }
+.light-button { width: 40px; height: 40px; border: 2px solid #4b5563; border-radius: 8px; cursor: pointer; transition: background-color 0.3s; }
+.light-on { background-color: #facc15; box-shadow: 0 0 12px #facc15; }
+.light-off { background-color: #374151; }
+.color-peg-mastermind { width: 28px; height: 28px; border-radius: 50%; cursor: pointer; transition: transform 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.1); margin: 0 3px; }
+.guess-slot-mastermind { width: 26px; height: 26px; border-radius: 50%; border: 2px solid #4b5563; background-color: #374151; margin: 1px; }
+.nonogram-grid { display: grid; border: 1px solid #4b5563; margin: 8px auto; }
+.nonogram-cell { width: 28px; height: 28px; background-color: #374151; border: 1px solid #2b3440; cursor: pointer; display:flex; align-items:center; justify-content:center; font-size: 14px; }
+.nonogram-cell.filled { background-color: #60a5fa; }
+.nonogram-cell.marked::after { content: 'X'; color: #6b7280; }
+.nonogram-hints { font-size: 0.75rem; text-align: center; color: #9ca3af; }
+.nonogram-hints-container-cols { display: flex; justify-content: center; margin-left: 28px; } 
+.nonogram-hints-container-rows { display: flex; flex-direction: column; justify-content: center; margin-top: 28px; } 
+.nonogram-hint-block { min-width: 28px; min-height: 28px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; }
+.nonogram-hint-block-row { min-width: 28px; min-height: 28px; display: flex; align-items: center; justify-content: flex-end; padding-right: 4px;}
+.sliding-puzzle-grid { display: grid; border: 2px solid #4b5563; margin: 8px auto; padding: 4px; background-color: #2b3440; }
+.sliding-puzzle-tile { background-color: #60a5fa; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: bold; cursor: pointer; user-select: none; transition: background-color 0.2s, transform 0.2s; border: 1px solid #1f2937;}
+.sliding-puzzle-tile:hover { background-color: #3b82f6; }
+.sliding-puzzle-empty { background-color: transparent !important; cursor: default !important; border: none !important; }
+.flow-grid { display: grid; border: 1px solid #4b5563; margin: 8px auto; }
+.flow-cell { width: 33px; height: 33px; border: 1px solid #2b3440; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.flow-dot { width: 18px; height: 18px; border-radius: 50%; }
+.flow-path { transition: background-color 0.1s; }
+.scale-item { width: 35px; height: 35px; background-color: #9ca3af; border: 1px solid #4b5563; border-radius: 8px; display: flex; align-items: center; justify-content: center; margin: 3px; cursor: pointer; transition: background-color 0.2s; }
+.scale-item:hover { background-color: #6b7280; }
+.scale-item.selected { background-color: #60a5fa; border-color: #2563eb; }
+.scale-pan { min-height: 50px; background-color: #374151; border: 2px dashed #4b5563; border-radius: 8px; padding: 8px; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; }
+.scale-result-area { font-weight: bold; color: #fde047; /* yellow-300 */ }
+.feedback-peg { width: 10px; height: 10px; border-radius: 50%; margin: 1px; }
+.black-peg { background-color: #000000; border: 1px solid #4b5563; }
+.white-peg { background-color: #ffffff; border: 1px solid #4b5563; }
+
+/* Adicione estas classes ao final do seu style.css */
+
+.blockfit-main-area { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 15px; 
+}
+
+.blockfit-target-grid { 
+    display: grid; 
+    border: 2px solid #60a5fa; /* Tailwind blue-400 */
+    background-color: #2b3440; 
+}
+
+.blockfit-cell { 
+    background-color: #374151; /* Tailwind gray-700 */
+    border: 1px solid #1e293b; /* Fundo mais escuro para efeito de grade */
+}
+
+.blockfit-cell.filled { 
+    background-color: #818cf8; /* Tailwind indigo-400 */
+    border-color: #4f46e5;
+}
+
+.blockfit-pieces-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 10px; 
+    margin-top:10px; 
+    max-height: 150px; 
+    overflow-y: auto; 
+    padding: 10px; 
+    background-color: #111827; /* Tailwind gray-900 */
+    border-radius: 8px;
+}
+
+.blockfit-piece-preview { 
+    border: 2px dashed #4b5563; /* Tailwind gray-600 */
+    padding: 5px; 
+    cursor: grab; 
+    display: inline-block; 
+    transition: border-color 0.2s;
+}
+
+.blockfit-piece-preview:hover {
+    border-color: #9ca3af; /* Tailwind gray-400 */
+}
+
+.blockfit-piece-preview.dragging { 
+    opacity: 0.5; 
+    border-style: solid;
+    cursor: grabbing;
+}
+
+.blockfit-piece-cell { 
+    width: 20px; 
+    height: 20px; 
+    background-color: #a78bfa; /* Tailwind violet-400 */
+    border: 1px solid #1e293b; 
+    display: inline-block; 
+    margin:1px; 
+}
+
+.blockfit-controls button { 
+    margin: 0 5px; 
+}
+/* Adicione estas classes ao final do seu style.css */
+
+.blockfit-main-area.select-none {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.blockfit-piece-preview {
+    /* (O estilo que já tinha está bom) */
+    cursor: grab;
+}
+
+.blockfit-piece-preview.selected {
+    border: 2px solid #60a5fa; /* Tailwind blue-400 */
+    box-shadow: 0 0 10px #60a5fa;
+    border-radius: 4px;
+}
+
+.blockfit-piece-cell {
+    width: 15px; /* Tamanho menor para a paleta */
+    height: 15px;
+    border: 1px solid rgba(0,0,0,0.4);
+    display: inline-block;
+}
+
+/* Estilos para a pré-visualização "fantasma" */
+.ghost-cell {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none; /* Importante para não interferir com o rato */
+    transition: background-color 0.1s;
+    border-radius: 2px;
+}
+
+.ghost-cell.valid-placement {
+    opacity: 0.7;
+    outline: 2px solid #22c55e; /* green-500 */
+}
+
+.ghost-cell.invalid-placement {
+    opacity: 0.5;
+    background-color: #ef4444 !important; /* red-500, ignora a cor da peça */
+    outline: 2px solid #b91c1c; /* red-700 */
+}
+
+/* Estilos para Quebra-Cabeça de Lógica */
+.logic-grid-container {
+    background-color: #374151; /* gray-700 */
+    border: 2px solid #4b5563; /* gray-600 */
+    border-radius: 8px;
+}
+
+.logic-grid-cell {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4b5563; /* gray-600 */
+    flex-shrink: 0; /* Previne que as células encolham */
+    font-size: 14px;
+}
+
+.logic-grid-cell.header {
+    background-color: #1f2937; /* gray-800 */
+    color: #9ca3af; /* gray-400 */
+    font-weight: bold;
+    writing-mode: vertical-rl; /* Gira o texto das categorias */
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
+.logic-grid-cell.main-cat-header {
+    writing-mode: horizontal-tb;
+    transform: none;
+    width: 50px; /* Mais espaço para os itens da categoria principal */
+}
+
+.logic-grid-cell.corner {
+    background-color: #111827; /* gray-900 */
+}
+
+.logic-grid-cell.interactive {
+    background-color: #1f2937; /* gray-800 */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logic-grid-cell.interactive:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+.solution-select {
+    font-size: 12px;
+    padding: 2px !important;
+    background-color: #4b5563 !important;
+}
+
+#sd-timer-bar-container {
+    transition: all 0.2s ease-in-out;
+}
+
+#sd-char-stream {
+    font-size: 1.5rem; /* text-2xl */
+    font-family: 'Courier New', Courier, monospace;
+    word-spacing: 0.5rem;
+    letter-spacing: 0.25rem;
+}
+
+.sd-char {
+    cursor: pointer;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s, color 0.2s;
+    display: inline-block; /* Permite animações de transformação */
+}
+
+.sd-char:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+.sd-char.found {
+    background-color: #22c55e; /* green-500 */
+    color: #1f2937; /* gray-800 */
+    cursor: default;
+    transform: scale(1.2);
+}
+
+.sd-char.incorrect {
+    background-color: #ef4444; /* red-500 */
+    animation: shake-incorrect 0.4s ease; /* Reutiliza a animação do Caça ao Símbolo */
+}
+
+/* Estilos ADICIONAIS para Diferença Sutil */
+
+.sd-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect fill="%23000" width="100" height="100"/><g fill-opacity=".5"><rect fill="%23111" width="11" height="11"/><rect fill="%231a1a1a" x="22" width="11" height="11"/><rect fill="%23333" x="44" width="11" height="11"/><rect fill="%234d4d4d" x="66" width="11" height="11"/><rect fill="%23666" x="88" width="11" height="11"/><rect fill="%231a1a1a" y="22" width="11" height="11"/><rect fill="%23333" x="22" y="22" width="11" height="11"/><rect fill="%234d4d4d" x="44" y="22" width="11" height="11"/><rect fill="%23666" x="66" y="22" width="11" height="11"/><rect fill="%23808080" x="88" y="22" width="11" height="11"/><rect fill="%23333" y="44" width="11" height="11"/><rect fill="%234d4d4d" x="22" y="44" width="11" height="11"/><rect fill="%23666" x="44" y="44" width="11" height="11"/><rect fill="%23808080" x="66" y="44" width="11" height="11"/><rect fill="%23999" x="88" y="44" width="11" height="11"/><rect fill="%234d4d4d" y="66" width="11" height="11"/><rect fill="%23666" x="22" y="66" width="11" height="11"/><rect fill="%23808080" x="44" y="66" width="11" height="11"/><rect fill="%23999" x="66" y="66" width="11" height="11"/><rect fill="%23b3b3b3" x="88" y="66" width="11" height="11"/><rect fill="%23666" y="88" width="11" height="11"/><rect fill="%23808080" x="22" y="88" width="11" height="11"/><rect fill="%23999" x="44" y="88" width="11" height="11"/><rect fill="%23b3b3b3" x="66" y="88" width="11" height="11"/><rect fill="%23ccc" x="88" y="88" width="11" height="11"/></g></svg>');
+    opacity: 0;
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.05s ease-in-out;
+}
+
+.sd-glitch-overlay.active {
+    opacity: 0.1;
+}
+
+.sd-char.flicker {
+    color: #fde047; /* yellow-300 */
+    animation: flicker-anim 0.4s ease-in-out;
+}
+
+@keyframes flicker-anim {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.2; }
+}
+
+/* Estilos para Caça ao Símbolo (versão Malha de Caracteres) */
+#symbol-hunt-grid {
+    padding: 0.5rem;
+    background-color: #1f2937; /* gray-800 */
+    border-radius: 0.5rem;
+    border: 2px solid #4b5563; /* gray-600 */
+}
+
+.sh-char-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1;
+    width: 2rem;  /* w-8 */
+    height: 2rem; /* h-8 */
+    color: #9ca3af; /* gray-400 */
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition: transform 0.2s, background-color 0.2s, color 0.2s;
+}
+
+@media (max-width: 640px) {
+    .sh-char-cell {
+        font-size: 1rem;
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
+
+.sh-char-cell:hover {
+    background-color: #374151; /* gray-700 */
+    color: #e5e7eb;
+}
+
+.sh-char-cell.found {
+    background-color: #22c55e; /* green-500 */
+    color: #111827; /* gray-900 */
+    font-weight: bold;
+    transform: scale(1.1);
+    cursor: default;
+}
+
+.sh-char-cell.incorrect {
+    animation: shake-incorrect 0.4s ease;
+    background-color: #ef4444; /* red-500 */
+    color: white;
+}
+
+/* Pode manter a animação 'shake-incorrect' que já tinha */
+@keyframes shake-incorrect {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* Estilos para Jogo dos 7 Erros v2.1 */
+.fd-image-container {
+    border: 3px solid #4b5563; /* gray-600 */
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+}
+
+/* Marcador para erros ENCONTRADOS pelo jogador (verde) */
+.fd-found-marker {
+    fill: none;
+    stroke: #22c55e; /* green-500 */
+    stroke-width: 3px;
+    pointer-events: none;
+    animation: fd-pulse-found 0.5s ease-out;
+}
+
+/* Marcador para erros NÃO ENCONTRADOS, revelados no final (vermelho) */
+.fd-missed-marker {
+    fill: none;
+    stroke: #ef4444; /* red-500 */
+    stroke-width: 3px;
+    stroke-dasharray: 8 4;
+    pointer-events: none;
+}
+
+@keyframes fd-pulse-found {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Estilos para Simon Diz */
+.ss-pad-container {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    transform: rotate(45deg); /* Gira para a aparência de losango */
+}
+
+.ss-pad {
+    background-color: var(--pad-color);
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s, transform 0.1s;
+    border: 4px solid #1f2937; /* gray-800 */
+}
+
+.ss-pad:nth-child(1) { border-radius: 100% 0 0 0; }
+.ss-pad:nth-child(2) { border-radius: 0 100% 0 0; }
+.ss-pad:nth-child(3) { border-radius: 0 0 0 100%; }
+.ss-pad:nth-child(4) { border-radius: 0 0 100% 0; }
+
+.ss-pad.active {
+    opacity: 1;
+    transform: scale(0.97);
+    box-shadow: 0 0 20px var(--pad-color);
+}
+
+.ss-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 120px;
+    height: 120px;
+    background-color: #111827; /* gray-900 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: 10px solid #374151; /* gray-700 */
+    pointer-events: none; /* Não interfere com os cliques nos pads */
+}
