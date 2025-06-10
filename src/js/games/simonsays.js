@@ -89,26 +89,36 @@ function initSimonSaysPhase(config) {
         const pads = document.querySelectorAll('.ss-pad');
 
         // --- Funções do Jogo ---
-        function startNewRound() {
-            isPlayerTurn = false;
-            isAnimating = true;
-            playerSequence = [];
-            
-            if (settings.gameMode === 'levels') {
-                statusDisplay.textContent = `Nível ${internalLevel} - A observar...`;
-                const sequenceLength = 2 + internalLevel; // Sequência começa com 3 e aumenta
-                sequence = [];
-                for (let i = 0; i < sequenceLength; i++) {
-                    sequence.push(Math.floor(Math.random() * 4));
-                }
-            } else { // Modo Infinito
-                statusDisplay.textContent = 'A observar...';
-                sequence.push(Math.floor(Math.random() * 4));
+        let internalTurn = 0;
+let fullSequence = [];
+
+function startNewRound() {
+    isPlayerTurn = false;
+    isAnimating = true;
+    playerSequence = [];
+
+    if (settings.gameMode === 'levels') {
+        // Se for o primeiro turno do nível, reinicia a sequência
+        if (internalTurn === 0) {
+            fullSequence = [];
+            for (let i = 0; i < internalLevel; i++) {
+                fullSequence.push(Math.floor(Math.random() * 4));
             }
-            
-            centerDisplay.textContent = sequence.length;
-            playSequence();
         }
+
+        // Define o trecho da sequência que será usada neste turno
+        sequence = fullSequence.slice(0, internalTurn + 1);
+        statusDisplay.textContent = `Nível ${internalLevel} - Turno ${internalTurn + 1}`;
+        centerDisplay.textContent = `${internalTurn + 1}`;
+    } else {
+        // Modo Infinito tradicional
+        sequence.push(Math.floor(Math.random() * 4));
+        statusDisplay.textContent = 'A observar...';
+        centerDisplay.textContent = sequence.length;
+    }
+
+    playSequence();
+}
 
         async function playSequence() {
             await new Promise(res => setTimeout(res, 500));
@@ -142,19 +152,23 @@ function initSimonSaysPhase(config) {
             }
 
             if (playerSequence.length === sequence.length) {
-                // Acertou a sequência completa
                 if (settings.gameMode === 'levels') {
-                    if (internalLevel >= maxInternalLevels) {
-                        // Venceu o modo de níveis completo
-                        statusDisplay.textContent = 'Parabéns!';
-                        phaseCompleted(true, { text: `Você completou todos os ${maxInternalLevels} níveis!` });
+                    internalTurn++;
+                    if (internalTurn >= internalLevel) {
+                        if (internalLevel >= maxInternalLevels) {
+                            statusDisplay.textContent = 'Parabéns!';
+                            phaseCompleted(true, { text: `Você completou todos os ${maxInternalLevels} níveis!` });
+                        } else {
+                            statusDisplay.textContent = 'Nível completo!';
+                            internalLevel++;
+                            internalTurn = 0;
+                            setTimeout(startNewRound, 1500);
+                        }
                     } else {
-                        // Passou para o próximo nível interno
                         statusDisplay.textContent = 'Correto!';
-                        internalLevel++;
                         setTimeout(startNewRound, 1000);
                     }
-                } else { // Modo infinito
+                } else {
                     statusDisplay.textContent = 'Correto!';
                     setTimeout(startNewRound, 1000);
                 }
