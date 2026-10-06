@@ -1,0 +1,29 @@
+{
+  "reports": [
+    {
+      "name": "Biblioteca e estilos carregam em / sem arquivos externos",
+      "status": "PASS"
+    },
+    {
+      "name": "250 SVGs e quatro bancos de dados preservados em /",
+      "status": "PASS"
+    },
+    {
+      "name": "44 jogos inicializam em / sem requests adicionais ou erros",
+      "status": "PASS"
+    },
+    {
+      "name": "Biblioteca e estilos carregam em /games/ sem arquivos externos",
+      "status": "PASS"
+    },
+    {
+      "name": "250 SVGs e quatro bancos de dados preservados em /games/",
+      "status": "PASS"
+    },
+    {
+      "name": "44 jogos inicializam em /games/ sem requests adicionais ou erros",
+      "status": "PASS"
+    }
+  ],
+  "externalRequests": []
+}

@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Termo: solo, dueto, quarteto, escada, dicionário e letras repetidas",
+    "status": "PASS"
+  },
+  {
+    "name": "Capitais em português e aliases internacionais são aceitos com e sem acentos",
+    "status": "PASS"
+  },
+  {
+    "name": "Mapa: localizar país com teclado, zoom e todos os modos com respostas válidas",
+    "status": "PASS"
+  },
+  {
+    "name": "Deslizante e Hanói: soluções BFS independentes chegam à vitória",
+    "status": "PASS"
+  },
+  {
+    "name": "Resta Um: busca de saltos na configuração visível encontra solução",
+    "status": "PASS"
+  }
+]

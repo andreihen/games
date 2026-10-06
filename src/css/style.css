@@ -1,0 +1,1408 @@
+body {
+    font-family:
+        'Inter', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+    background-color: #111827; /* Tailwind gray-900 */
+    color: #e5e7eb; /* Tailwind gray-200 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+}
+.game-container {
+    background-color: #1f2937; /* Tailwind gray-800 */
+    border: 1px solid #374151; /* Tailwind gray-700 */
+    width: 100%;
+    max-width: 700px;
+    border-radius: 0.75rem; /* rounded-xl */
+    box-shadow:
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04); /* shadow-2xl */
+}
+.phase-title {
+    color: #60a5fa; /* Tailwind blue-400 */
+}
+.button {
+    transition: all 0.2s ease-in-out;
+    border-radius: 8px;
+}
+.button:hover {
+    transform: translateY(-2px);
+}
+.button-primary {
+    background-color: #2563eb; /* Tailwind blue-600 */
+    color: white;
+}
+.button-primary:hover {
+    background-color: #1d4ed8; /* Tailwind blue-700 */
+}
+.button-secondary {
+    background-color: #4b5563; /* Tailwind gray-600 */
+    color: white;
+}
+.button-secondary:hover {
+    background-color: #374151; /* Tailwind gray-700 */
+}
+.button-choice {
+    background-color: #3b82f6; /* Tailwind blue-500 */
+    color: white;
+    margin: 5px;
+}
+.button-choice:hover {
+    background-color: #2563eb;
+}
+.input-field {
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #e5e7eb;
+    border-radius: 6px;
+}
+.disabled-button {
+    background-color: #4b5563 !important;
+    cursor: not-allowed !important;
+    opacity: 0.7;
+}
+.limit-display {
+    font-size: 0.9rem;
+    color: #f59e0b; /* Tailwind amber-500 */
+    margin-bottom: 10px;
+    text-align: center;
+    min-height: 20px;
+}
+.si-modal-overlay.hidden {
+    display: none;
+}
+
+/* Estilos Labirinto */
+.maze-grid {
+    display: grid;
+    border: 2px solid #60a5fa;
+    background-color: #1e293b;
+    margin: 10px auto;
+}
+.maze-cell {
+    background-color: #4b5563; /* Parede */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.maze-cell.path {
+    background-color: #374151; /* Caminho */
+}
+.maze-cell.player {
+    background-color: #facc15 !important; /* Amarelo */
+    border-radius: 50%;
+    width: 70% !important;
+    height: 70% !important;
+    margin: auto;
+}
+.maze-cell.start {
+    background-color: #22c55e !important; /* Verde */
+}
+.maze-cell.exit {
+    background-color: #ef4444 !important; /* Vermelho */
+}
+.maze-cell.key {
+    background-color: #eab308 !important; /* Dourado */
+    font-size: 0.8em;
+}
+.maze-cell.door {
+    background-color: #a16207 !important; /* Castanho */
+}
+.maze-cell.door.open {
+    background-color: #52525b !important; /* Cinza escuro - porta aberta */
+}
+.maze-inventory {
+    text-align: center;
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #fde047;
+}
+
+/* Estilos Resta Um */
+.restaum-board {
+    display: grid;
+    gap: 2px;
+    margin: 10px auto;
+    padding: 5px;
+    background-color: #2b3440;
+    border: 2px solid #60a5fa;
+}
+.restaum-cell {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #4b5563; /* Furo vazio */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.restaum-cell.peg {
+    background-color: #818cf8; /* Peça (indigo-400) */
+}
+.restaum-cell.selected {
+    box-shadow: 0 0 10px 3px #60a5fa;
+}
+.restaum-cell.invalid {
+    background-color: #111827 !important;
+    cursor: not-allowed; /* Espaço inválido do tabuleiro */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+.modal-content {
+    background-color: #1f2937;
+    margin: 10% auto;
+    padding: 25px;
+    border: 1px solid #374151;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+.modal-close-button {
+    background-color: #2563eb;
+    color: white;
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.modal-close-button:hover {
+    background-color: #1d4ed8;
+}
+
+/* Estilos de outros jogos (abreviados para manter o foco) */
+.sudoku-grid {
+    display: grid;
+    border: 2px solid #60a5fa;
+    margin: 10px auto;
+}
+.sudoku-cell {
+    width: 35px;
+    height: 35px;
+    border: 1px solid #4b5563;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sudoku-cell input {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    background-color: #374151;
+    color: #e5e7eb;
+    border: none;
+    font-size: 1.1rem;
+    outline: none;
+}
+.sudoku-cell input:disabled {
+    background-color: #2b3440;
+    color: #9ca3af;
+}
+.sudoku-cell.subgrid-border-right {
+    border-right-width: 2px;
+    border-right-color: #60a5fa;
+}
+.sudoku-cell.subgrid-border-bottom {
+    border-bottom-width: 2px;
+    border-bottom-color: #60a5fa;
+}
+.crypto-text {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    text-align: center;
+    word-break: break-all;
+}
+.crypto-char-placeholder {
+    display: inline-block;
+    width: 18px;
+    text-align: center;
+    border-bottom: 1px solid #60a5fa;
+    margin: 0 1px;
+    color: #fde047;
+    min-height: 22px;
+}
+.hanoi-peg-container {
+    height: 160px;
+}
+.hanoi-disk {
+    height: 18px;
+}
+.lights-out-grid {
+    display: grid;
+    gap: 5px;
+    margin: 15px auto;
+}
+.light-button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #4b5563;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.light-on {
+    background-color: #facc15;
+    box-shadow: 0 0 12px #facc15;
+}
+.light-off {
+    background-color: #374151;
+}
+.color-peg-mastermind {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    margin: 0 3px;
+}
+.guess-slot-mastermind {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid #4b5563;
+    background-color: #374151;
+    margin: 1px;
+}
+.nonogram-grid {
+    display: grid;
+    border: 1px solid #4b5563;
+    margin: 8px auto;
+}
+.nonogram-cell {
+    width: 28px;
+    height: 28px;
+    background-color: #374151;
+    border: 1px solid #2b3440;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+}
+.nonogram-cell.filled {
+    background-color: #60a5fa;
+}
+.nonogram-cell.marked::after {
+    content: 'X';
+    color: #6b7280;
+}
+.nonogram-hints {
+    font-size: 0.75rem;
+    text-align: center;
+    color: #9ca3af;
+}
+.nonogram-hints-container-cols {
+    display: flex;
+    justify-content: center;
+    margin-left: 28px;
+}
+.nonogram-hints-container-rows {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 28px;
+}
+.nonogram-hint-block {
+    min-width: 28px;
+    min-height: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+}
+.nonogram-hint-block-row {
+    min-width: 28px;
+    min-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding-right: 4px;
+}
+.sliding-puzzle-grid {
+    display: grid;
+    border: 2px solid #4b5563;
+    margin: 8px auto;
+    padding: 4px;
+    background-color: #2b3440;
+}
+.sliding-puzzle-tile {
+    background-color: #60a5fa;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+    border: 1px solid #1f2937;
+}
+.sliding-puzzle-tile:hover {
+    background-color: #3b82f6;
+}
+.sliding-puzzle-empty {
+    background-color: transparent !important;
+    cursor: default !important;
+    border: none !important;
+}
+.flow-grid {
+    display: grid;
+    border: 1px solid #4b5563;
+    margin: 8px auto;
+}
+.flow-cell {
+    width: 33px;
+    height: 33px;
+    border: 1px solid #2b3440;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.flow-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+}
+.flow-path {
+    transition: background-color 0.1s;
+}
+.scale-item {
+    width: 35px;
+    height: 35px;
+    background-color: #9ca3af;
+    border: 1px solid #4b5563;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 3px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.scale-item:hover {
+    background-color: #6b7280;
+}
+.scale-item.selected {
+    background-color: #60a5fa;
+    border-color: #2563eb;
+}
+.scale-pan {
+    min-height: 50px;
+    background-color: #374151;
+    border: 2px dashed #4b5563;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.scale-result-area {
+    font-weight: bold;
+    color: #fde047; /* yellow-300 */
+}
+.feedback-peg {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin: 1px;
+}
+.black-peg {
+    background-color: #000000;
+    border: 1px solid #4b5563;
+}
+.white-peg {
+    background-color: #ffffff;
+    border: 1px solid #4b5563;
+}
+
+/* Adicione estas classes ao final do seu style.css */
+
+.blockfit-main-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.blockfit-target-grid {
+    display: grid;
+    border: 2px solid #60a5fa; /* Tailwind blue-400 */
+    background-color: #2b3440;
+}
+
+.blockfit-cell {
+    background-color: #374151; /* Tailwind gray-700 */
+    border: 1px solid #1e293b; /* Fundo mais escuro para efeito de grade */
+}
+
+.blockfit-cell.filled {
+    background-color: #818cf8; /* Tailwind indigo-400 */
+    border-color: #4f46e5;
+}
+
+.blockfit-pieces-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+    padding: 10px;
+    background-color: #111827; /* Tailwind gray-900 */
+    border-radius: 8px;
+}
+
+.blockfit-piece-preview {
+    border: 2px dashed #4b5563; /* Tailwind gray-600 */
+    padding: 5px;
+    cursor: grab;
+    display: inline-block;
+    transition: border-color 0.2s;
+}
+
+.blockfit-piece-preview:hover {
+    border-color: #9ca3af; /* Tailwind gray-400 */
+}
+
+.blockfit-piece-preview.dragging {
+    opacity: 0.5;
+    border-style: solid;
+    cursor: grabbing;
+}
+
+.blockfit-piece-cell {
+    width: 20px;
+    height: 20px;
+    background-color: #a78bfa; /* Tailwind violet-400 */
+    border: 1px solid #1e293b;
+    display: inline-block;
+    margin: 1px;
+}
+
+.blockfit-controls button {
+    margin: 0 5px;
+}
+/* Adicione estas classes ao final do seu style.css */
+
+.blockfit-main-area.select-none {
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.blockfit-piece-preview {
+    /* (O estilo que já tinha está bom) */
+    cursor: grab;
+}
+
+.blockfit-piece-preview.selected {
+    border: 2px solid #60a5fa; /* Tailwind blue-400 */
+    box-shadow: 0 0 10px #60a5fa;
+    border-radius: 4px;
+}
+
+.blockfit-piece-cell {
+    width: 15px; /* Tamanho menor para a paleta */
+    height: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.4);
+    display: inline-block;
+}
+
+/* Estilos para a pré-visualização "fantasma" */
+.ghost-cell {
+    position: absolute;
+    z-index: 10;
+    pointer-events: none; /* Importante para não interferir com o rato */
+    transition: background-color 0.1s;
+    border-radius: 2px;
+}
+
+.ghost-cell.valid-placement {
+    opacity: 0.7;
+    outline: 2px solid #22c55e; /* green-500 */
+}
+
+.ghost-cell.invalid-placement {
+    opacity: 0.5;
+    background-color: #ef4444 !important; /* red-500, ignora a cor da peça */
+    outline: 2px solid #b91c1c; /* red-700 */
+}
+
+/* Estilos para Quebra-Cabeça de Lógica */
+.logic-grid-container {
+    background-color: #374151; /* gray-700 */
+    border: 2px solid #4b5563; /* gray-600 */
+    border-radius: 8px;
+}
+
+.logic-grid-cell {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #4b5563; /* gray-600 */
+    flex-shrink: 0; /* Previne que as células encolham */
+    font-size: 14px;
+}
+
+.logic-grid-cell.header {
+    background-color: #1f2937; /* gray-800 */
+    color: #9ca3af; /* gray-400 */
+    font-weight: bold;
+    writing-mode: vertical-rl; /* Gira o texto das categorias */
+    text-orientation: mixed;
+    transform: rotate(180deg);
+}
+
+.logic-grid-cell.main-cat-header {
+    writing-mode: horizontal-tb;
+    transform: none;
+    width: 50px; /* Mais espaço para os itens da categoria principal */
+}
+
+.logic-grid-cell.corner {
+    background-color: #111827; /* gray-900 */
+}
+
+.logic-grid-cell.interactive {
+    background-color: #1f2937; /* gray-800 */
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.logic-grid-cell.interactive:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+.solution-select {
+    font-size: 12px;
+    padding: 2px !important;
+    background-color: #4b5563 !important;
+}
+
+#sd-timer-bar-container {
+    transition: all 0.2s ease-in-out;
+}
+
+#sd-char-stream {
+    font-size: 1.5rem; /* text-2xl */
+    font-family: 'Courier New', Courier, monospace;
+    word-spacing: 0.5rem;
+    letter-spacing: 0.25rem;
+}
+
+.sd-char {
+    cursor: pointer;
+    padding: 0 0.25rem;
+    border-radius: 0.25rem;
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+    display: inline-block; /* Permite animações de transformação */
+}
+
+.sd-char:hover {
+    background-color: #374151; /* gray-700 */
+}
+
+.sd-char.found {
+    background-color: #22c55e; /* green-500 */
+    color: #1f2937; /* gray-800 */
+    cursor: default;
+    transform: scale(1.2);
+}
+
+.sd-char.incorrect {
+    background-color: #ef4444; /* red-500 */
+    animation: shake-incorrect 0.4s ease; /* Reutiliza a animação do Caça ao Símbolo */
+}
+
+/* Estilos ADICIONAIS para Diferença Sutil */
+
+.sd-glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100"><rect fill="%23000" width="100" height="100"/><g fill-opacity=".5"><rect fill="%23111" width="11" height="11"/><rect fill="%231a1a1a" x="22" width="11" height="11"/><rect fill="%23333" x="44" width="11" height="11"/><rect fill="%234d4d4d" x="66" width="11" height="11"/><rect fill="%23666" x="88" width="11" height="11"/><rect fill="%231a1a1a" y="22" width="11" height="11"/><rect fill="%23333" x="22" y="22" width="11" height="11"/><rect fill="%234d4d4d" x="44" y="22" width="11" height="11"/><rect fill="%23666" x="66" y="22" width="11" height="11"/><rect fill="%23808080" x="88" y="22" width="11" height="11"/><rect fill="%23333" y="44" width="11" height="11"/><rect fill="%234d4d4d" x="22" y="44" width="11" height="11"/><rect fill="%23666" x="44" y="44" width="11" height="11"/><rect fill="%23808080" x="66" y="44" width="11" height="11"/><rect fill="%23999" x="88" y="44" width="11" height="11"/><rect fill="%234d4d4d" y="66" width="11" height="11"/><rect fill="%23666" x="22" y="66" width="11" height="11"/><rect fill="%23808080" x="44" y="66" width="11" height="11"/><rect fill="%23999" x="66" y="66" width="11" height="11"/><rect fill="%23b3b3b3" x="88" y="66" width="11" height="11"/><rect fill="%23666" y="88" width="11" height="11"/><rect fill="%23808080" x="22" y="88" width="11" height="11"/><rect fill="%23999" x="44" y="88" width="11" height="11"/><rect fill="%23b3b3b3" x="66" y="88" width="11" height="11"/><rect fill="%23ccc" x="88" y="88" width="11" height="11"/></g></svg>');
+    opacity: 0;
+    z-index: 50;
+    pointer-events: none;
+    transition: opacity 0.05s ease-in-out;
+}
+
+.sd-glitch-overlay.active {
+    opacity: 0.1;
+}
+
+.sd-char.flicker {
+    color: #fde047; /* yellow-300 */
+    animation: flicker-anim 0.4s ease-in-out;
+}
+
+@keyframes flicker-anim {
+    0%,
+    100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.2;
+    }
+}
+
+/* Estilos para Caça ao Símbolo (versão Malha de Caracteres) */
+#symbol-hunt-grid {
+    padding: 0.5rem;
+    background-color: #1f2937; /* gray-800 */
+    border-radius: 0.5rem;
+    border: 2px solid #4b5563; /* gray-600 */
+}
+
+.sh-char-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem; /* text-xl */
+    line-height: 1;
+    width: 2rem; /* w-8 */
+    height: 2rem; /* h-8 */
+    color: #9ca3af; /* gray-400 */
+    cursor: pointer;
+    border-radius: 0.25rem;
+    transition:
+        transform 0.2s,
+        background-color 0.2s,
+        color 0.2s;
+}
+
+@media (max-width: 640px) {
+    .sh-char-cell {
+        font-size: 1rem;
+        width: 1.75rem;
+        height: 1.75rem;
+    }
+}
+
+.sh-char-cell:hover {
+    background-color: #374151; /* gray-700 */
+    color: #e5e7eb;
+}
+
+.sh-char-cell.found {
+    background-color: #22c55e; /* green-500 */
+    color: #111827; /* gray-900 */
+    font-weight: bold;
+    transform: scale(1.1);
+    cursor: default;
+}
+
+.sh-char-cell.incorrect {
+    animation: shake-incorrect 0.4s ease;
+    background-color: #ef4444; /* red-500 */
+    color: white;
+}
+
+/* Pode manter a animação 'shake-incorrect' que já tinha */
+@keyframes shake-incorrect {
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+/* Estilos para Jogo dos 7 Erros v2.1 */
+.fd-image-container {
+    border: 3px solid #4b5563; /* gray-600 */
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 300px;
+    height: 300px;
+}
+
+/* Marcador para erros ENCONTRADOS pelo jogador (verde) */
+.fd-found-marker {
+    fill: none;
+    stroke: #22c55e; /* green-500 */
+    stroke-width: 3px;
+    pointer-events: none;
+    animation: fd-pulse-found 0.5s ease-out;
+}
+
+/* Marcador para erros NÃO ENCONTRADOS, revelados no final (vermelho) */
+.fd-missed-marker {
+    fill: none;
+    stroke: #ef4444; /* red-500 */
+    stroke-width: 3px;
+    stroke-dasharray: 8 4;
+    pointer-events: none;
+}
+
+@keyframes fd-pulse-found {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+}
+
+/* Estilos para Simon Diz */
+.ss-pad-container {
+    position: relative;
+    width: 320px;
+    height: 320px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 10px;
+    transform: rotate(45deg); /* Gira para a aparência de losango */
+}
+
+.ss-pad {
+    background-color: var(--pad-color);
+    cursor: pointer;
+    opacity: 0.6;
+    transition:
+        opacity 0.2s,
+        transform 0.1s;
+    border: 4px solid #1f2937; /* gray-800 */
+}
+
+.ss-pad:nth-child(1) {
+    border-radius: 100% 0 0 0;
+}
+.ss-pad:nth-child(2) {
+    border-radius: 0 100% 0 0;
+}
+.ss-pad:nth-child(3) {
+    border-radius: 0 0 0 100%;
+}
+.ss-pad:nth-child(4) {
+    border-radius: 0 0 100% 0;
+}
+
+.ss-pad.active {
+    opacity: 1;
+    transform: scale(0.97);
+    box-shadow: 0 0 20px var(--pad-color);
+}
+
+.ss-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 120px;
+    height: 120px;
+    background-color: #111827; /* gray-900 */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border: 10px solid #374151; /* gray-700 */
+    pointer-events: none; /* Não interfere com os cliques nos pads */
+}
+/* Estilos para Trilha da Memória */
+.mp-cell {
+    width: 45px;
+    height: 45px;
+    background-color: #374151; /* gray-700 */
+    border: 2px solid #4b5563; /* gray-600 */
+    border-radius: 0.5rem;
+    transition:
+        background-color 0.2s,
+        transform 0.2s;
+}
+
+.mp-cell:not(.path-show):not(.correct):not(.incorrect) {
+    cursor: pointer;
+}
+
+.mp-cell:hover:not(.path-show):not(.correct):not(.incorrect) {
+    background-color: #4b5563;
+}
+
+.mp-cell.path-show {
+    background-color: #facc15; /* yellow-400 */
+    transform: scale(1.1);
+    border-color: #fde047;
+}
+
+.mp-cell.correct {
+    background-color: #22c55e; /* green-500 */
+    border-color: #4ade80;
+    transform: scale(0.9);
+}
+
+.mp-cell.incorrect {
+    background-color: #ef4444; /* red-500 */
+    border-color: #f87171;
+    animation: shake-incorrect 0.4s ease;
+}
+
+.mp-cell.revealed {
+    background-color: #60a5fa; /* blue-400 */
+    border-color: #93c5fd;
+}
+
+/* Estilos para Prateleira da Memória */
+.ms-shelf {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 500px;
+    min-height: 200px;
+    padding: 1rem;
+    background-color: #4b5563; /* gray-600 */
+    border-bottom: 10px solid #374151; /* gray-700 */
+    border-radius: 0.5rem;
+}
+
+.ms-object {
+    width: 64px;
+    height: 64px;
+    background-color: #f3f4f6; /* gray-100 */
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.ms-object svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para Impulso Certo */
+.ri-symbol-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem; /* text-5xl */
+    line-height: 1;
+    font-weight: bold;
+    transition:
+        transform 0.2s ease,
+        text-shadow 0.2s ease;
+}
+
+#ri-symbol-presentation.correct {
+    color: #22c55e !important; /* green-500 */
+    text-shadow: 0 0 15px #22c55e;
+    animation: pulse-correct 0.4s;
+}
+
+#ri-symbol-presentation.incorrect {
+    color: #ef4444 !important; /* red-500 */
+    text-shadow: 0 0 15px #ef4444;
+    animation: shake-incorrect 0.4s;
+}
+
+/* Estilos para Labirinto Lógico */
+.lm-cell {
+    background-color: #374151; /* gray-700 - Caminho */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+}
+
+.lm-cell.wall {
+    background-color: #1f2937; /* gray-800 */
+    border-radius: 2px;
+}
+
+.lm-cell.player {
+    background-color: #facc15 !important; /* yellow-400 */
+    border-radius: 50%;
+    transform: scale(0.7);
+    box-shadow: 0 0 10px #facc15;
+}
+
+.lm-cell.exit {
+    background-color: #4ade80 !important; /* green-400 */
+}
+
+.lm-cell.door {
+    background-color: #a78bfa; /* violet-400 */
+    border-radius: 4px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #1f2937;
+    cursor: help;
+}
+
+.lm-cell.door.open {
+    background-color: #4b5563; /* gray-600 - Porta aberta */
+    content: '';
+}
+
+/* Modal do Enigma */
+.lm-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.lm-modal-content {
+    background-color: #1f2937; /* gray-800 */
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 2px solid #4b5563;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    max-width: 90%;
+    width: 500px;
+}
+
+.lm-modal-content .button.incorrect {
+    animation: shake-incorrect 0.4s ease;
+    background-color: #ef4444; /* red-500 */
+}
+
+/* Layout compartilhado e adaptações dos tabuleiros existentes. */
+html {
+    color-scheme: dark;
+}
+body {
+    font-family:
+        system-ui,
+        -apple-system,
+        'Segoe UI',
+        sans-serif;
+    padding: 16px;
+    justify-content: flex-start;
+}
+.game-container {
+    margin: 24px auto;
+    padding: 24px;
+}
+.game-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.game-catalog {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+.game-choice {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    padding: 16px;
+    margin: 0;
+    background: #24364d;
+    border: 1px solid #425872;
+}
+.game-choice span {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #d1d5db;
+}
+.button {
+    min-height: 44px;
+    line-height: 1.4;
+}
+button:disabled {
+    opacity: 0.65;
+}
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid #facc15;
+    outline-offset: 3px;
+}
+#phase-display {
+    min-width: 0;
+    width: 100%;
+    min-height: 300px;
+    align-items: stretch;
+}
+#phase-display > div {
+    max-width: 100%;
+    min-width: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+#game-notice:empty {
+    display: none;
+}
+.result-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: #000b;
+    z-index: 3000;
+}
+.result-content {
+    background: #1f2937;
+    border: 1px solid #4b5563;
+    border-radius: 16px;
+    padding: 28px;
+    max-width: 520px;
+    max-height: 90vh;
+    overflow: auto;
+    text-align: center;
+}
+.light-button {
+    width: 100%;
+    height: 44px;
+}
+.color-peg-mastermind {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 700;
+    text-shadow:
+        0 1px 3px #000,
+        0 -1px 3px #000;
+    border: 2px solid #9ca3af;
+}
+.guess-slot-mastermind {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    text-shadow: 0 1px 3px #000;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.guess-slot-mastermind[data-index] {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+}
+#mastermind-current-guess {
+    flex-wrap: wrap;
+    gap: 4px;
+}
+#mastermind-history .history-peg {
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+}
+#mastermind-history > div {
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.nonogram-layout-container {
+    max-width: 100%;
+    overflow-x: auto;
+    align-self: flex-start;
+}
+.nonogram-cell {
+    width: var(--nonogram-cell-size);
+    height: var(--nonogram-cell-size);
+}
+.nonogram-cell.marked::after {
+    color: #d1d5db;
+}
+.restaum-board {
+    max-width: 100%;
+    overflow: auto;
+}
+.restaum-cell {
+    position: relative;
+    flex-shrink: 0;
+}
+.sudoku-cell {
+    width: clamp(34px, 8vw, 48px);
+    height: clamp(38px, 9vw, 48px);
+}
+.sudoku-cell:disabled {
+    opacity: 1;
+    color: #7dd3fc;
+    background: #26334a;
+}
+#tttm-board > div {
+    width: clamp(64px, 20vw, 96px);
+    height: clamp(64px, 20vw, 96px);
+}
+.hanoi-disk {
+    max-width: 96%;
+}
+.hanoi-peg {
+    min-width: 0;
+}
+#hanoi-towers-container {
+    width: 100%;
+}
+#si-container {
+    padding: 12px;
+}
+#si-container .lg\:w-3\/5,
+#si-container .lg\:w-2\/5 {
+    min-width: 0;
+}
+#si-document-properties {
+    overflow-wrap: anywhere;
+}
+.mg-card {
+    min-width: 0 !important;
+    width: 100%;
+    min-height: 56px;
+}
+#mg-board {
+    width: 100%;
+    min-width: 0;
+    gap: 6px;
+}
+.mg-word {
+    font-size: clamp(0.6rem, 2.2vw, 0.85rem) !important;
+    overflow-wrap: anywhere;
+}
+.mg-word small {
+    display: block;
+    font-size: 0.7em;
+}
+.ms-object {
+    flex-direction: column;
+    width: 104px;
+    height: auto;
+    min-height: 112px;
+    color: #111827;
+}
+.ms-object .icon {
+    width: 52px;
+    height: 52px;
+}
+.ms-object .name small {
+    display: block;
+    font-size: 0.75rem;
+}
+.ss-pad-container {
+    width: min(280px, 100%);
+    height: 280px;
+    transform: none;
+    gap: 12px;
+}
+.ss-pad {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 2px 4px #000;
+    min-height: 100px;
+}
+.ss-center {
+    width: 70px;
+    height: 70px;
+    border-width: 5px;
+    font-size: 1.5rem;
+    transform: translate(-50%, -50%);
+}
+#mp-grid-container {
+    width: min(100%, 360px);
+    gap: 6px;
+}
+.mp-cell {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+}
+#symbol-hunt-grid {
+    width: min(100%, 500px);
+    gap: 3px;
+}
+.sh-char-cell {
+    width: auto;
+    min-width: 0;
+    height: 36px;
+    font-size: 1.4rem;
+}
+.fs-item {
+    min-width: 44px;
+    min-height: 52px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    line-height: 1;
+}
+.fs-option-btn {
+    background: #374151;
+    border: 2px solid #6b7280;
+    border-radius: 8px;
+    cursor: pointer;
+}
+.fs-option-btn.correct {
+    background: #166534;
+}
+.fs-option-btn.incorrect {
+    background: #991b1b;
+}
+#fs-sequence-display {
+    gap: 4px;
+    flex-wrap: wrap;
+}
+.blockfit-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #111827;
+    font-weight: bold;
+}
+.blockfit-piece-preview {
+    min-width: 44px;
+    min-height: 44px;
+    cursor: pointer;
+}
+.blockfit-piece-cell {
+    margin: 0;
+}
+.blockfit-main-area > div:first-of-type {
+    max-width: 100%;
+    overflow: auto;
+}
+.scale-item {
+    width: 44px;
+    height: 44px;
+    color: #111827;
+    font-weight: bold;
+}
+#scale-result-area {
+    height: auto;
+    min-height: 24px;
+}
+#scale-history {
+    max-height: 150px;
+    overflow: auto;
+}
+.direction-pad {
+    display: grid;
+    grid-template-columns: repeat(3, 48px);
+    gap: 8px;
+}
+.direction-pad button {
+    background: #374151;
+    border: 1px solid #6b7280;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    min-height: 48px;
+}
+.direction-pad [data-direction='up'] {
+    grid-column: 2;
+}
+.direction-pad [data-direction='left'] {
+    grid-column: 1;
+    grid-row: 2;
+}
+.direction-pad [data-direction='down'] {
+    grid-column: 2;
+    grid-row: 2;
+}
+.direction-pad [data-direction='right'] {
+    grid-column: 3;
+    grid-row: 2;
+}
+#lm-puzzle-options {
+    flex-wrap: wrap;
+}
+.flow-grid {
+    width: min(100%, 350px);
+}
+.flow-cell {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.ri-symbol-display {
+    font-size: clamp(2rem, 8vw, 3rem);
+    text-align: center;
+    flex-wrap: wrap;
+}
+#ri-game-area {
+    min-height: 160px;
+}
+#mm-problem-text {
+    font-size: clamp(1.6rem, 6vw, 3rem);
+    overflow-wrap: anywhere;
+}
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    .game-container {
+        padding: 14px;
+        margin: 12px auto;
+    }
+    .game-catalog {
+        grid-template-columns: 1fr;
+    }
+    #hanoi-towers-container {
+        padding: 4px;
+    }
+}
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}

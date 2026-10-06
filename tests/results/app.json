@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Migração v1 preserva partidas, vitórias, histórico e backup original",
+    "status": "PASS"
+  },
+  {
+    "name": "Armazenamento desconhecido ou corrompido é preservado, estatísticas da sessão continuam",
+    "status": "PASS"
+  },
+  {
+    "name": "Estatísticas limitam o histórico e revisão espaçada adia acertos e antecipa erros",
+    "status": "PASS"
+  },
+  {
+    "name": "Biblioteca: categorias, 43 jogos principais, extra procedural e configurações",
+    "status": "PASS"
+  },
+  {
+    "name": "App: jogar, pausar, retomar, replay, vitória única e migração de resultado",
+    "status": "PASS"
+  },
+  {
+    "name": "Links compartilhados preservam WPM e revisão da configuração original",
+    "status": "PASS"
+  },
+  {
+    "name": "Jornada mantém dificuldade, varia categorias e nunca escolhe Extras",
+    "status": "PASS"
+  },
+  {
+    "name": "Seed inválida e link desconhecido dão feedback sem derrubar a biblioteca",
+    "status": "PASS"
+  }
+]

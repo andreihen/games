@@ -1,0 +1,82 @@
+[
+  {
+    "name": "44 jogos: quatro dificuldades, todos os modos, seed repetível e encerramento sem recursos",
+    "status": "PASS"
+  },
+  {
+    "name": "Seed: igualdade, diversidade, limites e forks independentes",
+    "status": "PASS"
+  },
+  {
+    "name": "Pausa, conclusão única, timers e eventos antigos",
+    "status": "PASS"
+  },
+  {
+    "name": "200 quebra-cabeças deslizantes conservam paridade solucionável",
+    "status": "PASS"
+  },
+  {
+    "name": "200 rotas Flow e partições BlockFit: cobertura, adjacência, obstáculos e diversidade",
+    "status": "PASS"
+  },
+  {
+    "name": "120 tabuleiros Resta Um: saltos independentes chegam a uma única peça",
+    "status": "PASS"
+  },
+  {
+    "name": "Sudoku: unicidade independente e deduções válidas nos quatro níveis, 12 seeds",
+    "status": "PASS"
+  },
+  {
+    "name": "Luzes: solução mínima independente nos quatro modificadores e medalha ouro",
+    "status": "PASS"
+  },
+  {
+    "name": "Motor de regras: 200 manuais consistentes, exceções, testemunhas e evolução",
+    "status": "PASS"
+  },
+  {
+    "name": "120 figuras de rotação: alternativas espelhadas não coincidem por giro",
+    "status": "PASS"
+  },
+  {
+    "name": "Rampas: distância perceptual mínima, ordem sem empate e 120 seeds",
+    "status": "PASS"
+  },
+  {
+    "name": "Dia da semana: 400 rodadas verificadas pelo calendário UTC independente",
+    "status": "PASS"
+  },
+  {
+    "name": "N-Back: estímulos observados, 1/2/3-back, balanceamento e falha por inação",
+    "status": "PASS"
+  },
+  {
+    "name": "Números dinâmicos: três regras, setas, 50% por lado e resposta bloqueada",
+    "status": "PASS"
+  },
+  {
+    "name": "Checklist: requisitos memorizados, itens ausentes, add/remove/invert e conclusão",
+    "status": "PASS"
+  },
+  {
+    "name": "Regra Mutante: mudanças a cada 20s, timeout, pausa e impossibilidade de vencer sem clicar",
+    "status": "PASS"
+  },
+  {
+    "name": "Memória de trabalho e subitização: estímulo oculto, bloqueio antes do prazo e resposta correta",
+    "status": "PASS"
+  },
+  {
+    "name": "Ativos locais: 250 bandeiras, geometria do mapa, capitais válidas e dicionário 4–7 letras",
+    "status": "PASS"
+  },
+  {
+    "name": "WordRain: erros corrigíveis, remoção no meio não conta teclas novas, precisão e alvo",
+    "status": "PASS"
+  },
+  {
+    "name": "Arraste por toque: captura, destino, ghost removido e clique posterior disponível",
+    "status": "PASS"
+  }
+]

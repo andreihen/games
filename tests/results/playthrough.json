@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Arena: expressões independentes, quatro dificuldades, combo, erros, sprint e sobrevivência",
+    "status": "PASS"
+  },
+  {
+    "name": "Comparação, estimativa e operador: todas as rodadas têm respostas calculáveis e únicas",
+    "status": "PASS"
+  },
+  {
+    "name": "Matrizes: soma, escalar, determinantes 2/3, elemento faltante, sistemas e transformação",
+    "status": "PASS"
+  },
+  {
+    "name": "Memória clássica é resolvida apenas observando cartas abertas",
+    "status": "PASS"
+  },
+  {
+    "name": "Diferenças: contagem 2/4/6/8, alterações reais e apresentação de memória",
+    "status": "PASS"
+  },
+  {
+    "name": "Prateleira: cortina, mudanças reais e restauração com cliques",
+    "status": "PASS"
+  },
+  {
+    "name": "Ordem Temporal: estímulos apresentados permitem restaurar a ordem por teclado/tela",
+    "status": "PASS"
+  },
+  {
+    "name": "Memória espacial: posições, sequência, cores e obstáculos são reconstruíveis",
+    "status": "PASS"
+  },
+  {
+    "name": "Flow: solução construtiva desenhada no tabuleiro e desfazer",
+    "status": "PASS"
+  },
+  {
+    "name": "Velha: melhor de três, vantagem da segunda rodada e saída da peça mais antiga",
+    "status": "PASS"
+  },
+  {
+    "name": "Balança: dedução independente identifica o objeto em duas pesagens",
+    "status": "PASS"
+  },
+  {
+    "name": "Impulso Certo: respostas pelo estímulo visível, pontuação global e falha sem input",
+    "status": "PASS"
+  }
+]

@@ -1,0 +1,544 @@
+{
+  "date": "2026-10-04",
+  "url": "http://127.0.0.1:8765/",
+  "version": "2026-10-04.3",
+  "normalViewport": {
+    "height": 720,
+    "width": 1280
+  },
+  "library": {
+    "searchWithoutAccents": true,
+    "newFilter": 3,
+    "favoriteToggle": true,
+    "configurationPerGame": true,
+    "pauseResume": true
+  },
+  "interactions": {
+    "timelineSelectAndMove": true,
+    "timelineCorrectReviewWithSources": true,
+    "identityTypedAliasAndHints": true,
+    "connectionsCorrectGroup": true,
+    "colorOrderSelectAndMove": true,
+    "mapCountryClick": true,
+    "identityExpertLimit": true
+  },
+  "mobile": [
+    {
+      "documentWidth": 305,
+      "game": "Linha do Tempo",
+      "outliers": [],
+      "prepared": "Linha do TempoColoque os acontecimentos da exploração e",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Quem Sou Eu?",
+      "outliers": [],
+      "prepared": "Quem Sou Eu?Descubra a identidade secreta usando pistas",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Conexões",
+      "outliers": [],
+      "prepared": "ConexõesEncontre quatro grupos de quatro termos. Seleci",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Decifrando Cores",
+      "outliers": [],
+      "prepared": "Decifrando Cores6 posições · 8 cores · repetições possí",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Apague as Luzes",
+      "outliers": [],
+      "prepared": "Apague as LuzesApague todas as células. Ative a prévia ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Balança Lógica",
+      "outliers": [],
+      "prepared": "Balança Lógica12 objetos · 3 pesagens. O diferente pode",
+      "width": 320
+    },
+    {
+      "cells": 81,
+      "documentWidth": 305,
+      "game": "Sudoku",
+      "outliers": [],
+      "prepared": "SudokuEspecialista · solução única, validada por deduçõ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Bloco Fit",
+      "outliers": [],
+      "prepared": "Bloco FitArraste uma peça para a célula onde seu canto ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Conecte os Pontos",
+      "outliers": [],
+      "prepared": "Conecte os PontosConecte cores e símbolos iguais. Arras",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Nonogram",
+      "outliers": [],
+      "prepared": "\n        \n            Nonogram: 10x10 · solução única\n ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Quebra-Cabeça Deslizante",
+      "outliers": [],
+      "prepared": "\n        \n            Quebra-Cabeça Deslizante (5x5)\n  ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Torre de Hanói",
+      "outliers": [],
+      "prepared": "\n            Torre de Hanói (Caos)\n            Organize",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Velha: Peças Móveis",
+      "outliers": [],
+      "prepared": "Velha: Peças MóveisForme uma linha de três. Na quarta j",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Jogo da Memória",
+      "outliers": [],
+      "prepared": "Jogo da MemóriaEncontre os pares iguais.Pares: 0/12????",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Simon Diz",
+      "outliers": [],
+      "prepared": "Simon DizA sequência cresce a cada rodada. Você pode re",
+      "width": 320
+    },
+    {
+      "difficulty": "Especialista · Seed: 8TE0R11B33YJ",
+      "documentWidth": 305,
+      "game": "Trilha da Memória",
+      "outliers": [],
+      "prepared": "Trilha da MemóriaMemorize 14 passos. Após a apresentaçã",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Prateleira da Memória",
+      "outliers": [],
+      "prepared": "Prateleira da MemóriaObserve por cinco segundos. Depois",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Inspetor",
+      "outliers": [],
+      "prepared": "InspetorO manual permanece disponível. Compare cada doc",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Qual a Diferença?",
+      "outliers": [],
+      "prepared": "Qual a Diferença?Compare os painéis A e B. Marque no pa",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Impulso Certo",
+      "outliers": [],
+      "prepared": "\n        \n            Impulso Certo\n            \n      ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Arena de Cálculo",
+      "outliers": [],
+      "prepared": "Arena de CálculoCalcule mentalmente e responda. Acertos",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Chuva de Palavras",
+      "outliers": [],
+      "prepared": "Chuva de PalavrasDigite para escolher um alvo. Erros fi",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Termo",
+      "outliers": [],
+      "prepared": "TermoDescubra a palavra usando as pistas: verde é letra",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Capitais",
+      "outliers": [],
+      "prepared": "CapitaisQual é a capital? As alternativas pertencem à m",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Bandeiras",
+      "outliers": [],
+      "prepared": "BandeirasObserve cores, proporções e símbolos. As alter",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Mapa Mundi",
+      "outliers": [],
+      "prepared": "Mapa MundiUse zoom e arraste o mapa para explorar. Os c",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Dia da Semana",
+      "outliers": [],
+      "prepared": "Dia da SemanaConsidere o calendário gregoriano. Depois ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Cores: Stroop",
+      "outliers": [],
+      "prepared": "StroopSiga a regra escrita em cada rodada: a cor da tin",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Ordenar Cores",
+      "outliers": [],
+      "prepared": "Ordem de CoresOrdene do mais escuro ao mais claro. Arra",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Cor Diferente",
+      "outliers": [],
+      "prepared": "Cor IntrusaEncontre a única célula de cor diferente. O ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Matriz Rápida",
+      "outliers": [],
+      "prepared": "MatrizesResponda apenas ao valor solicitado. As operaçõ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Regra Mutante",
+      "outliers": [],
+      "prepared": "Regra MutanteClique apenas nos objetos aceitos pela reg",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "N-Back",
+      "outliers": [],
+      "prepared": "3-BackDecida se o estímulo atual é igual ao de 3 posiçõ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Memória de Trabalho",
+      "outliers": [],
+      "prepared": "Memória de TrabalhoMemorize os números. Depois, transfo",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Operador Mutante",
+      "outliers": [],
+      "prepared": "Operador MutanteOs símbolos representam operações. Cons",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Checklist",
+      "outliers": [],
+      "prepared": "ChecklistMemorize a lista de requisitos. Depois aprove ",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Ordem Temporal",
+      "outliers": [],
+      "prepared": "Ordem TemporalObserve os eventos, um de cada vez. Depoi",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Subitização",
+      "outliers": [],
+      "prepared": "SubitizaçãoOs pontos aparecem brevemente e desaparecem.",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Maior ou Menor",
+      "outliers": [],
+      "prepared": "Maior ou MenorCalcule mentalmente os dois lados e escol",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Estimativa",
+      "outliers": [],
+      "prepared": "EstimativaEscolha a alternativa mais próxima do produto",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Memória Espacial",
+      "outliers": [],
+      "prepared": "Memória EspacialObserve as células e reproduza a config",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Rotação Mental",
+      "outliers": [],
+      "prepared": "Rotação MentalUma alternativa é a figura original girad",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Par ou Ímpar Dinâmico",
+      "outliers": [],
+      "prepared": "Par ou Ímpar DinâmicoResponda com os botões ou as setas",
+      "width": 320
+    },
+    {
+      "documentWidth": 305,
+      "game": "Resta Um",
+      "outliers": [],
+      "prepared": "\n        \n            Resta Um: Europeu\n            Obj",
+      "width": 320
+    }
+  ],
+  "codeWords": [
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 112.2109375,
+      "length": 6,
+      "right": 192.7890625,
+      "word": "Symbol"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 124.3046875,
+      "length": 4,
+      "right": 180.6953125,
+      "word": "this"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 136.3984375,
+      "length": 2,
+      "right": 168.6015625,
+      "word": "?."
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 69.875,
+      "length": 13,
+      "right": 235.125,
+      "word": "querySelector"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 130.3515625,
+      "length": 3,
+      "right": 174.6484375,
+      "word": "box"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 124.3046875,
+      "length": 4,
+      "right": 180.6953125,
+      "word": "void"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 100.1171875,
+      "length": 8,
+      "right": 204.8828125,
+      "word": "Math.max"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 130.3515625,
+      "length": 3,
+      "right": 174.6484375,
+      "word": "log"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 81.96875,
+      "length": 11,
+      "right": 223.03125,
+      "word": "Promise.all"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "21.0784px",
+      "left": 61.609375,
+      "length": 15,
+      "right": 243.390625,
+      "word": "Promise.resolve"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 124.3046875,
+      "length": 4,
+      "right": 180.6953125,
+      "word": "with"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 112.2109375,
+      "length": 6,
+      "right": 192.7890625,
+      "word": "module"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 118.2578125,
+      "length": 5,
+      "right": 186.7421875,
+      "word": "break"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 112.2109375,
+      "length": 6,
+      "right": 192.7890625,
+      "word": "filter"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 124.3046875,
+      "length": 4,
+      "right": 180.6953125,
+      "word": "some"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 124.3046875,
+      "length": 4,
+      "right": 180.6953125,
+      "word": "trim"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 112.2109375,
+      "length": 6,
+      "right": 192.7890625,
+      "word": "BigInt"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 130.3515625,
+      "length": 3,
+      "right": 174.6484375,
+      "word": "run"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 88.015625,
+      "length": 10,
+      "right": 216.984375,
+      "word": "JSON.parse"
+    },
+    {
+      "fieldLeft": 32,
+      "fieldRight": 273,
+      "fits": true,
+      "font": "22px",
+      "left": 63.828125,
+      "length": 14,
+      "right": 241.171875,
+      "word": "getElementById"
+    }
+  ],
+  "limitations": [
+    "Viewport simulado, sem aparelho físico ou teclado virtual.",
+    "44 inicializações em 320 px; os modos individuais e quatro perfis são cobertos pela suíte automatizada.",
+    "Arraste por toque tem teste de eventos simulados; não foi usado um aparelho físico."
+  ]
+}

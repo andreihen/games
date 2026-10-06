@@ -1,0 +1,369 @@
+{
+  "date": "2026-10-02",
+  "browser": "Chromium integrado do Codex",
+  "assetVersion": "2026-10-02.3",
+  "mobile": {
+    "viewport": "320x568",
+    "seed": "BENCH",
+    "difficulty": "expert; Simon usa progressão contínua",
+    "scope": "Inicialização, navegação, conteúdo e ausência de transbordamento horizontal",
+    "checks": [
+      {
+        "name": "Sudoku",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "scrollWidth": 305,
+        "width": 320,
+        "status": "PASS"
+      },
+      {
+        "name": "Jogo da Memória",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Simon Diz",
+        "category": "Memória",
+        "difficulty": "continuous",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Trilha da Memória",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 319,
+        "status": "PASS"
+      },
+      {
+        "name": "Prateleira da Memória",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "N-Back",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Memória de Trabalho",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Ordem Temporal",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Memória Espacial",
+        "category": "Memória",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Decifrando Cores",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Apague as Luzes",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Balança Lógica",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Bloco Fit",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Conecte os Pontos",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Nonogram",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Quebra-Cabeça Deslizante",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Torre de Hanói",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Velha: Peças Móveis",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Rotação Mental",
+        "category": "Lógica",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Inspetor",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Qual a Diferença?",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Impulso Certo",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Cores: Stroop",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Ordenar Cores",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Cor Diferente",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Regra Mutante",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Checklist",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Par ou Ímpar Dinâmico",
+        "category": "Atenção",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Arena de Cálculo",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Matriz Rápida",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Operador Mutante",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Subitização",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Maior ou Menor",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Estimativa",
+        "category": "Matemática",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Capitais",
+        "category": "Conhecimento",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Bandeiras",
+        "category": "Conhecimento",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Mapa Mundi",
+        "category": "Conhecimento",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Dia da Semana",
+        "category": "Conhecimento",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Chuva de Palavras",
+        "category": "Digitação e Palavras",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Termo",
+        "category": "Digitação e Palavras",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      },
+      {
+        "name": "Resta Um",
+        "category": "Extras",
+        "difficulty": "expert",
+        "width": 320,
+        "scrollWidth": 305,
+        "status": "PASS"
+      }
+    ]
+  },
+  "additionalChecks": [
+    {
+      "name": "Bloco Fit: arraste real, colocação e remoção por clique",
+      "width": 1280,
+      "status": "PASS"
+    },
+    {
+      "name": "Termo: quarteto, 7 letras, Especialista",
+      "keyboardRows": 3,
+      "scrollWidth": 375,
+      "width": 390,
+      "status": "PASS"
+    },
+    {
+      "name": "Termo: palpite LIVRO aceito na versão final",
+      "letters": "LIVRO",
+      "progress": "5 letras · 1/7 tentativas · 0/1 palavras",
+      "scrollWidth": 1265,
+      "width": 1280,
+      "status": "PASS"
+    }
+  ],
+  "consoleErrorsAndWarnings": [],
+  "limitations": [
+    "Sem aparelhos físicos",
+    "Não representa partidas completas de todos os jogos no navegador",
+    "Vitórias e geradores são verificados separadamente pelas suítes de DOM simulado"
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "Biblioteca: busca sem acentos, novidades, favoritos, categorias e persistência",
+    "status": "PASS"
+  },
+  {
+    "name": "Configuração: parâmetros explícitos em todos os jogos; preferências e pausa por Escape",
+    "status": "PASS"
+  },
+  {
+    "name": "Bancos editoriais: IDs únicos, datas sem empate, pistas completas e termos distintos",
+    "status": "PASS"
+  },
+  {
+    "name": "Linha do Tempo: 800 gerações sem empate, início desordenado, janela coerente e variedade",
+    "status": "PASS"
+  },
+  {
+    "name": "Linha do Tempo: partidas completas nos quatro níveis, movimentos e revisão de erro",
+    "status": "PASS"
+  },
+  {
+    "name": "Quem Sou Eu: 128 identidades jogadas, quatro temas, aliases, pistas, erro e revelação",
+    "status": "PASS"
+  },
+  {
+    "name": "Conexões: 1000 tabuleiros com 16 termos e quatro relações editoriais distintas",
+    "status": "PASS"
+  },
+  {
+    "name": "Conexões: vitória, seleção limitada, embaralhar sem perder seleção, erros únicos e derrota",
+    "status": "PASS"
+  },
+  {
+    "name": "Nonograma: unicidade independente em 80 grades; solver detecta ambiguidade, limite e fallback",
+    "status": "PASS"
+  },
+  {
+    "name": "Deslizante fácil: nove posições distintas, alcançáveis e a pelo menos dois movimentos da solução",
+    "status": "PASS"
+  },
+  {
+    "name": "Maior ou Menor: relações balanceadas sem posições fixas em 120 desafios completos",
+    "status": "PASS"
+  },
+  {
+    "name": "Mapa: arrastar bloqueia apenas o clique imediato; clique posterior e teclado continuam válidos",
+    "status": "PASS"
+  }
+]

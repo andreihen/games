@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-02",
+  "browser": "Chromium integrado do Codex",
+  "assetVersion": "2026-10-02.6",
+  "scope": "Conferência manual pelo DOM visível, interações e capturas da atualização de UX; não representa execução completa dos 41 jogos no navegador.",
+  "checks": [
+    {"name": "Capitais: opções do Caribe e América Central, resposta errada identificada e alternativa correta revelada", "status": "PASS"},
+    {"name": "Capitais: avanço da rodada e apresentação da próxima pergunta", "status": "PASS"},
+    {"name": "Bandeiras: modo digitado, erro explicado em português e acerto sem acentos ao repetir o desafio", "status": "PASS"},
+    {"name": "Termo: prévia neutra, tentativa inválida preservada e pistas após LIVRO", "status": "PASS"},
+    {"name": "Termo final: palpite válido limpa mensagem anterior e mantém foco no campo", "status": "PASS"},
+    {"name": "Termo: quarteto de sete letras inicializa quatro tabuleiros", "status": "PASS"},
+    {"name": "Chuva: erro por letra destacado e corrigido, palavra concluída e próxima palavra diferente", "status": "PASS"},
+    {"name": "Mapa: modo Oceanos digitado aceita Oceano Austral para o marcador antártico", "status": "PASS"},
+    {"name": "Mapa: zoom e centralização disponíveis", "status": "PASS"}
+  ],
+  "responsiveGeometry": [
+    {"game": "Bandeiras", "requestedViewport": "390x900", "measuredCssWidth": 300, "scrollWidth": 288},
+    {"game": "Termo: uma palavra", "requestedViewport": "390x900", "measuredCssWidth": 300, "scrollWidth": 288},
+    {"game": "Termo: quarteto 7 letras", "requestedViewport": "320x900", "measuredCssWidth": 246, "scrollWidth": 247},
+    {"game": "Mapa: resposta digitada", "requestedViewport": "390x900", "measuredCssWidth": 300, "scrollWidth": 288}
+  ],
+  "responsiveNote": "O zoom existente do navegador altera a largura efetiva em CSS. Registros usam as medidas observadas; tolerância de arredondamento de 2px. As capturas estreitas tiveram corte pela ferramenta e não são entregues como prova visual completa.",
+  "consoleErrorsOrWarnings": [],
+  "captures": ["feedback-ux.jpg", "termo-ux.jpg"],
+  "cleanup": "Viewport temporário restaurado e prévia deixada na biblioteca de Conhecimento."
+}

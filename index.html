@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="theme-color" content="#0d1422" />
+        <meta
+            name="description"
+            content="Jogos procedurais de memória, lógica, atenção e conhecimento."
+        />
+        <title>Desafio Lógico Total</title>
+        <link rel="stylesheet" href="./src/css/utilities.css?v=2026-10-04.3" />
+        <link rel="stylesheet" href="./src/css/style.css?v=2026-10-04.3" />
+        <link rel="stylesheet" href="./src/css/platform.css?v=2026-10-04.3" />
+        <link rel="stylesheet" href="./src/css/arcade.css?v=2026-10-04.3" />
+    </head>
+    <body>
+        <main id="game-main-menu" class="dashboard">
+            <header class="arcade-topbar">
+                <a class="arcade-brand" href="./" aria-label="Desafio Lógico Total, início"
+                    ><span class="brand-symbol" aria-hidden="true">✚</span
+                    ><span>DESAFIO<span>LÓGICO TOTAL</span></span></a
+                >
+                <span class="topbar-tag">SEU ARCADE DE IDEIAS</span>
+                <span class="local-player"
+                    ><span class="player-dot" aria-hidden="true"></span> Jogador local</span
+                >
+            </header>
+            <section class="arcade-hero" aria-label="Destaques da coleção">
+                <div class="hero-copy">
+                    <span class="eyebrow">LIGUE A CURIOSIDADE</span>
+                    <h1>Pequenos jogos.<br /><span>Grandes descobertas.</span></h1>
+                    <p>
+                        Uma pausa para pensar, explorar e tentar de novo. Escolha seu desafio e
+                        entre no jogo.
+                    </p>
+                    <button id="start-practice-mode-select" class="button button-primary">
+                        Encontrar meu próximo jogo <span aria-hidden="true">↗</span>
+                    </button>
+                    <p id="progress-summary"></p>
+                </div>
+                <button
+                    id="featured-game"
+                    class="featured-game"
+                    aria-label="Conhecer Linha do Tempo"
+                >
+                    <span class="featured-label"
+                        >NOVO NA COLEÇÃO <span aria-hidden="true">↗</span></span
+                    ><span id="featured-art" class="featured-art"></span
+                    ><span class="featured-caption"
+                        ><small>CONHECIMENTO · EXPLORAÇÃO ESPACIAL</small
+                        ><strong>Linha do Tempo</strong
+                        ><span>Conecte os marcos. Encontre a ordem.</span></span
+                    >
+                </button>
+            </section>
+            <section class="arcade-modes" aria-label="Jeitos de jogar">
+                <div class="mode-copy">
+                    <span class="mode-symbol" aria-hidden="true">⚡</span>
+                    <div>
+                        <strong>Uma jornada, vários desafios</strong>
+                        <p>Alterne habilidades e descubra jogos.</p>
+                    </div>
+                </div>
+                <div class="hero-actions">
+                    <label
+                        >Dificuldade da Jornada<select id="journey-difficulty">
+                            <option value="easy">Fácil</option>
+                            <option value="medium">Médio</option>
+                            <option value="hard">Difícil</option>
+                            <option value="expert">Especialista</option>
+                        </select></label
+                    ><button id="start-journey-mode" class="button button-primary">
+                        Iniciar Jornada →</button
+                    ><button id="daily-challenge" class="button button-secondary">
+                        Desafio diário
+                    </button>
+                </div>
+            </section>
+            <section class="library-shell" aria-label="Biblioteca de jogos">
+                <aside class="library-sidebar">
+                    <span class="eyebrow">EXPLORE POR HABILIDADE</span>
+                    <nav id="category-tabs" aria-label="Categorias"></nav>
+                    <p id="storage-status" class="muted"></p>
+                    <span class="sidebar-tip">Seu próximo recorde começa com uma tentativa.</span>
+                </aside>
+                <div class="library-content">
+                    <div class="section-title">
+                        <div>
+                            <span class="eyebrow">ESCOLHA. JOGUE. REPITA.</span>
+                            <h2 id="library-title">Todos os jogos</h2>
+                        </div>
+                        <label class="library-search"
+                            ><span class="sr-only">Buscar jogos</span
+                            ><input
+                                id="game-search"
+                                type="search"
+                                placeholder="Buscar um jogo ou habilidade…"
+                                autocomplete="off"
+                        /></label>
+                    </div>
+                    <div class="library-tools">
+                        <div
+                            id="library-filters"
+                            class="library-filters"
+                            aria-label="Filtrar biblioteca"
+                        >
+                            <button data-filter="all" aria-pressed="true">Todos</button
+                            ><button data-filter="new" aria-pressed="false">
+                                Novidades <span class="new-dot" aria-hidden="true"></span></button
+                            ><button data-filter="favorites" aria-pressed="false">Favoritos</button
+                            ><button data-filter="recent" aria-pressed="false">
+                                Últimos jogados
+                            </button>
+                        </div>
+                        <label class="library-sort"
+                            ><span class="sr-only">Ordenar jogos</span
+                            ><select id="game-sort">
+                                <option value="recommended">Destaques primeiro</option>
+                                <option value="az">Nome: A–Z</option>
+                                <option value="recent">Jogadas recentes</option>
+                            </select></label
+                        >
+                    </div>
+                    <p id="library-count" class="muted" role="status" aria-live="polite"></p>
+                    <div id="phase-buttons-container" class="catalog"></div>
+                    <div id="library-empty" class="library-empty hidden">
+                        <span aria-hidden="true">⌕</span>
+                        <h3 id="empty-title">Nenhum jogo encontrado</h3>
+                        <p id="empty-description">Tente outro nome ou habilidade.</p>
+                        <button id="clear-library-filters" class="button button-secondary">
+                            Mostrar todos os jogos
+                        </button>
+                    </div>
+                </div>
+            </section>
+            <footer class="arcade-footer">
+                <span>Uma coleção feita para voltar.</span
+                ><span>Sem conta. Seu progresso fica com você.</span>
+            </footer>
+            <noscript>Ative o JavaScript para jogar.</noscript>
+        </main>
+        <section
+            id="phase-selection-screen"
+            class="game-container hidden"
+            aria-label="Configurar partida"
+        >
+            <button id="back-to-main-menu" class="text-button">← Biblioteca</button>
+            <div class="config-layout">
+                <aside class="config-intro">
+                    <div id="config-cover" class="config-cover"></div>
+                    <span id="game-category-label" class="eyebrow"></span>
+                    <h1 id="difficulty-selection-title"></h1>
+                    <p id="game-description" class="game-instructions"></p>
+                    <p id="game-control-info" class="muted"></p>
+                </aside>
+                <div class="config-controls">
+                    <span class="eyebrow">DO SEU JEITO</span>
+                    <h2>Prepare sua partida</h2>
+                    <div class="configuration">
+                        <label
+                            >Dificuldade<select id="difficulty-select">
+                                <option value="easy">Fácil</option>
+                                <option value="medium">Médio</option>
+                                <option value="hard">Difícil</option>
+                                <option value="expert">Especialista</option>
+                            </select></label
+                        ><label
+                            >Seed <span class="muted">(opcional)</span
+                            ><input
+                                id="seed-input"
+                                maxlength="32"
+                                placeholder="Automática, ou uma seed para repetir"
+                                autocomplete="off"
+                        /></label>
+                        <div id="game-options"></div>
+                    </div>
+                    <p
+                        id="difficulty-explanation"
+                        class="difficulty-explanation"
+                        aria-live="polite"
+                    ></p>
+                    <p id="config-error" role="status" class="error-text"></p>
+                    <button id="start-practice-game-btn" class="button button-primary">
+                        Jogar →
+                    </button>
+                    <p class="config-tip">
+                        Uma nova seed cria outro desafio. Guarde a sua para jogar novamente.
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section id="roguelike-game-area" class="game-container hidden" aria-label="Partida">
+            <header class="game-toolbar">
+                <button id="quit-current-game" class="text-button">← Voltar</button>
+                <h1 id="current-mode-title"></h1>
+                <button id="game-settings" class="text-button" aria-label="Configurar partida">
+                    ⚙
+                </button>
+            </header>
+            <div class="session-hud">
+                <span>Pontuação <strong id="hud-score">0</strong></span
+                ><span>Sequência <strong id="hud-streak">0</strong></span
+                ><span id="hud-time-wrap">Tempo <strong id="hud-time">00:00</strong></span>
+            </div>
+            <div class="challenge-strip">
+                <p id="run-status"></p>
+                <div>
+                    <button id="pause-current-game" class="text-button">Pausar</button
+                    ><button id="restart-current-game" class="text-button">Mesmo desafio</button
+                    ><button id="new-current-game" class="text-button">Nova partida</button>
+                </div>
+            </div>
+            <div id="phase-limit-display" class="limit-display" role="status"></div>
+            <p id="game-notice" role="status" aria-live="polite"></p>
+            <p id="pause-notice" class="hidden" role="status">
+                Partida pausada. Retome para continuar.
+            </p>
+            <div id="phase-display" class="flex flex-col items-center w-full"></div>
+        </section>
+        <div
+            id="messageModal"
+            class="result-overlay hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalMessageText"
+        >
+            <div class="result-content">
+                <span class="eyebrow">PARTIDA ENCERRADA</span>
+                <h2 id="modalMessageText">Resultado</h2>
+                <div id="result-stats" class="result-stats"></div>
+                <div id="modalDetailsDisplay"></div>
+                <div class="result-actions">
+                    <button id="modalCloseButton" class="button button-primary">Nova partida</button
+                    ><button id="modalReplayButton" class="button button-secondary">
+                        Mesmo desafio</button
+                    ><button id="modalShareButton" class="button button-secondary">
+                        Compartilhar desafio</button
+                    ><button id="modalMenuButton" class="button button-secondary">Menu</button>
+                </div>
+                <p id="share-status" role="status"></p>
+            </div>
+        </div>
+        <script src="./src/js/core/random.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/difficulty.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/score.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/registry.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/algorithms.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/session.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/progress.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/interactions.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/rules.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/sudoku.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/puzzles.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/challenges.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/knowledge.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/nonogram.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/learning.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/library.js?v=2026-10-04.3"></script>
+        <script src="./src/js/games.config.js?v=2026-10-04.3"></script>
+        <script src="./src/js/main.js?v=2026-10-04.3"></script>
+    </body>
+</html>

@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Vocabulário: expansão real, respostas validadas e bancos amplos",
+    "status": "PASS"
+  },
+  {
+    "name": "Baralho: não repete antes de esgotar e prioriza itens ainda não vistos",
+    "status": "PASS"
+  },
+  {
+    "name": "Alternativas geográficas: América do Sul nunca é uma opção isolada",
+    "status": "PASS"
+  },
+  {
+    "name": "Fácil: países pequenos e fora do antigo grupo aparecem em partidas reais",
+    "status": "PASS"
+  },
+  {
+    "name": "Digitado: bandeiras e seis modos do mapa aceitam respostas válidas",
+    "status": "PASS"
+  },
+  {
+    "name": "Feedback: erros revelam a alternativa correta, barra avança e não aceita duas respostas",
+    "status": "PASS"
+  },
+  {
+    "name": "Termo: prévia neutra, erro não consome tentativa e palavra recente não retorna",
+    "status": "PASS"
+  },
+  {
+    "name": "Chuva: quinze palavras distintas, feedback por letra e histórico usado no reinício",
+    "status": "PASS"
+  }
+]
