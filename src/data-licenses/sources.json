@@ -1,0 +1,54 @@
+{
+  "countries": {
+    "repository": "https://github.com/mledoze/countries",
+    "commit": "c2ac0049c14edcf2436c7aa1b2493222a020b462",
+    "downloaded": "2026-10-02",
+    "license": "ODbL-1.0",
+    "changes": "Campos selecionados, nomes e capitais em português, aliases, correções documentadas, associação a SVGs e cartografia."
+  },
+  "world": {
+    "repository": "https://github.com/nvkelso/natural-earth-vector",
+    "commit": "ca96624a56bd078437bca8184e78163e5039ad19",
+    "downloaded": "2026-10-02",
+    "license": "Public domain",
+    "changes": "177 feições, coordenadas arredondadas e vizinhos derivados de bordas cartográficas compartilhadas."
+  },
+  "flags": {
+    "repository": "https://github.com/hampusborgos/country-flags",
+    "commit": "c09927e63705529bbf59ca6684cd9b23225dddad",
+    "downloaded": "2026-10-02",
+    "license": "Public domain as stated by the source repository",
+    "changes": "250 SVGs copiados sem alteração gráfica para uso local."
+  },
+  "words": {
+    "repository": "https://github.com/wooorm/dictionaries/tree/main/dictionaries/pt",
+    "commit": "8cfea406b505e4d7df52d5a19bce525df98c54ab",
+    "downloaded": "2026-10-02",
+    "dictionary": "VERO — português brasileiro, Raimundo Santos Moura e colaboradores",
+    "licenseNotice": "Original notice declares LGPLv3 and Mozilla Public License; derived list distributed under LGPLv3.",
+    "changes": "Bases e afixos de 4–7 letras validados com Spylls antes de remover acentos e converter para A–Z. Respostas cotidianas selecionadas.",
+    "entries": 166143,
+    "answers": 278,
+    "originals": "VERO-original.zip",
+    "rebuild": "build_words.py"
+  },
+  "capitalNames": {
+    "reference": "https://servicodados.ibge.gov.br/api/docs/paises",
+    "accessed": "2026-10-02",
+    "changes": "Nomenclatura em português; referências específicas de capitais revisadas permanecem no registro de cada país."
+  },
+  "wordValidator": {
+    "repository": "https://github.com/zverok/spylls",
+    "version": "0.1.7",
+    "usage": "Development only; library code is not included in the application."
+  },
+  "editorialVocabulary": {
+    "file": "src/js/data/vocabulary.js",
+    "created": "2026-10-02",
+    "portuguese": 865,
+    "english": 729,
+    "codeTokens": 135,
+    "termoCommonTargets": 780,
+    "processing": "Seleção editorial local; alvos de Termo filtrados pelo dicionário validado."
+  }
+}
