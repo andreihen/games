@@ -1,3 +1,7 @@
+# Sobre esta distribuiÃ§Ã£o
+
+CSS, JavaScript, bancos de dados e as 250 bandeiras estÃ£o incorporados ao `index.html`. Os caminhos descritos abaixo identificam os arquivos-fonte do projeto. As fontes originais e licenÃ§as do dicionÃ¡rio permanecem em `src/data-licenses/`. Abra o HTML para jogar; nÃ£o Ã© necessÃ¡rio carregar imagens separadamente.
+
 # Dados e créditos de terceiros
 
 Os dados necessários para jogar acompanham o projeto. A aplicação não consulta esses serviços durante uma partida. As versões de coleta e os commits estão em `src/data-licenses/sources.json`.
@@ -57,3 +61,11 @@ As pistas do Sistema Solar utilizam como referência [planetas](https://science.
 ## Dependências de desenvolvimento
 
 `tests/package.json` e o lockfile registram jsdom 30.1.1 para o DOM simulado. A validação utilizou Node.js 24.18.0 e Prettier 3.6.2. Essas ferramentas não são necessárias para abrir o aplicativo e seus pacotes não são incluídos no site entregue.
+
+## Pokémon, elementos e textos de digitação
+
+`src/js/data/pokemon.js` usa fatos do [repositório oficial PokéAPI](https://github.com/PokeAPI/pokeapi), snapshot `c80757193bd0889054e36f4209762360bdaa4b95`, consultado em 9 de outubro de 2026. CSVs: pokemon, pokemon_species, pokemon_species_names e pokemon_types. Inclui 1.025 espécies, nomes em inglês e atributos da forma padrão; exclui megaevoluções e variantes regionais. O banco é local conforme a [política de cache da PokéAPI](https://pokeapi.co/docs/v2). A licença BSD de três cláusulas e seus avisos estão em `src/data-licenses/LICENSE-PokeAPI.txt`. Pokémon e seus nomes são marcas de Nintendo; este jogo é uma adaptação independente de dedução, sem sprites extraídos.
+
+`src/js/data/elements.js` adapta números, símbolos e categorias factuais da [Tabela Periódica PubChem](https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON), consultada em 9 de outubro de 2026. Referência de nomenclatura e disposição: [IUPAC](https://iupac.org/what-we-do/periodic-table-of-elements/). Nomes em português são rótulos editoriais locais. Períodos seguem a disposição padrão; as famílias são categorias GroupBlock do snapshot PubChem, não números de grupo. A classificação de elementos superpesados pode variar por fonte. Nenhuma massa, descoberta ou propriedade não utilizada foi incorporada ao jogo.
+
+`src/js/data/passages.js` contém 24 trechos originais (10 em português, 8 em inglês e 6 de código) escritos para treino; cada partida combina de dois a cinco trechos sem repetir dentro do texto. As capas novas são SVGs locais e o jogo de Pokémon não depende de downloads de imagens.
