@@ -1,0 +1,30 @@
+[
+  {
+    "name": "131 retratos originais carregados, zero imagens quebradas",
+    "status": "PASS"
+  },
+  {
+    "name": "Pacote standalone: iCarly, cinco fotos data URI, sem dependência de imagem externa",
+    "status": "PASS"
+  },
+  {
+    "name": "Preparação com painel de elenco, tipo/obra e regras próprias",
+    "status": "PASS"
+  },
+  {
+    "name": "Desktop 1280×900 e celulares 390×844/320×740: controles dentro da tela e ausência de overflow horizontal",
+    "status": "PASS"
+  },
+  {
+    "name": "Mapa urbano distinto com ocupantes, fontes renováveis e miniaturas",
+    "status": "PASS"
+  },
+  {
+    "name": "TVmaze: busca real retorna iCarly 2007/2021; elenco da versão 2021 em tema separado",
+    "status": "PASS"
+  },
+  {
+    "name": "Voltar da preparação e reabrir save mantém a competição no mesmo acontecimento",
+    "status": "PASS"
+  }
+]

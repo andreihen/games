@@ -1,6 +1,6 @@
 /* Scripts clássicos mantêm a plataforma utilizável também ao abrir index.html. */
 const GameRegistry = (() => {
-    const version = '2026-10-04.3';
+    const version = '2026-10-13.2';
     const factories = new Map();
     const loads = new Map();
     function register(id, factory) {

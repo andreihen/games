@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "package": "Orbita-Arena-Viva.zip",
+  "version": 3,
+  "url": "http://127.0.0.1:8772/dist/?view=play&game=survivalarena&seed=CINEMA3",
+  "checks": [
+    "Busca real de Harry Potter: oito filmes; 46 papéis importados de A Pedra Filosofal",
+    "Busca real de Shrek: seis obras; 12 papéis importados do filme de 2001",
+    "Retratos visíveis carregados; imagens de intérpretes identificadas",
+    "NPC reage à nuvem, foge por uma passagem e consome o turno",
+    "Feedback visual de ataque: dano, participantes, mapa e chance/d100",
+    "390x844 e 320x740: sem overflow horizontal; controles dentro da tela",
+    "Preparação e retorno preservam o acontecimento",
+    "Recarregar e restaurar o pacote final preservam exatamente o acontecimento, sem erros de console"
+  ],
+  "screenshots": [
+    "C:/Users/andre/Documents/Codex/2026-10-12/orbita/arena-viva-filmes.png",
+    "C:/Users/andre/Documents/Codex/2026-10-12/orbita/arena-viva.png",
+    "C:/Users/andre/Documents/Codex/2026-10-12/orbita/arena-viva-celular.png"
+  ]
+}

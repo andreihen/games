@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Celular 320×740: história rolável, abas legíveis e reprodução dentro da tela, sem overflow horizontal",
+    "status": "PASS"
+  },
+  {
+    "name": "Celular 390×844: controles permanentes e mapa interativo",
+    "status": "PASS"
+  },
+  {
+    "name": "Tablet 768×900 e desktop 1280×800: sem overflow horizontal; história e mapa lado a lado",
+    "status": "PASS"
+  },
+  {
+    "name": "Ficha individual, Escape, retorno de foco e consulta histórica com estados correspondentes",
+    "status": "PASS"
+  },
+  {
+    "name": "Reabrir última arena restaura dia, posições e inventário",
+    "status": "PASS"
+  },
+  {
+    "name": "Rick and Morty API: busca real por Rick Sanchez retorna quatro resultados, sem imagens remotas; console sem erros",
+    "status": "PASS"
+  }
+]

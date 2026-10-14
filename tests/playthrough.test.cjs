@@ -196,7 +196,7 @@ async function run() {
             assert(second);
             t.click(second);
             seen.set(+second.dataset.card, second.textContent);
-            await t.advance(801);
+            await t.advance(1101);
             assert(++turns < 50);
         }
         assert.equal(t.outcomes[0][0], true);

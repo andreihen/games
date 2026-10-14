@@ -74,13 +74,13 @@ async function main() {
             );
             const api = (expression) => vm.runInContext(expression, context);
             assert.equal(errors.length, 0, errors[0]?.stack);
-            assert.equal(w.document.querySelectorAll('.game-card').length, 43);
+            assert.equal(w.document.querySelectorAll('.game-card').length, 60);
             assert.equal(
                 w.document.querySelectorAll('script[src], link[rel="stylesheet"]').length,
                 0
             );
             assert.equal(w.document.querySelector('#featured-art svg') !== null, true);
-            assert.equal(w.document.querySelectorAll('style').length, 4);
+            assert.equal(w.document.querySelectorAll('style').length, 5);
             reports.push({
                 name: `Biblioteca e estilos carregam em ${suffix} sem arquivos externos`,
                 status: 'PASS'
@@ -95,7 +95,7 @@ async function main() {
                     fs.readFileSync(path.join(root, 'src/assets/flags', code + '.svg'))
                 );
             }
-            for (const key of ['geography', 'learning', 'vocabulary', 'words']) {
+            for (const key of ['geography', 'learning', 'vocabulary', 'words', 'pokemon', 'elements', 'passages', 'arena']) {
                 const bundleData = await api(`GameData.load('${key}')`);
                 const sourceContext = vm.createContext({
                     GameData: {
@@ -114,7 +114,7 @@ async function main() {
                 );
             }
             reports.push({
-                name: `250 SVGs e quatro bancos de dados preservados em ${suffix}`,
+                name: `250 SVGs e oito bancos de dados preservados em ${suffix}`,
                 status: 'PASS'
             });
 
@@ -137,7 +137,7 @@ async function main() {
                 await flush();
             }
             const config = api('GAMES_CONFIG');
-            assert.equal(config.length, 44);
+            assert.equal(config.length, 61);
             for (const game of config) {
                 const phase = w.document.querySelector('#phase-display');
                 phase.replaceChildren();
@@ -185,7 +185,7 @@ async function main() {
                     assert(phase.children.length > 0, game.id + ': partida vazia');
                     for (const image of phase.querySelectorAll('img')) {
                         assert(
-                            image.src.startsWith('data:image/svg+xml;base64,'),
+                            image.src.startsWith('data:image/svg+xml;base64,') || (game.id==='survivalarena' && /^data:image\/(png|jpeg|webp);base64,/.test(image.src)),
                             game.id + ': bandeira externa'
                         );
                     }
@@ -197,7 +197,7 @@ async function main() {
             }
             assert.deepEqual(attempts, []);
             reports.push({
-                name: `44 jogos inicializam em ${suffix} sem requests adicionais ou erros`,
+                name: `61 jogos inicializam em ${suffix} sem requests adicionais ou erros`,
                 status: 'PASS'
             });
             dom.window.close();

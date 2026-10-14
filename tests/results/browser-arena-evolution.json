@@ -1,0 +1,28 @@
+{
+  "report": [
+    {
+      "width": 390,
+      "status": "PASS",
+      "layout": {
+        "documentWidth": 390,
+        "viewport": 390,
+        "visible": "visible"
+      },
+      "portraitRoundtrip": true,
+      "helpPausesAndResumes": true
+    },
+    {
+      "width": 1280,
+      "status": "PASS",
+      "layout": {
+        "documentWidth": 1280,
+        "viewport": 1280,
+        "visible": "visible"
+      },
+      "portraitRoundtrip": true,
+      "helpPausesAndResumes": true
+    }
+  ],
+  "errors": [],
+  "sharedHelp": true
+}

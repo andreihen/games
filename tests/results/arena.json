@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Arena: 144 competições completas em seis biomas, 2–48 participantes e três ritmos",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: histórico imutável, mapa passado, save e continuação reproduzem exatamente a seed",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: rejeita arma sem munição, aliança distante, cura sem item e IDs reservados sem mutação",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: adaptador opcional suporta resposta, 404, falha e retrato ausente sem carregar imagens externas",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: importação de JSON valida versão, conserva elenco e restaura o save; busca expira sem bloquear",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: elenco, cotas e exclusões, edição segura, reprodução e retomar sem pontuação fictícia",
+    "status": "PASS"
+  },
+  {
+    "name": "Arena: integração separa observação de dificuldade, jornada e desafio diário",
+    "status": "PASS"
+  }
+]

@@ -1311,3 +1311,188 @@ input[aria-invalid='true'] {
     max-width: 100%;
     margin: auto;
 }
+.ded-reference {
+    margin: 1rem 0;
+    border: 1px solid var(--border-color, #35434b);
+    border-radius: 10px;
+    padding: 0.75rem;
+}
+.ded-reference summary {
+    cursor: pointer;
+}
+#ded-reference-list {
+    max-height: 220px;
+    overflow: auto;
+    display: grid;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+.ded-candidate {
+    background: transparent;
+    border: 1px solid #35434b;
+    color: inherit;
+    text-align: left;
+    padding: 0.65rem;
+    border-radius: 6px;
+    font: inherit;
+    cursor: pointer;
+}
+.ded-history {
+    display: grid;
+    gap: 0.7rem;
+}
+.ded-row {
+    border: 1px solid #35434b;
+    border-radius: 10px;
+    padding: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+.ded-row strong {
+    flex-basis: 100%;
+}
+.ded-cell {
+    background: #26323a;
+    padding: 0.45rem 0.6rem;
+    border-radius: 5px;
+    font-size: 0.9rem;
+}
+.ded-cell.matched,
+.sum-total.matched {
+    background: #234838;
+    color: #bbebce;
+}
+.ded-cell.partial {
+    background: #594920;
+    color: #ffdf8b;
+}
+.sum-grid {
+    display: grid;
+    grid-template-columns: repeat(var(--sum-size), minmax(0, 1fr));
+    gap: 0.35rem;
+    max-width: 520px;
+    margin: 1rem auto;
+}
+.sum-cell {
+    min-height: 44px;
+    border: 1px solid #455461;
+    border-radius: 7px;
+    background: #25313b;
+    color: #edf1f5;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+.sum-cell[aria-pressed='true'] {
+    background: transparent;
+    color: #a0aab5;
+    text-decoration: line-through;
+    border-style: dashed;
+}
+.sum-total {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+    border-radius: 6px;
+}
+.equation-history {
+    display: grid;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+}
+.equation-row {
+    display: flex;
+    gap: 0.3rem;
+}
+.equation-tile {
+    flex: 1;
+    min-width: 0;
+    max-width: 60px;
+    padding: 0.4rem 0;
+    text-align: center;
+    background: #35404b;
+    border-radius: 5px;
+    font: 600 1.4rem monospace;
+    color: #fff;
+}
+.equation-tile small {
+    display: block;
+    font-size: 0.75rem;
+}
+.equation-tile.exact {
+    background: #2d6846;
+}
+.equation-tile.present {
+    background: #715919;
+}
+.equation-keys {
+    display: flex;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+    max-width: 580px;
+    margin-top: 0.75rem;
+}
+.equation-keys .button {
+    min-width: 40px;
+    min-height: 44px;
+    padding: 0.5rem;
+}
+.typing-passage {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 300px;
+    overflow: auto;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #455461;
+    border-radius: 10px;
+    background: #161f27;
+    line-height: 1.9;
+    font-family: monospace;
+    font-size: 1rem;
+    color: #c5cfda;
+}
+.text-correct {
+    color: #a9e8c2;
+}
+.text-wrong {
+    color: #fff;
+    background: #853e49;
+    text-decoration: underline;
+}
+.text-cursor {
+    border-bottom: 3px solid #c3dcff;
+}
+.typing-text-input {
+    display: block;
+    width: 100%;
+    resize: vertical;
+    box-sizing: border-box;
+    background: #17232c;
+    color: #edf1f5;
+    border: 1px solid #526372;
+    border-radius: 8px;
+    padding: 0.75rem;
+    font: 1rem/1.7 monospace;
+    margin: 0.5rem 0;
+}
+.typing-text-input[aria-invalid='true'] {
+    border-color: #ed9aab;
+}
+@media (max-width: 420px) {
+    .sum-total {
+        font-size: 0.7rem;
+    }
+    .equation-tile {
+        font-size: 1.15rem;
+    }
+    .typing-passage {
+        padding: 0.65rem;
+        max-height: 240px;
+    }
+}

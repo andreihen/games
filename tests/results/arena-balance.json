@@ -1,0 +1,37 @@
+{
+  "combat": 254,
+  "total": 528,
+  "ratio": 0.4810606060606061,
+  "arenas": [
+    {
+      "arena": "forest",
+      "combat": 34,
+      "environment": 54
+    },
+    {
+      "arena": "desert",
+      "combat": 38,
+      "environment": 50
+    },
+    {
+      "arena": "arctic",
+      "combat": 49,
+      "environment": 39
+    },
+    {
+      "arena": "city",
+      "combat": 48,
+      "environment": 40
+    },
+    {
+      "arena": "islands",
+      "combat": 37,
+      "environment": 51
+    },
+    {
+      "arena": "volcano",
+      "combat": 48,
+      "environment": 40
+    }
+  ]
+}

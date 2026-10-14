@@ -1,5 +1,183 @@
 const GAMES_CONFIG = Object.freeze([
     {
+        id: 'chess', name: 'Xadrez', file: 'chess.js', category: 'Lógica', icon: '♞',
+        description: 'Proteja seu rei e planeje o próximo xeque-mate.',
+        rules: 'Xadrez com roque, en passant e escolha de promoção. Jogue contra um bot em quatro níveis ou com outra pessoa no mesmo aparelho. Brancas começam; vença com xeque-mate.',
+        options: [
+            { key: 'mode', label: 'Participantes', values: [{ value: 'bot', label: 'Contra o bot' }, { value: 'friend', label: '2 pessoas no mesmo aparelho' }] },
+            { key: 'side', label: 'Sua cor (contra o bot)', values: [{ value: 'white', label: 'Brancas' }, { value: 'black', label: 'Pretas' }] }
+        ],
+        primary: true, controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'draughts', name: 'Damas', file: 'draughts.js', category: 'Lógica', icon: '◉',
+        description: 'Encadeie capturas e transforme suas pedras em damas.',
+        rules: 'Damas brasileiras em tabuleiro 8 × 8. Capturas para frente e para trás são obrigatórias, pela sequência mais longa. Damas percorrem diagonais. Duas pessoas no mesmo aparelho ou bot em quatro níveis. Empates casuais por repetição ou 15 lances de damas por pessoa sem captura.',
+        options: [
+            { key: 'mode', label: 'Participantes', values: [{ value: 'bot', label: 'Contra o bot' }, { value: 'friend', label: '2 pessoas no mesmo aparelho' }] },
+            { key: 'side', label: 'Sua cor (contra o bot)', values: [{ value: 'white', label: 'Brancas' }, { value: 'black', label: 'Pretas' }] }
+        ],
+        primary: true, controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'minesweeper', name: 'Campo Minado', file: 'minesweeper.js', category: 'Lógica', icon: '⚑',
+        description: 'Leia os números, marque as minas e abra as casas seguras.',
+        rules: 'Abra todas as casas sem minas. Números contam minas vizinhas; marque suspeitas com bandeiras. O primeiro clique e seus vizinhos são seguros. Use modo bandeira no toque, botão direito ou F no teclado. Quatro tamanhos conforme a dificuldade.',
+        options: [], primary: true, controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'ludo', name: 'Ludo', file: 'ludo.js', category: 'Lógica', icon: '⚄',
+        description: 'Uma corrida de quatro peões, capturas e decisões em família.',
+        rules: 'De 2 a 4 participantes no mesmo aparelho, com pessoas e bots. Tire 6 para sair da base e jogar novamente; três 6 seguidos perdem a vez. Estrelas protegem de capturas. Sem barreiras nem bônus por captura. Chegue com valor exato e leve os quatro peões ao centro.',
+        options: [
+            { key: 'players', label: 'Total de participantes', values: [{ value: '2', label: '2 participantes' }, { value: '3', label: '3 participantes' }, { value: '4', label: '4 participantes' }] },
+            { key: 'humans', label: 'Pessoas no aparelho (restante: bots)', values: [{ value: '1', label: '1 pessoa' }, { value: '2', label: '2 pessoas' }, { value: '3', label: '3 pessoas' }, { value: '4', label: '4 pessoas' }] }
+        ],
+        primary: true, controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'colorrecall',
+        name: 'Cor Relâmpago',
+        file: 'colorrecall.js',
+        category: 'Memória',
+        icon: '◓',
+        description: 'Observe uma cor e reconstrua o tom depois que ela desaparecer.',
+        rules: 'Observe cada uma das cinco cores por alguns segundos. Reproduza tonalidade, saturação e brilho sem ver a referência. Depois de confirmar, compare sua resposta com o original.',
+        options: [],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'soundrecall',
+        name: 'Nota de Memória',
+        file: 'soundrecall.js',
+        category: 'Memória',
+        icon: '♫',
+        description: 'Ouça uma nota e reencontre sua altura pelo ouvido.',
+        rules: 'Ative o áudio em Ouvir referência. Ajuste do grave ao agudo, ouça sua tentativa e confirme. Cinco notas por partida. No desafio a referência toca uma vez; no treino você pode ouvi-la novamente.',
+        options: [
+            {
+                key: 'mode',
+                label: 'Modo',
+                values: [
+                    { value: 'challenge', label: 'Desafio: uma referência' },
+                    { value: 'practice', label: 'Treino: ouvir novamente' }
+                ]
+            }
+        ],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'timerecall',
+        name: 'Relógio Interno',
+        file: 'timerecall.js',
+        category: 'Atenção',
+        icon: '◷',
+        description: 'Sinta a duração de um intervalo e reproduza sem cronômetro.',
+        rules: 'Observe o círculo aceso. Em seguida toque uma vez para iniciar a reprodução e novamente para encerrá-la. Cinco intervalos por partida. A diferença em segundos aparece apenas depois da resposta.',
+        options: [],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'shaperecall',
+        name: 'Forma de Memória',
+        file: 'shaperecall.js',
+        category: 'Memória',
+        icon: '⬡',
+        description: 'Reconstrua o tamanho e a rotação de uma forma.',
+        rules: 'Observe uma forma e depois ajuste seu tamanho e rotação. A correção sobrepõe o contorno original. Rotações equivalentes pela simetria da forma recebem a mesma pontuação. Cinco formas por partida.',
+        options: [],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'patternrepair',
+        name: 'Padrão Partido',
+        file: 'patternrepair.js',
+        category: 'Atenção',
+        icon: '▦',
+        description: 'Memorize uma grade e desfaça as trocas que quebraram seu padrão.',
+        rules: 'Observe a grade. Algumas peças trocam de lugar. Clique em duas peças para trocá-las de volta. Há cinco grades e três verificações por rodada. A precisão considera a restauração e o tempo; símbolos distinguem as cores.',
+        options: [],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'temporebuild',
+        name: 'Construtor de Ritmo',
+        file: 'temporebuild.js',
+        category: 'Atenção',
+        icon: '♬',
+        description: 'Reconstrua uma batida musical, uma faixa por vez.',
+        rules: 'Ouça e observe uma faixa. A gravação começa após quatro batidas de preparação. Toque ou pressione Espaço no momento de cada nota. O resultado considera acertos, antecipações, atrasos e batidas extras. O modo visual funciona sem áudio.',
+        options: [
+            {
+                key: 'sound',
+                label: 'Apresentação',
+                values: [
+                    { value: 'on', label: 'Som e indicador visual' },
+                    { value: 'off', label: 'Somente visual' }
+                ]
+            }
+        ],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'colormix',
+        name: 'Ateliê de Cores',
+        file: 'colormix.js',
+        category: 'Atenção',
+        icon: '◐',
+        description: 'Misture gotas de cor para alcançar um tom alvo.',
+        rules: 'Adicione e retire gotas. Cada cor alvo é gerada por uma receita possível da paleta disponível. Há cinco rodadas e três avaliações por cor. No treino, a proximidade aparece enquanto você mistura.',
+        options: [
+            {
+                key: 'mode',
+                label: 'Modo',
+                values: [
+                    { value: 'challenge', label: 'Desafio: avaliar a mistura' },
+                    { value: 'guided', label: 'Treino: proximidade ao vivo' }
+                ]
+            }
+        ],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'colormemory',
+        name: 'Cor de Memória',
+        file: 'colormemory.js',
+        category: 'Memória',
+        icon: '◒',
+        description: 'Recrie as cores de personagens e símbolos de memória.',
+        rules: 'Ajuste tonalidade, saturação e brilho para reproduzir a cor principal de uma ilustração. No modo observar, veja a referência antes de ela desaparecer. Após confirmar, compare as cores. As referências são versões estilizadas; há cinco itens diferentes por partida.',
+        options: [
+            {
+                key: 'mode',
+                label: 'Modo',
+                values: [
+                    { value: 'memory', label: 'De memória: sem ver a referência' },
+                    { value: 'study', label: 'Observar e reproduzir' }
+                ]
+            },
+            {
+                key: 'pack',
+                label: 'Coleção',
+                values: [
+                    { value: 'mixed', label: 'Tudo misturado' },
+                    { value: 'characters', label: 'Personagens' },
+                    { value: 'logos', label: 'Símbolos e marcas' },
+                    { value: 'nature', label: 'Natureza' }
+                ]
+            }
+        ],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
         id: 'decode_colors',
         name: 'Decifrando Cores',
         file: 'decode_colors.js',
@@ -234,7 +412,7 @@ const GAMES_CONFIG = Object.freeze([
         category: 'Memória',
         icon: '▣',
         description: 'Combine imagens, conceitos e associações.',
-        rules: 'Encontre os pares. No modo Associação, as cartas representam coisas relacionadas, não desenhos iguais.',
+        rules: 'Escolha entre encontrar pares e memorizar uma sequência de quadrados. Nas associações, combine coisas relacionadas: um país e sua capital, uma palavra e seu significado ou uma conta e seu resultado.',
         options: [
             {
                 key: 'mode',
@@ -242,7 +420,11 @@ const GAMES_CONFIG = Object.freeze([
                 values: [
                     {
                         value: 'classic',
-                        label: 'Clássico'
+                        label: 'Pares iguais'
+                    },
+                    {
+                        value: 'sequence',
+                        label: 'Sequência de quadrados'
                     },
                     {
                         value: 'association',
@@ -339,8 +521,8 @@ const GAMES_CONFIG = Object.freeze([
         file: 'memorypath.js',
         category: 'Memória',
         icon: '↟',
-        description: 'Guarde uma rota e execute seus passos.',
-        rules: 'Observe a trilha e depois a percorra. Nas dificuldades maiores, há atraso e interferência.',
+        description: 'Observe os quadrados e repita a sequência.',
+        rules: 'Os quadrados acendem e apagam um por vez. Depois, toque nas posições na mesma ordem. Os modos de direções, interferência e rotação mudam a forma de lembrar.',
         options: [
             {
                 key: 'mode',
@@ -348,7 +530,7 @@ const GAMES_CONFIG = Object.freeze([
                 values: [
                     {
                         value: 'spatial',
-                        label: 'Trilha espacial'
+                        label: 'Sequência de quadrados'
                     },
                     {
                         value: 'directions',
@@ -356,7 +538,11 @@ const GAMES_CONFIG = Object.freeze([
                     },
                     {
                         value: 'interference',
-                        label: 'Interferência'
+                        label: 'Com distração'
+                    },
+                    {
+                        value: 'rotation',
+                        label: 'Grade girada'
                     }
                 ]
             }
@@ -480,7 +666,7 @@ const GAMES_CONFIG = Object.freeze([
         category: 'Digitação e Palavras',
         icon: '⌨',
         description: 'Treine digitação com ritmo adaptativo.',
-        rules: 'Digite o alvo destacado e corrija erros com Backspace. O banco evita repetição até percorrer as palavras disponíveis. Cotidiano funciona nos três idiomas; Amplo acrescenta o dicionário em português. A dificuldade altera comprimento e ritmo.',
+        rules: 'Chuva tranquila deixa as palavras caírem e esperarem na base; Sobrevivência tem cinco vidas; Sprint dura 60 segundos; Precisão mantém o alvo parado; Texto completo apresenta parágrafos para digitar. Corrija com Backspace. Nos modos de palavras, a meta é completar a quantidade indicada com 65% de precisão. O banco evita repetição até se esgotar; Amplo inclui flexões em português. Texto completo aceita correções e não tem prazo.',
         options: [
             {
                 key: 'mode',
@@ -488,7 +674,7 @@ const GAMES_CONFIG = Object.freeze([
                 values: [
                     {
                         value: 'zen',
-                        label: 'Zen'
+                        label: 'Chuva tranquila'
                     },
                     {
                         value: 'survival',
@@ -499,8 +685,12 @@ const GAMES_CONFIG = Object.freeze([
                         label: 'Sprint: 60 segundos'
                     },
                     {
+                        value: 'text',
+                        label: 'Texto completo'
+                    },
+                    {
                         value: 'precision',
-                        label: 'Precisão'
+                        label: 'Precisão: sem queda'
                     }
                 ]
             },
@@ -1063,9 +1253,19 @@ const GAMES_CONFIG = Object.freeze([
         file: 'checklist.js',
         category: 'Atenção',
         icon: '✓',
-        description: 'Inspecione casos usando uma lista que evolui.',
-        rules: 'Memorize os requisitos antes de a lista ser ocultada. Aprove documentos que cumprem todas as exigências e rejeite os demais. Entre dias, acompanhe inclusões, remoções e inversões.',
-        options: [],
+        description: 'Prepare equipes para missões com regras que mudam.',
+        rules: 'Memorize os suprimentos exigidos e decida quais equipes estão prontas para sair. A próxima etapa acrescenta, remove ou inverte um requisito. Três decisões corretas seguidas rendem um bônus.',
+        options: [
+            {
+                key: 'theme',
+                label: 'Cenário',
+                values: [
+                    { value: 'expedition', label: 'Expedição' },
+                    { value: 'space', label: 'Missão espacial' },
+                    { value: 'potions', label: 'Oficina de poções' }
+                ]
+            }
+        ],
         primary: true,
         controls: ['mouse', 'teclado', 'toque']
     },
@@ -1243,6 +1443,109 @@ const GAMES_CONFIG = Object.freeze([
         description: 'Encontre quatro relações entre dezesseis termos.',
         rules: 'Forme quatro grupos de quatro termos. Selecione os cartões e confirme a relação. Cada acerto revela o tema e retira o grupo do tabuleiro. O Fácil revela uma pista temática. Você dispõe de 4, 4, 3 ou 2 erros conforme o nível; repetir uma combinação errada não consome outro erro.',
         options: [],
+        primary: true,
+        controls: ['mouse', 'teclado', 'toque']
+    },
+    {
+        id: 'pokemon',
+        name: 'Pokédex Misteriosa',
+        file: 'pokemon.js',
+        category: 'Conhecimento',
+        icon: '◉',
+        description: 'Encontre o Pokémon pelas comparações de tipos, geração e medidas.',
+        rules: 'Digite nomes de Pokémon e combine as pistas. Setas apontam para o valor secreto. Tipos parciais são marcados com ≈. A consulta de candidatos está disponível. Os níveis ampliam as gerações e reduzem tentativas. Formas padrão, sem variantes regionais.',
+        options: [
+            {
+                key: 'generation',
+                label: 'Gerações',
+                values: [
+                    { value: 'all', label: 'Conforme a dificuldade' },
+                    { value: '1', label: 'Geração 1' },
+                    { value: '2', label: 'Geração 2' },
+                    { value: '3', label: 'Geração 3' },
+                    { value: '4', label: 'Geração 4' },
+                    { value: '5', label: 'Geração 5' },
+                    { value: '6', label: 'Geração 6' },
+                    { value: '7', label: 'Geração 7' },
+                    { value: '8', label: 'Geração 8' },
+                    { value: '9', label: 'Geração 9' }
+                ]
+            }
+        ],
+        primary: true,
+        controls: ['teclado', 'mouse', 'toque']
+    },
+    {
+        id: 'element',
+        name: 'Elemento Secreto',
+        file: 'element.js',
+        category: 'Conhecimento',
+        icon: '⚛',
+        description: 'Investigue o elemento por número atômico, período e família.',
+        rules: 'Digite nome ou símbolo e compare com o elemento secreto. A consulta de candidatos ajuda a aprender a tabela periódica. Níveis ampliam o banco de 20 para 118 elementos e reduzem tentativas.',
+        options: [],
+        primary: true,
+        controls: ['teclado', 'mouse', 'toque']
+    },
+    {
+        id: 'equation',
+        name: 'Equação Oculta',
+        file: 'equation.js',
+        category: 'Matemática',
+        icon: '=',
+        description: 'Descubra uma igualdade usando pistas para cada caractere.',
+        rules: 'Envie uma igualdade verdadeira. ✓ posição correta, ↔ outra posição, · ausente. Multiplicação e divisão têm prioridade. A igualdade precisa coincidir exatamente com a secreta; expressões equivalentes podem ser usadas como palpites. Níveis aumentam de cinco para oito caracteres.',
+        options: [],
+        primary: true,
+        controls: ['teclado', 'mouse', 'toque']
+    },
+    {
+        id: 'sumexact',
+        name: 'Soma Exata',
+        file: 'sumexact.js',
+        category: 'Lógica',
+        icon: '∑',
+        description: 'Retire números até todas as somas coincidirem.',
+        rules: 'Clique em números para retirar ou recolocar. Cada borda mostra soma atual/meta. Todas as linhas e colunas precisam coincidir ao verificar. Tabuleiros são gerados com uma solução garantida; outras soluções válidas também são aceitas. Níveis aumentam a grade de 3×3 a 6×6.',
+        options: [],
+        primary: true,
+        controls: ['teclado', 'mouse', 'toque']
+    },
+    {
+        id: 'survivalarena',
+        name: 'Arena Improvável',
+        file: 'survivalarena.js',
+        category: 'Simuladores',
+        type: 'simulation',
+        icon: '◈',
+        description: 'Misture universos e acompanhe uma competição de sobrevivência.',
+        rules: 'Você organiza e observa uma simulação fictícia. Monte o elenco, escolha a arena e avance a história. Atributos são balanceados para o jogo, não poderes canônicos. Movimentos, inventários, encontros e alianças obedecem ao estado real. O cerco fecha regiões progressivamente; no dia 30 entra uma tempestade final explícita. A arena encerra ao restar um participante. Não há resposta certa, pontuação ou julgamento de habilidade.',
+        options: [
+            {
+                key: 'arena',
+                label: 'Arena inicial',
+                values: [
+                    { value: 'forest', label: 'Floresta dos Ecos' },
+                    { value: 'desert', label: 'Deserto de Vidro' },
+                    { value: 'arctic', label: 'Ártico Silencioso' },
+                    { value: 'city', label: 'Cidade sem Nome' },
+                    { value: 'islands', label: 'Ilhas da Maré' },
+                    { value: 'volcano', label: 'Caldeira Rubra' }
+                ]
+            },
+            {
+                key: 'count',
+                label: 'Participantes iniciais',
+                values: [
+                    { value: '8', label: '8 participantes' },
+                    { value: '12', label: '12 participantes' },
+                    { value: '16', label: '16 participantes' },
+                    { value: '24', label: '24 participantes' },
+                    { value: '32', label: '32 participantes' },
+                    { value: '48', label: '48 participantes' }
+                ]
+            }
+        ],
         primary: true,
         controls: ['mouse', 'teclado', 'toque']
     }

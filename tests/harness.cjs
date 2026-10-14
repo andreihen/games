@@ -11,6 +11,7 @@ const core = [
     'registry',
     'algorithms',
     'session',
+    'perception',
     'progress',
     'interactions',
     'rules',
@@ -20,6 +21,10 @@ const core = [
     'knowledge',
     'nonogram',
     'learning',
+    'arena',
+    'arena-access',
+    'classics',
+    'classic-ui',
     'library'
 ];
 function setup({ width = 390, url = 'http://localhost/', storage = null, app = false } = {}) {
@@ -46,6 +51,7 @@ function setup({ width = 390, url = 'http://localhost/', storage = null, app = f
     w.clearTimeout = (id) => jobs.delete(id);
     w.requestAnimationFrame = (fn) => w.setTimeout(() => fn(time), 16);
     w.cancelAnimationFrame = w.clearTimeout;
+    w.scrollTo = () => {};
     w.HTMLElement.prototype.scrollIntoView = () => {};
     w.HTMLElement.prototype.setPointerCapture = () => {};
     if (storage !== null)
@@ -64,6 +70,10 @@ function setup({ width = 390, url = 'http://localhost/', storage = null, app = f
     load('data/geography.js');
     load('data/vocabulary.js');
     load('data/learning.js');
+    load('data/pokemon.js');
+    load('data/elements.js');
+    load('data/passages.js');
+    load('data/arena.js');
     const api = (name) => vm.runInContext(name, context),
         config = api('GAMES_CONFIG'),
         registry = api('GameRegistry');

@@ -1,0 +1,15 @@
+{
+  "simulations": 24,
+  "events": 7132,
+  "days": 332,
+  "combat": 106,
+  "environment": 158,
+  "groupActions": 66,
+  "areaAttacks": 12,
+  "hazards": 375,
+  "exploration": 624,
+  "restDay": 89,
+  "restNight": 143,
+  "meanDays": 13.833333333333334,
+  "meanEvents": 297.1666666666667
+}

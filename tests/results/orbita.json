@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Órbita: sair retorna à configuração, depois à biblioteca com filtros e seleção",
+    "status": "PASS"
+  },
+  {
+    "name": "Órbita: origem permanece após recarregar e acesso direto retorna à configuração",
+    "status": "PASS"
+  },
+  {
+    "name": "Órbita: feedback semântico distinto de digitação, estados de resposta e reinício",
+    "status": "PASS"
+  },
+  {
+    "name": "Órbita: seleção editorial valoriza variedade, habilidades explícitas e créditos de progresso preservados",
+    "status": "PASS"
+  },
+  {
+    "name": "Órbita: consultar regras pausa o tempo, Escape fecha ajuda e pausa manual permanece",
+    "status": "PASS"
+  }
+]

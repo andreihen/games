@@ -1,7 +1,7 @@
-"""Gera o site completo para upload pelo navegador, sem dependências externas.
+"""Gera o site completo para upload pelo navegador, sem dependÃªncias externas.
 
 Uso: python tools/build_site.py [--output dist] [--zip site.zip]
-O código editável continua em index.html e src/. Não edite o HTML gerado.
+O cÃ³digo editÃ¡vel continua em index.html e src/. NÃ£o edite o HTML gerado.
 """
 
 import argparse
@@ -26,17 +26,17 @@ def local_file(url):
 def build(output):
     output = output.resolve()
     if output == ROOT or output.is_relative_to(ROOT / "src"):
-        raise ValueError("A saída deve ser uma pasta separada dos arquivos-fonte.")
+        raise ValueError("A saÃ­da deve ser uma pasta separada dos arquivos-fonte.")
     html = (ROOT / "index.html").read_text(encoding="utf-8")
     styles = re.findall(r'<link\b[^>]*rel="stylesheet"[^>]*>', html)
     scripts = re.findall(r'<script\s+src="([^"]+)"\s*></script>', html)
-    if len(styles) != 4 or not scripts or urlsplit(scripts[-1]).path != "./src/js/main.js":
+    if len(styles) != 5 or not scripts or urlsplit(scripts[-1]).path != "./src/js/main.js":
         raise ValueError("A ordem de carregamento mudou; revise o empacotador.")
     for tag in styles:
         path = local_file(re.search(r'href="([^"]+)"', tag)[1])
         css = path.read_text(encoding="utf-8")
         if "</style" in css.lower():
-            raise ValueError(f"CSS incompatível com incorporação: {path}")
+            raise ValueError(f"CSS incompatÃ­vel com incorporaÃ§Ã£o: {path}")
         html = html.replace(tag, f"<style>\n/* {path.relative_to(ROOT).as_posix()} */\n{css}\n</style>", 1)
 
     flags = {
@@ -45,14 +45,22 @@ def build(output):
     }
     config = (ROOT / "src/js/games.config.js").read_text(encoding="utf-8")
     games = re.findall(r"file:\s*'([^']+)'", config)
-    if len(games) != 44 or len(set(games)) != len(games) or len(flags) != 250:
-        raise ValueError("Catálogo ou bandeiras mudou; revise as verificações da publicação.")
+    if len(games) != 61 or len(set(games)) != len(games) or len(flags) != 250:
+        raise ValueError("CatÃ¡logo ou bandeiras mudou; revise as verificaÃ§Ãµes da publicaÃ§Ã£o.")
     sources = [local_file(url) for url in scripts[:-1]]
     sources += sorted((ROOT / "src/js/data").glob("*.js"))
     sources += [local_file(f"./src/js/games/{name}") for name in games]
     sources += [local_file(scripts[-1])]
-    code = ["/* Distribuição autossuficiente. Fontes e créditos: THIRD_PARTY.md. */",
+    code = ["/* DistribuiÃ§Ã£o autossuficiente. Fontes e crÃ©ditos: THIRD_PARTY.md. */",
             "const BundledFlags = Object.freeze(" + json.dumps(flags, separators=(",", ":")) + ");"]
+    portraits = {}
+    portrait_files = []
+    for path in sorted((ROOT / "src/assets/characters").glob("*")):
+        if path.suffix in [".jpg", ".png", ".webp"]:
+            mime = {".jpg": "image/jpeg", ".png": "image/png", ".webp": "image/webp"}[path.suffix]
+            portraits["./" + path.relative_to(ROOT).as_posix()] = "data:" + mime + ";base64," + base64.b64encode(path.read_bytes()).decode("ascii")
+            portrait_files.append(path)
+    code.append("const BundledPortraits = Object.freeze(" + json.dumps(portraits, separators=(",", ":")) + ");")
     replacements = 0
     for path in sources:
         js = path.read_text(encoding="utf-8")
@@ -62,23 +70,23 @@ def build(output):
         js = re.sub(r"</script", r"<\/script", js, flags=re.IGNORECASE)
         code.append(f"\n/* {path.relative_to(ROOT).as_posix()} */\n{js}")
     if replacements != 3:
-        raise ValueError("O uso das bandeiras mudou; revise a incorporação das imagens.")
+        raise ValueError("O uso das bandeiras mudou; revise a incorporaÃ§Ã£o das imagens.")
     for url in scripts:
         html = html.replace(f'<script src="{url}"></script>', "", 1)
     html = html.replace("</body>", "<script>\n" + "\n".join(code) + "\n</script>\n    </body>", 1)
     html = html.replace("<head>", '<head>\n        <meta name="distribution" content="standalone-github-pages" />', 1)
     encoded = html.encode("utf-8")
     if len(encoded) >= 25 * 1024 * 1024:
-        raise ValueError("A distribuição excede o limite de upload web do GitHub.")
+        raise ValueError("A distribuiÃ§Ã£o excede o limite de upload web do GitHub.")
     output.mkdir(parents=True, exist_ok=True)
     (output / "index.html").write_bytes(encoded)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     (output / "THIRD_PARTY.md").write_text(
-        "# Sobre esta distribuição\n\n"
-        "CSS, JavaScript, bancos de dados e as 250 bandeiras estão incorporados ao `index.html`. "
+        "# Sobre esta distribuiÃ§Ã£o\n\n"
+        "CSS, JavaScript, bancos de dados e as 250 bandeiras estÃ£o incorporados ao `index.html`. "
         "Os caminhos descritos abaixo identificam os arquivos-fonte do projeto. "
-        "As fontes originais e licenças do dicionário permanecem em `src/data-licenses/`. "
-        "Abra o HTML para jogar; não é necessário carregar imagens separadamente.\n\n"
+        "As fontes originais e licenÃ§as do dicionÃ¡rio permanecem em `src/data-licenses/`. "
+        "Abra o HTML para jogar; nÃ£o Ã© necessÃ¡rio carregar imagens separadamente.\n\n"
         + (ROOT / "THIRD_PARTY.md").read_text(encoding="utf-8"), encoding="utf-8")
     (output / "PUBLICAR.md").write_bytes((ROOT / "docs/PUBLICAR_GITHUB.md").read_bytes())
     files = ["index.html", ".nojekyll", "THIRD_PARTY.md", "PUBLICAR.md"]
@@ -89,14 +97,19 @@ def build(output):
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_bytes(source.read_bytes())
             files.append(name)
+    for name in ["docs/ARENA_IMPROVAVEL.md", "docs/ARENA_RPG.md", "docs/ARENA_VIVA.md", "docs/ARENA_EVOLUCAO.md", "docs/PROMPT_ARENA_RPG.md", "docs/JOGOS_CLASSICOS.md", "src/assets/characters/sources.json"]:
+        target = output / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((ROOT / name).read_bytes())
+        files.append(name)
     manifest = {
-        "format": "standalone-github-pages", "games": len(games), "flags": len(flags),
+        "format": "standalone-github-pages", "games": len(games), "flags": len(flags), "portraits": len(portraits),
         "data": [p.stem for p in sorted((ROOT / "src/js/data").glob("*.js"))],
         "htmlBytes": len(encoded), "htmlSha256": hashlib.sha256(encoded).hexdigest(),
         "files": files + ["manifest.json"],
         "sources": {p.relative_to(ROOT).as_posix(): hashlib.sha256(p.read_bytes()).hexdigest()
                     for p in [ROOT / "index.html", *sources, *(ROOT / "src/css").glob("*.css"),
-                              *(ROOT / "src/assets/flags").glob("*.svg")]},
+                              *(ROOT / "src/assets/flags").glob("*.svg"), *portrait_files]},
     }
     (output / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return manifest

@@ -28,7 +28,7 @@ const ScoreEngine = Object.freeze({
                     if (countAttempt) mistakes++;
                     streak = 0;
                 }
-                changed(snapshot());
+                changed(snapshot(), { type: 'answer', success: Boolean(success), points });
             },
             attempt(success, amount = 1) {
                 if (success) correct += amount;

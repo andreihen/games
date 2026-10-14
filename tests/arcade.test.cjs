@@ -75,7 +75,7 @@ async function run() {
     await test('Biblioteca: busca sem acentos, novidades, favoritos, categorias e persistência', async () => {
         const t = setup({ app: true });
         t.startApp();
-        assert.equal(t.$$('.game-card').length, 43);
+        assert.equal(t.$$('.game-card').length, 60);
         t.input('#game-search', 'conexoes');
         assert.equal(t.$$('.game-card').length, 1);
         t.click('[aria-label="Favoritar Conexões"]');
@@ -83,14 +83,14 @@ async function run() {
         assert(!t.$('#game-main-menu').classList.contains('hidden'));
         t.input('#game-search', '');
         t.click('[data-filter="new"]');
-        assert.equal(t.$$('.game-card').length, 3);
+        assert.equal(t.$$('.game-card').length, 20);
         t.click('[data-filter="favorites"]');
         assert.equal(t.$$('.game-card').length, 1);
         t.click('[aria-label="Favoritar Conexões"]');
         assert.equal(t.$$('.game-card').length, 0);
         assert(!t.$('#library-empty').classList.contains('hidden'));
         t.click('#clear-library-filters');
-        assert.equal(t.$$('.game-card').length, 43);
+        assert.equal(t.$$('.game-card').length, 60);
         const extra = t.$$('#category-tabs button').find((b) => b.dataset.category === 'Extras');
         t.click(extra);
         assert.equal(t.$$('.game-card').length, 1);

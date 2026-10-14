@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Cores: identidade, escala da mistura, limites e diferença perceptual",
+    "passed": true
+  },
+  {
+    "name": "Ateliê: toda cor alvo tem receita possível, cinco rodadas e pontuação",
+    "passed": true
+  },
+  {
+    "name": "Ateliê: três avaliações, receita revelada e limpar sem consumir tentativa",
+    "passed": true
+  },
+  {
+    "name": "Cor de Memória: referência escondida, cinco itens únicos e campanha perfeita",
+    "passed": true
+  },
+  {
+    "name": "Cor de Memória: observar, pausa, pista com desconto e cancelamento",
+    "passed": true
+  }
+]

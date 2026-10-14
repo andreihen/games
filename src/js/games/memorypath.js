@@ -3,10 +3,19 @@ GameRegistry.register('memorypath', (session) => {
         const mode = config.options.mode || 'spatial',
             size = config.size,
             tier = DifficultyEngine.index(config.difficulty),
-            route = GameAlgorithms.route(size, session.random);
+            route =
+                mode === 'spatial'
+                    ? session.random.shuffle(
+                          Array.from({ length: size * size }, (_, i) => ({
+                              r: Math.floor(i / size),
+                              c: i % size
+                          }))
+                      )
+                    : GameAlgorithms.route(size, session.random);
         let path = route.slice(0, config.length),
             teleport = -1;
-        if (tier === 3) {
+        const rotated = mode === 'rotation';
+        if (tier === 3 && mode === 'directions') {
             teleport = 3;
             path = [
                 ...route.slice(0, teleport),
@@ -22,7 +31,7 @@ GameRegistry.register('memorypath', (session) => {
         const $ = GameUI.shell(
             session,
             'Trilha da Memória',
-            `Memorize ${path.length} passos. ${tier === 3 ? 'Após a apresentação, a grade gira 90° e há um teletransporte.' : ''} ${mode === 'directions' ? 'Depois percorra a rota usando as direções.' : 'Depois toque nas células na ordem apresentada.'}`,
+            `Memorize ${path.length} posições. ${rotated ? 'Depois, a grade gira 90° no sentido horário.' : ''} ${mode === 'directions' ? 'Use as direções para percorrer a rota.' : 'Os quadrados acendem um por vez. Repita a ordem tocando nas mesmas posições.'}`,
             `<p id="mp-status" class="notice" role="status">Observe a trilha…</p><p id="mp-directions" class="status-line"></p><div id="mp-grid-container" class="tile-grid" style="grid-template-columns:repeat(${size},1fr)"></div><div id="mp-controls" class="direction-pad hidden"><button data-direction="up">↑</button><button data-direction="left">←</button><button data-direction="down">↓</button><button data-direction="right">→</button></div>${GameUI.button('Usar teletransporte', 'mp-teleport')}`
         );
         const buttons = [];
@@ -42,7 +51,7 @@ GameRegistry.register('memorypath', (session) => {
             buttons.forEach((b) => {
                 b.textContent = '';
                 b.className = '';
-                b.disabled = false;
+                b.disabled = !ready;
             });
             for (const cell of blocked) {
                 const transformed = rotated ? rotate(cell) : cell;
@@ -59,11 +68,12 @@ GameRegistry.register('memorypath', (session) => {
                 ready = false;
                 buttons[i].classList.add('incorrect');
                 return session.complete(false, {
-                    text: `O passo ${index + 1} era ${SudokuEngine.cell(expected[index].r * 9 + expected[index].c)}. Tente observar a mesma trilha novamente.`
+                    text: `O passo ${index + 1} era a linha ${expected[index].r + 1}, coluna ${expected[index].c + 1}. Repita o mesmo desafio para praticar.`
                 });
             }
             buttons[i].classList.add('correct');
             index++;
+            buttons[i].textContent = index;
             $('#mp-status').textContent = `Passos: ${index}/${expected.length}`;
             if (index === expected.length) {
                 ready = false;
@@ -125,22 +135,23 @@ GameRegistry.register('memorypath', (session) => {
                 buttons[cellIndex(path[0])].textContent = 'S';
                 if (!(await session.sleep(4000))) return;
             } else {
-                path.forEach((cell, i) => {
+                for (const cell of path) {
                     const b = buttons[cellIndex(cell)];
                     b.classList.add('flash');
-                    b.textContent = i + 1;
-                });
-                if (!(await session.sleep(4000))) return;
+                    if (!(await session.sleep([850, 700, 550, 420][tier]))) return;
+                    b.classList.remove('flash');
+                    if (!(await session.sleep(180))) return;
+                }
             }
             renderBase();
             $('#mp-directions').textContent = '';
-            if (tier >= 2 || mode === 'interference') {
+            if (mode === 'interference') {
                 $('#mp-status').textContent =
                     `Interferência: ${session.random.pick(['★ ● ▲', '■ ◆ ●', '▲ ★ ■'])}`;
                 if (!(await session.sleep(700))) return;
             }
             if (!(await session.sleep(config.delay))) return;
-            if (tier === 3) {
+            if (rotated) {
                 expected = path.map(rotate);
                 renderBase(true);
             }
@@ -150,8 +161,11 @@ GameRegistry.register('memorypath', (session) => {
                 $('#mp-teleport').classList.remove('hidden');
             }
             ready = true;
+            buttons.forEach((b) => {
+                if (!b.classList.contains('blocked')) b.disabled = false;
+            });
             $('#mp-status').textContent =
-                `Sua vez! ${tier === 3 ? 'Grade girada 90° no sentido horário.' : ''}`;
+                `Sua vez: ${expected.length} posições. ${rotated ? 'Grade girada 90° no sentido horário.' : ''}`;
             if (mode === 'directions') {
                 $('#mp-controls').classList.remove('hidden');
                 answer(cellIndex(expected[0]));

@@ -9,12 +9,14 @@ GameRegistry.register('simonsays', (session) => {
             started = false,
             longest = 0,
             presenting = false;
-        const colors = ['#ef6767', '#58ac79', '#d5b855', '#5f9dd5'];
+        // Ordem no sentido horário; +2 corresponde ao quadrante fisicamente oposto.
+        const colors = ['#398952', '#b54145', '#356ba2', '#bea52c'];
+        const labels = ['Verde', 'Vermelho', 'Azul', 'Amarelo'];
         const $ = GameUI.shell(
             session,
             'Simon Diz',
             'A sequência cresce a cada rodada. Você pode rever antes da primeira resposta, jogar sem som ou encerrar para registrar o resultado.',
-            `<p id="ss-rule" class="notice" role="status"></p><p id="ss-status" class="status-line"></p><div id="ss-pads" class="tile-grid" style="grid-template-columns:repeat(2,1fr);max-width:320px">${colors.map((color, i) => `<button data-pad="${i}" style="background:${color};font-size:2.7rem;min-height:110px" aria-label="Botão ${i + 1}">${i + 1}</button>`).join('')}</div><div class="controls">${GameUI.button('Rever sequência', 'ss-replay')}${GameUI.button('Encerrar e salvar', 'ss-finish')}</div>`
+            `<p id="ss-rule" class="notice" role="status"></p><p id="ss-status" class="status-line"></p><div class="simon-console"><div id="ss-pads" class="simon-pads">${colors.map((color, i) => `<button data-pad="${i}" style="--pad-color:${color}" aria-label="${labels[i]}, tecla ${i + 1}"><span>${i + 1}</span></button>`).join('')}</div><div class="simon-center" aria-hidden="true"><small>SIMON</small><strong id="ss-round">1</strong></div></div><div class="controls">${GameUI.button('Rever sequência', 'ss-replay')}${GameUI.button('Encerrar e salvar', 'ss-finish')}</div>`
         );
         const pads = [...$('#ss-pads').querySelectorAll('button')],
             rule = () =>
@@ -36,9 +38,9 @@ GameRegistry.register('simonsays', (session) => {
             );
         }
         function feedback(i) {
-            pads[i].style.filter = 'brightness(1.8)';
+            pads[i].classList.add('simon-lit');
             if (sound) GameAudio.note([262, 330, 392, 523][i]);
-            session.timeout(() => (pads[i].style.filter = ''), 180);
+            session.timeout(() => pads[i].classList.remove('simon-lit'), 180);
         }
         async function present() {
             if (presenting) return;
@@ -48,7 +50,9 @@ GameRegistry.register('simonsays', (session) => {
             started = false;
             $('#ss-replay').disabled = true;
             pads.forEach((p) => (p.disabled = true));
-            $('#ss-status').textContent = `Observe ${sequence.length} estímulos…`;
+            $('#ss-status').textContent =
+                `Observe ${sequence.length} ${sequence.length === 1 ? 'estímulo' : 'estímulos'}…`;
+            $('#ss-round').textContent = sequence.length;
             displayRule();
             if (!(await session.sleep(500))) return;
             for (const i of sequence) {

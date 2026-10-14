@@ -1,0 +1,38 @@
+[
+  {
+    "name": "Xadrez: contagens perft conhecidas na abertura e no roque (Kiwipete)",
+    "status": "PASS"
+  },
+  {
+    "name": "Xadrez: en passant, segurança do rei, quatro promoções e direitos de roque",
+    "status": "PASS"
+  },
+  {
+    "name": "Xadrez: mate, afogamento, material insuficiente e empates automáticos",
+    "status": "PASS"
+  },
+  {
+    "name": "Damas: obrigatoriedade, captura para trás, maior sequência e damas voadoras",
+    "status": "PASS"
+  },
+  {
+    "name": "Campo Minado: primeira região segura, seed, abertura em cascata, bandeiras e finais",
+    "status": "PASS"
+  },
+  {
+    "name": "Ludo: 2–4 participantes, saída com 6, captura, segurança e chegada exata",
+    "status": "PASS"
+  },
+  {
+    "name": "Bots: quatro níveis legais, escolhas táticas, seed repetível e cancelamento",
+    "status": "PASS"
+  },
+  {
+    "name": "Interface: multiplayer local, mate completo, desistência e bandeira no toque",
+    "status": "PASS"
+  },
+  {
+    "name": "Ludo na interface: todos locais, mistura de bots, pausa, três seis e partida completa",
+    "status": "PASS"
+  }
+]

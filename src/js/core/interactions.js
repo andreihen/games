@@ -1,6 +1,6 @@
 const GameUI = Object.freeze({
     shell(session, title, instructions, body) {
-        session.ui.phaseDisplay.innerHTML = `<div class="play-panel"><h2 class="phase-title">${title}</h2><p class="game-instructions">${instructions}</p>${body}</div>`;
+        session.ui.phaseDisplay.innerHTML = `<div class="play-panel"><h2 class="phase-title">${title}</h2><details class="game-help"><summary>Como jogar <small>· pausa o tempo</small></summary><p class="game-instructions">${instructions}</p></details>${body}</div>`;
         return (selector) => session.ui.phaseDisplay.querySelector(selector);
     },
     button(label, id = '', kind = 'secondary') {

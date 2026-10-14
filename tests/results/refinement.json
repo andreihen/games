@@ -1,0 +1,22 @@
+[
+  {
+    "name": "Memória: uma posição acesa por vez, sem números antecipados, resposta bloqueada e vitória",
+    "status": "PASS"
+  },
+  {
+    "name": "Trilha: rotação explícita transforma corretamente as posições observadas",
+    "status": "PASS"
+  },
+  {
+    "name": "Simon inverso: opostos e regra seguinte permanecem jogáveis pelo teclado",
+    "status": "PASS"
+  },
+  {
+    "name": "Ordem Temporal: seis rodadas crescentes, reconstrução, feedback e banco variado",
+    "status": "PASS"
+  },
+  {
+    "name": "Configuração: escolhas visíveis, controles sincronizados e modo salvo",
+    "status": "PASS"
+  }
+]

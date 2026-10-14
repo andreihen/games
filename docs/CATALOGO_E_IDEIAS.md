@@ -1,11 +1,28 @@
 # Jogos atuais e ideias para expansão
 
-Catálogo conferido no código em 4 de outubro de 2026: **44 jogos ativos**, sendo 43 na biblioteca principal e Resta Um em Extras. Linha do Tempo, Quem Sou Eu? e Conexões já foram implementados. As 13 ideias ao final continuam como propostas para próximas entregas.
+Catálogo conferido no código em 13 de outubro de 2026: **61 jogos ativos**, sendo 60 na biblioteca principal e Resta Um em Extras. Xadrez, Damas, Campo Minado e Ludo já foram implementados, assim como Linha do Tempo, Quem Sou Eu? e Conexões. As 13 ideias ao final continuam como propostas para próximas entregas.
 
 ## Jogos atuais
 
 | Categoria            | Jogo                     | O que você faz                                                                                                                       |
 | -------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------ |
+| Lógica | Xadrez | Busca o xeque-mate contra um bot em quatro níveis ou outra pessoa no mesmo aparelho. |
+| Lógica | Damas | Encadeia capturas obrigatórias com regras brasileiras, contra bot ou em duas pessoas. |
+| Lógica | Campo Minado | Deduz as minas pelos números, marca bandeiras e abre todas as casas seguras. |
+| Lógica | Ludo | Leva quatro peões à chegada com 2–4 participantes, misturando pessoas e bots. |
+| Simuladores | Arena Improvável | Organiza um elenco de universos diversos e acompanha uma competição fictícia, com mapa, inventários, alianças e histórico. |
+| Conhecimento | Pokédex Misteriosa | Deduz o Pokémon secreto comparando geração, tipos, altura e peso, com consulta de candidatos. |
+| Conhecimento | Elemento Secreto | Deduz um elemento da tabela periódica por número atômico, período e família. |
+| Matemática | Equação Oculta | Descobre uma igualdade usando feedback por caractere e tentativas limitadas. |
+| Lógica | Soma Exata | Retira números de uma grade para cumprir somas de linhas e colunas. |
+| Memória              | Cor Relâmpago            | Memoriza uma cor e a reconstrói pelos controles de tonalidade, saturação e brilho.                                                   |
+| Memória              | Nota de Memória          | Ouve uma nota e reencontra sua altura do grave ao agudo.                                                                             |
+| Atenção              | Relógio Interno          | Reproduz a duração de um estímulo sem cronômetro.                                                                                    |
+| Memória              | Forma de Memória         | Reconstrói o tamanho e a rotação de uma forma observada.                                                                             |
+| Atenção              | Padrão Partido           | Desfaz trocas entre peças para restaurar um padrão memorizado.                                                                       |
+| Atenção              | Construtor de Ritmo      | Reconstrói uma batida por faixas, reproduzindo o tempo das notas.                                                                    |
+| Atenção              | Ateliê de Cores          | Mistura gotas de pigmentos para alcançar uma cor alvo, com treino ao vivo ou avaliações limitadas.                                   |
+| Memória              | Cor de Memória           | Recria cores de 24 personagens, símbolos e elementos da natureza com controles de tonalidade, saturação e brilho.                    |
 | Lógica               | Decifrando Cores         | Deduz uma combinação secreta de cores usando pistas sobre posições e cores presentes.                                                |
 | Lógica               | Apague as Luzes          | Aciona células que alteram outras luzes para apagar o tabuleiro, procurando uma solução eficiente.                                   |
 | Lógica               | Balança Lógica           | Usa pesagens para identificar o objeto diferente e se ele é mais pesado ou mais leve.                                                |
@@ -17,9 +34,9 @@ Catálogo conferido no código em 4 de outubro de 2026: **44 jogos ativos**, sen
 | Lógica               | Torre de Hanói           | Transfere discos entre torres sem colocar um disco maior sobre um menor.                                                             |
 | Lógica               | Velha: Peças Móveis      | Disputa partidas com até três peças por jogador; a peça mais antiga sai quando uma nova entra.                                       |
 | Lógica               | Rotação Mental           | Identifica a figura equivalente após rotação, distinguindo-a de figuras espelhadas.                                                  |
-| Memória              | Jogo da Memória          | Encontra pares de cartas, incluindo imagens e associações entre conceitos, idiomas e operações.                                      |
+| Memória              | Jogo da Memória          | Encontra pares de cartas e associações; também reproduz uma sequência de quadrados que acendem e apagam.                             |
 | Memória              | Simon Diz                | Reproduz uma sequência que cresce a cada acerto; inclui sequência inversa e áudio opcional.                                          |
-| Memória              | Trilha da Memória        | Memoriza um trajeto e executa seus passos, com variantes de obstáculos e transformações.                                             |
+| Memória              | Trilha da Memória        | Repete posições exibidas uma por vez, com modos de direção, distração e rotação opcional da grade.                                   |
 | Memória              | Prateleira da Memória    | Detecta alterações numa organização ou restaura a ordem observada.                                                                   |
 | Memória              | N-Back                   | Compara o estímulo atual com o apresentado alguns passos antes.                                                                      |
 | Memória              | Memória de Trabalho      | Guarda números e transforma a sequência, invertendo, ordenando ou calculando valores solicitados.                                    |
@@ -32,7 +49,7 @@ Catálogo conferido no código em 4 de outubro de 2026: **44 jogos ativos**, sen
 | Atenção              | Ordenar Cores            | Organiza amostras por luminosidade, saturação ou matiz.                                                                              |
 | Atenção              | Cor Diferente            | Encontra a célula de cor diferente, com contraste ajustado à dificuldade.                                                            |
 | Atenção              | Regra Mutante            | Seleciona estímulos válidos enquanto a regra muda durante a partida.                                                                 |
-| Atenção              | Checklist                | Memoriza requisitos e verifica itens, acompanhando inclusões, remoções e inversões de regras.                                        |
+| Atenção              | Checklist                | Prepara equipes para missões de expedição, espaço ou poções, aplicando regras de equipamentos e acumulando acertos consecutivos.     |
 | Atenção              | Par ou Ímpar Dinâmico    | Classifica números segundo regras de paridade, múltiplos de três ou primalidade.                                                     |
 | Matemática           | Arena de Cálculo         | Resolve operações mentais em modos de precisão, sprint e sobrevivência.                                                              |
 | Matemática           | Matriz Rápida            | Resolve soma, multiplicação por escalar, determinantes, elementos faltantes, sistemas e transformações.                              |

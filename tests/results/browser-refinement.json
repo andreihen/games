@@ -1,0 +1,77 @@
+{
+  "date": "2026-10-07",
+  "mobile": [
+    {
+      "game": "Simon Diz",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Simon Diz",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Jogo da Memória",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Jogo da Memória",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Trilha da Memória",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Trilha da Memória",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Ordem Temporal",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Ordem Temporal",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Apague as Luzes",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Apague as Luzes",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Checklist",
+      "screen": "setup",
+      "content": 305,
+      "width": 320
+    },
+    {
+      "game": "Checklist",
+      "screen": "play",
+      "content": 305,
+      "width": 320
+    }
+  ]
+}

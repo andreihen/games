@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Pokédex: 1025 espécies únicas, filtros de geração, comparação, palpite repetido, vitória e derrota",
+    "status": "PASS"
+  },
+  {
+    "name": "Elementos: 118 símbolos únicos, níveis, nomes sem acentos e símbolos aceitos",
+    "status": "PASS"
+  },
+  {
+    "name": "Equação: precedência, divisão por zero, caracteres repetidos, inválidos sem custo e replay solucionável",
+    "status": "PASS"
+  },
+  {
+    "name": "Soma Exata: resolver pelas metas visíveis em quatro tamanhos, desfazer e aceitar soluções",
+    "status": "PASS"
+  },
+  {
+    "name": "Chuva: modo padrão realmente cai e espera; sobrevivência perde ao esgotar vidas",
+    "status": "PASS"
+  },
+  {
+    "name": "Texto: parágrafos extensos, feedback, correção, pontuação e caixa exata em código",
+    "status": "PASS"
+  },
+  {
+    "name": "Navegação: recarregar desafio pelo URL, preservar modos, histórico e cache da página",
+    "status": "PASS"
+  },
+  {
+    "name": "Navegação: reabrir raiz retoma configuração, filtros e tolera estado inválido",
+    "status": "PASS"
+  }
+]

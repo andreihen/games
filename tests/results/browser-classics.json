@@ -1,0 +1,101 @@
+{
+  "report": [
+    {
+      "game": "chess",
+      "width": 390,
+      "status": "PASS",
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "boardWidth": 358,
+        "boardHeight": 358,
+        "innerScroll": 0
+      }
+    },
+    {
+      "game": "draughts",
+      "width": 390,
+      "status": "PASS",
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "boardWidth": 358,
+        "boardHeight": 358,
+        "innerScroll": 0
+      }
+    },
+    {
+      "game": "minesweeper",
+      "width": 390,
+      "status": "PASS",
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "boardWidth": 960,
+        "boardHeight": 518,
+        "innerScroll": 962
+      }
+    },
+    {
+      "game": "ludo",
+      "width": 390,
+      "status": "PASS",
+      "layout": {
+        "viewport": 390,
+        "documentWidth": 390,
+        "boardWidth": 358,
+        "boardHeight": 358,
+        "innerScroll": 0
+      }
+    },
+    {
+      "game": "chess",
+      "width": 1280,
+      "status": "PASS",
+      "layout": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "boardWidth": 480,
+        "boardHeight": 480,
+        "innerScroll": 0
+      }
+    },
+    {
+      "game": "draughts",
+      "width": 1280,
+      "status": "PASS",
+      "layout": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "boardWidth": 480,
+        "boardHeight": 480,
+        "innerScroll": 0
+      }
+    },
+    {
+      "game": "minesweeper",
+      "width": 1280,
+      "status": "PASS",
+      "layout": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "boardWidth": 960,
+        "boardHeight": 518,
+        "innerScroll": 1076
+      }
+    },
+    {
+      "game": "ludo",
+      "width": 1280,
+      "status": "PASS",
+      "layout": {
+        "viewport": 1280,
+        "documentWidth": 1280,
+        "boardWidth": 560,
+        "boardHeight": 560,
+        "innerScroll": 0
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-07",
+  "url": "http://127.0.0.1:8766/",
+  "mobile": [
+    {
+      "game": "Cor Relâmpago",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Cor Relâmpago",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Nota de Memória",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Nota de Memória",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Relógio Interno",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Relógio Interno",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Forma de Memória",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Forma de Memória",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Padrão Partido",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Padrão Partido",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Construtor de Ritmo",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Construtor de Ritmo",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Cor de Memória",
+      "screen": "setup",
+      "viewport": 320,
+      "width": 305
+    },
+    {
+      "game": "Cor de Memória",
+      "screen": "play",
+      "viewport": 320,
+      "width": 305
+    }
+  ],
+  "audio": "Referência e tentativa ativadas pelo navegador real",
+  "filter": "7 jogos no filtro Percepção"
+}

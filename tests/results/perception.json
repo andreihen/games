@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Percepção: simetrias, duração relativa e oitavas",
+    "passed": true
+  },
+  {
+    "name": "Cor Relâmpago: cor apresentada, bloqueio, reconstrução e cinco rodadas",
+    "passed": true
+  },
+  {
+    "name": "Relógio: intervalos observáveis, reprodução exata e pausa sem contaminar a duração",
+    "passed": true
+  },
+  {
+    "name": "Formas: respostas reconstruídas da apresentação, cinco formas e contorno original",
+    "passed": true
+  },
+  {
+    "name": "Padrões: cinco grades nas quatro dificuldades são restauráveis pelas peças vistas",
+    "passed": true
+  },
+  {
+    "name": "Som: falha de áudio recuperável; referência, ajuste, pausa e limpeza do contexto",
+    "passed": true
+  },
+  {
+    "name": "Ritmo: notas observadas, gravação no tempo e teclado sem duplicação",
+    "passed": true
+  },
+  {
+    "name": "Ritmo: inação não vence, áudio não começa antes do gesto e timers são cancelados",
+    "passed": true
+  }
+]

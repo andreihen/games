@@ -3,6 +3,31 @@ const DifficultyEngine = (() => {
     const keys = Object.keys(names);
     const index = (key) => Math.max(0, keys.indexOf(key));
     const policies = {
+        chess: [
+            { depth: 0, nodes: 0, random: 1 },
+            { depth: 2, nodes: 1600, random: 0.15 },
+            { depth: 3, nodes: 6500, random: 0.03 },
+            { depth: 4, nodes: 22000, random: 0 }
+        ],
+        draughts: [
+            { depth: 0, nodes: 0, random: 1 },
+            { depth: 3, nodes: 1600, random: 0.15 },
+            { depth: 5, nodes: 6500, random: 0.03 },
+            { depth: 7, nodes: 22000, random: 0 }
+        ],
+        minesweeper: [
+            { rows: 9, cols: 9, mines: 10 },
+            { rows: 12, cols: 12, mines: 24 },
+            { rows: 16, cols: 16, mines: 40 },
+            { rows: 16, cols: 30, mines: 99 }
+        ],
+        ludo: [{ strategy: 0 }, { strategy: 1 }, { strategy: 2 }, { strategy: 3 }],
+        temporalorder: [
+            { events: 3, exposure: 1000, retention: 0 },
+            { events: 4, exposure: 850, retention: 200 },
+            { events: 6, exposure: 650, retention: 500 },
+            { events: 8, exposure: 450, retention: 850 }
+        ],
         sliding_puzzle: [
             { size: 2, scramble: 12 },
             { size: 3, scramble: 36 },
@@ -58,10 +83,10 @@ const DifficultyEngine = (() => {
             { rows: 7, cols: 7, area: 6, blocked: 5, flip: true }
         ],
         memory_game: [
-            { pairs: 6, delay: 0 },
-            { pairs: 8, delay: 400 },
-            { pairs: 10, delay: 800 },
-            { pairs: 12, delay: 1200 }
+            { pairs: 6, delay: 300 },
+            { pairs: 8, delay: 200 },
+            { pairs: 10, delay: 100 },
+            { pairs: 12, delay: 0 }
         ],
         memorypath: [
             { size: 4, length: 5, delay: 0 },
@@ -122,7 +147,9 @@ const DifficultyEngine = (() => {
         });
     }
     function choose(games, recent, random) {
-        const eligible = games.filter((game) => game.primary !== false);
+        const eligible = games.filter(
+            (game) => game.primary !== false && game.type !== 'simulation'
+        );
         const varied = eligible.filter((game) => !recent.slice(-3).includes(game.id));
         const pool = varied.length ? varied : eligible;
         const last = eligible.find((game) => game.id === recent.at(-1));

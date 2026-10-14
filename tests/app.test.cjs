@@ -132,11 +132,11 @@ async function run() {
         assert(p.get('capitals').reviews.BRA.due < first);
         t.clean();
     });
-    await test('Biblioteca: categorias, 43 jogos principais, extra procedural e configurações', async () => {
+    await test('Biblioteca: categorias, 60 jogos principais, extra procedural e configurações', async () => {
         const t = setup({ app: true });
         t.startApp();
-        assert.equal(t.$$('#category-tabs button').length, 8);
-        assert(t.$('#progress-summary').textContent.includes('43 jogos'));
+        assert.equal(t.$$('#category-tabs button').length, 9);
+        assert(t.$('#progress-summary').textContent.includes('60 jogos'));
         const found = new Set();
         for (const c of t.$$('#category-tabs button')) {
             t.click(c);
@@ -145,7 +145,7 @@ async function run() {
                 assert(el.querySelector('p').textContent);
             }
         }
-        assert.equal(found.size, 44);
+        assert.equal(found.size, 61);
         category(t, 'Extras');
         assert.equal(t.$$('.game-card').length, 1);
         t.click(t.$('.game-card'));

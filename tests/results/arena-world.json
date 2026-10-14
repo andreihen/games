@@ -1,0 +1,30 @@
+[
+  {
+    "name": "Mundo: aliados exploram separadamente e apoiam combate somente quando presentes e disponíveis",
+    "status": "PASS"
+  },
+  {
+    "name": "Mundo: grupos são consistentes, traidor abandona todos os aliados e só ataca no local",
+    "status": "PASS"
+  },
+  {
+    "name": "Mundo: explosivos são consumidos, atingem somente a região e têm fuga individual baseada em atributos",
+    "status": "PASS"
+  },
+  {
+    "name": "Mundo: nuvens persistem por região, fuga usa passagens e atributos; efeitos expiram e não alteram pontos base",
+    "status": "PASS"
+  },
+  {
+    "name": "Mundo: 24 competições auditam turnos, interações locais, duração, perigos, replay e exploração",
+    "status": "PASS"
+  },
+  {
+    "name": "Filmes: busca confirma classe de filme, traduz papéis, separa personagem de ator e trata falhas",
+    "status": "PASS"
+  },
+  {
+    "name": "Mundo: interface possui filmes, efeitos e perigo; saves antigos preservam elenco e histórico",
+    "status": "PASS"
+  }
+]

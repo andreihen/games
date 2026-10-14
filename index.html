@@ -8,34 +8,56 @@
             name="description"
             content="Jogos procedurais de memória, lógica, atenção e conhecimento."
         />
-        <title>Desafio Lógico Total</title>
-        <link rel="stylesheet" href="./src/css/utilities.css?v=2026-10-04.3" />
-        <link rel="stylesheet" href="./src/css/style.css?v=2026-10-04.3" />
-        <link rel="stylesheet" href="./src/css/platform.css?v=2026-10-04.3" />
-        <link rel="stylesheet" href="./src/css/arcade.css?v=2026-10-04.3" />
+        <title>Órbita</title>
+        <link
+            rel="icon"
+            href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2212%22%20fill%3D%22none%22%20stroke%3D%22%23b8d7f4%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2212%22%20r%3D%224%22%20fill%3D%22%23b8d7f4%22%2F%3E%3C%2Fsvg%3E"
+        />
+        <link rel="stylesheet" href="./src/css/utilities.css?v=2026-10-13.2" />
+        <link rel="stylesheet" href="./src/css/style.css?v=2026-10-13.2" />
+        <link rel="stylesheet" href="./src/css/platform.css?v=2026-10-13.2" />
+        <link rel="stylesheet" href="./src/css/arcade.css?v=2026-10-13.2" />
+        <link rel="stylesheet" href="./src/css/simulator.css?v=2026-10-13.2" />
     </head>
     <body>
         <main id="game-main-menu" class="dashboard">
             <header class="arcade-topbar">
-                <a class="arcade-brand" href="./" aria-label="Desafio Lógico Total, início"
-                    ><span class="brand-symbol" aria-hidden="true">✚</span
-                    ><span>DESAFIO<span>LÓGICO TOTAL</span></span></a
+                <a class="arcade-brand" href="./" aria-label="Órbita, início"
+                    ><span class="brand-symbol" aria-hidden="true"
+                        ><svg viewBox="0 0 40 40">
+                            <circle
+                                cx="20"
+                                cy="20"
+                                r="10"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            />
+                            <ellipse
+                                cx="20"
+                                cy="20"
+                                rx="18"
+                                ry="7"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                                transform="rotate(-35 20 20)"
+                            />
+                            <circle cx="32" cy="10" r="3" fill="currentColor" /></svg></span
+                    ><span>ÓRBITA<span>JOGUE. DESCUBRA.</span></span></a
                 >
-                <span class="topbar-tag">SEU ARCADE DE IDEIAS</span>
+                <span class="topbar-tag">UM JOGO DE CADA VEZ</span>
                 <span class="local-player"
                     ><span class="player-dot" aria-hidden="true"></span> Jogador local</span
                 >
             </header>
             <section class="arcade-hero" aria-label="Destaques da coleção">
                 <div class="hero-copy">
-                    <span class="eyebrow">LIGUE A CURIOSIDADE</span>
-                    <h1>Pequenos jogos.<br /><span>Grandes descobertas.</span></h1>
-                    <p>
-                        Uma pausa para pensar, explorar e tentar de novo. Escolha seu desafio e
-                        entre no jogo.
-                    </p>
+                    <span class="eyebrow">JOGOS DE LÓGICA, MEMÓRIA E CONHECIMENTO</span>
+                    <h1>Seu próximo jogo.</h1>
+                    <p>Uma coleção para praticar, descobrir e tentar de novo.</p>
                     <button id="start-practice-mode-select" class="button button-primary">
-                        Encontrar meu próximo jogo <span aria-hidden="true">↗</span>
+                        Explorar jogos <span aria-hidden="true">↗</span>
                     </button>
                     <p id="progress-summary"></p>
                 </div>
@@ -108,6 +130,7 @@
                             <button data-filter="all" aria-pressed="true">Todos</button
                             ><button data-filter="new" aria-pressed="false">
                                 Novidades <span class="new-dot" aria-hidden="true"></span></button
+                            ><button data-filter="perception" aria-pressed="false">Percepção</button
                             ><button data-filter="favorites" aria-pressed="false">Favoritos</button
                             ><button data-filter="recent" aria-pressed="false">
                                 Últimos jogados
@@ -116,7 +139,7 @@
                         <label class="library-sort"
                             ><span class="sr-only">Ordenar jogos</span
                             ><select id="game-sort">
-                                <option value="recommended">Destaques primeiro</option>
+                                <option value="recommended">Seleção Órbita</option>
                                 <option value="az">Nome: A–Z</option>
                                 <option value="recent">Jogadas recentes</option>
                             </select></label
@@ -155,37 +178,55 @@
                     <p id="game-control-info" class="muted"></p>
                 </aside>
                 <div class="config-controls">
-                    <span class="eyebrow">DO SEU JEITO</span>
-                    <h2>Prepare sua partida</h2>
+                    <h2>Como você quer jogar?</h2>
                     <div class="configuration">
-                        <label
-                            >Dificuldade<select id="difficulty-select">
-                                <option value="easy">Fácil</option>
-                                <option value="medium">Médio</option>
-                                <option value="hard">Difícil</option>
-                                <option value="expert">Especialista</option>
-                            </select></label
-                        ><label
-                            >Seed <span class="muted">(opcional)</span
-                            ><input
-                                id="seed-input"
-                                maxlength="32"
-                                placeholder="Automática, ou uma seed para repetir"
-                                autocomplete="off"
-                        /></label>
                         <div id="game-options"></div>
+                        <div id="difficulty-field">
+                            <label class="select-fallback"
+                                >Dificuldade<select
+                                    id="difficulty-select"
+                                    aria-hidden="true"
+                                    tabindex="-1"
+                                >
+                                    <option value="easy">Fácil</option>
+                                    <option value="medium">Médio</option>
+                                    <option value="hard">Difícil</option>
+                                    <option value="expert">Especialista</option>
+                                </select></label
+                            >
+                            <fieldset id="difficulty-choices" class="choice-field">
+                                <legend>Dificuldade</legend>
+                                <div class="choice-grid"></div>
+                            </fieldset>
+                        </div>
+                        <p
+                            id="difficulty-explanation"
+                            class="difficulty-explanation"
+                            aria-live="polite"
+                        ></p>
+                        <details class="advanced-settings">
+                            <summary>Repetir ou compartilhar um desafio</summary>
+                            <label
+                                >Código do desafio <span class="muted">(opcional)</span
+                                ><input
+                                    id="seed-input"
+                                    maxlength="32"
+                                    placeholder="Automática, ou uma seed para repetir"
+                                    autocomplete="off"
+                            /></label>
+                            <p class="muted">
+                                Deixe em branco para uma partida nova. Use o mesmo código e as
+                                mesmas opções para repetir.
+                            </p>
+                        </details>
                     </div>
-                    <p
-                        id="difficulty-explanation"
-                        class="difficulty-explanation"
-                        aria-live="polite"
-                    ></p>
+
                     <p id="config-error" role="status" class="error-text"></p>
                     <button id="start-practice-game-btn" class="button button-primary">
                         Jogar →
                     </button>
                     <p class="config-tip">
-                        Uma nova seed cria outro desafio. Guarde a sua para jogar novamente.
+                        Suas últimas opções ficam salvas para a próxima partida.
                     </p>
                 </div>
             </div>
@@ -204,18 +245,35 @@
                 ><span id="hud-time-wrap">Tempo <strong id="hud-time">00:00</strong></span>
             </div>
             <div class="challenge-strip">
-                <p id="run-status"></p>
-                <div>
-                    <button id="pause-current-game" class="text-button">Pausar</button
-                    ><button id="restart-current-game" class="text-button">Mesmo desafio</button
-                    ><button id="new-current-game" class="text-button">Nova partida</button>
+                <span id="skill-chip" class="skill-chip"></span>
+                <div class="session-actions">
+                    <button id="pause-current-game" class="text-button">Pausar</button>
+                    <details class="session-tools">
+                        <summary>Opções da partida</summary>
+                        <p id="run-status"></p>
+                        <button id="restart-current-game" class="text-button">Mesmo desafio</button>
+                        <button id="new-current-game" class="text-button">Nova partida</button>
+                    </details>
+                    <button
+                        id="expand-game"
+                        class="text-button"
+                        aria-label="Entrar em tela cheia"
+                        aria-pressed="false"
+                    >
+                        ⛶
+                    </button>
                 </div>
             </div>
-            <div id="phase-limit-display" class="limit-display" role="status"></div>
-            <p id="game-notice" role="status" aria-live="polite"></p>
-            <p id="pause-notice" class="hidden" role="status">
-                Partida pausada. Retome para continuar.
-            </p>
+            <div id="answer-pulse" class="answer-pulse" aria-hidden="true">
+                <span id="answer-pulse-symbol"></span><span id="answer-pulse-label"></span>
+            </div>
+            <div class="session-notices">
+                <div id="phase-limit-display" class="limit-display" role="status"></div>
+                <p id="game-notice" role="status" aria-live="polite"></p>
+                <p id="pause-notice" class="hidden" role="status">
+                    Partida pausada. Retome para continuar.
+                </p>
+            </div>
             <div id="phase-display" class="flex flex-col items-center w-full"></div>
         </section>
         <div
@@ -227,6 +285,7 @@
         >
             <div class="result-content">
                 <span class="eyebrow">PARTIDA ENCERRADA</span>
+                <span id="result-signal" class="result-signal" aria-hidden="true"></span>
                 <h2 id="modalMessageText">Resultado</h2>
                 <div id="result-stats" class="result-stats"></div>
                 <div id="modalDetailsDisplay"></div>
@@ -241,23 +300,28 @@
                 <p id="share-status" role="status"></p>
             </div>
         </div>
-        <script src="./src/js/core/random.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/difficulty.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/score.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/registry.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/algorithms.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/session.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/progress.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/interactions.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/rules.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/sudoku.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/puzzles.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/challenges.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/knowledge.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/nonogram.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/learning.js?v=2026-10-04.3"></script>
-        <script src="./src/js/core/library.js?v=2026-10-04.3"></script>
-        <script src="./src/js/games.config.js?v=2026-10-04.3"></script>
-        <script src="./src/js/main.js?v=2026-10-04.3"></script>
+        <script src="./src/js/core/random.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/difficulty.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/score.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/registry.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/algorithms.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/session.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/perception.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/progress.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/interactions.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/rules.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/sudoku.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/puzzles.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/challenges.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/knowledge.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/nonogram.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/learning.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/arena.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/arena-access.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/classics.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/classic-ui.js?v=2026-10-13.2"></script>
+        <script src="./src/js/core/library.js?v=2026-10-13.2"></script>
+        <script src="./src/js/games.config.js?v=2026-10-13.2"></script>
+        <script src="./src/js/main.js?v=2026-10-13.2"></script>
     </body>
 </html>

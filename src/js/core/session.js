@@ -11,6 +11,7 @@ const GameSession = (() => {
             pausedTime = 0;
         const started = performance.now();
         const jobs = new Map(),
+            stateChanges = new Set(),
             listeners = [],
             cleanups = [];
         let counter = 0;
@@ -143,6 +144,7 @@ const GameSession = (() => {
             const time = now();
             hiddenAt = performance.now();
             paused = true;
+            stateChanges.forEach((fn) => fn(true));
             for (const job of jobs.values()) {
                 job.remaining = Math.max(0, job.due - time);
                 if (job.kind === 'frame') cancelAnimationFrame(job.native);
@@ -153,10 +155,14 @@ const GameSession = (() => {
             if (!active || !paused) return;
             pausedTime += performance.now() - hiddenAt;
             paused = false;
+            stateChanges.forEach((fn) => fn(false));
             for (const [id, job] of jobs) arm(id, job);
         }
         const random = SeededRandom.create(challenge.seed);
-        const score = ScoreEngine.create(now, (stats) => ui.updateStats?.(stats));
+        const score = ScoreEngine.create(now, (stats, event) => {
+            ui.updateStats?.(stats);
+            if (event?.type === 'answer') ui.answerFeedback?.(event);
+        });
         const session = {
             ui,
             random,
@@ -177,6 +183,10 @@ const GameSession = (() => {
             clear,
             listen,
             now,
+            onPauseChange(fn) {
+                stateChanges.add(fn);
+                cleanups.push(() => stateChanges.delete(fn));
+            },
             pause,
             resume,
             destroy,
@@ -240,7 +250,8 @@ const GameSession = (() => {
             }
             for (const el of ui.phaseDisplay.querySelectorAll(
                 'input:not([aria-label]),select:not([aria-label])'
-            ))
+            )) {
+                if (el.labels?.length) continue;
                 el.setAttribute(
                     'aria-label',
                     el.placeholder ||
@@ -248,6 +259,7 @@ const GameSession = (() => {
                             ? `Linha ${+el.dataset.row + 1}, coluna ${+el.dataset.col + 1}`
                             : 'Resposta')
                 );
+            }
         }
         const observer = new MutationObserver(decorate);
         observer.observe(ui.phaseDisplay, {

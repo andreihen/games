@@ -57,3 +57,27 @@ As pistas do Sistema Solar utilizam como referência [planetas](https://science.
 ## Dependências de desenvolvimento
 
 `tests/package.json` e o lockfile registram jsdom 30.1.1 para o DOM simulado. A validação utilizou Node.js 24.18.0 e Prettier 3.6.2. Essas ferramentas não são necessárias para abrir o aplicativo e seus pacotes não são incluídos no site entregue.
+
+## Pokémon, elementos e textos de digitação
+
+`src/js/data/pokemon.js` usa fatos do [repositório oficial PokéAPI](https://github.com/PokeAPI/pokeapi), snapshot `c80757193bd0889054e36f4209762360bdaa4b95`, consultado em 9 de outubro de 2026. CSVs: pokemon, pokemon_species, pokemon_species_names e pokemon_types. Inclui 1.025 espécies, nomes em inglês e atributos da forma padrão; exclui megaevoluções e variantes regionais. O banco é local conforme a [política de cache da PokéAPI](https://pokeapi.co/docs/v2). A licença BSD de três cláusulas e seus avisos estão em `src/data-licenses/LICENSE-PokeAPI.txt`. Pokémon e seus nomes são marcas de Nintendo; este jogo é uma adaptação independente de dedução, sem sprites extraídos.
+
+`src/js/data/elements.js` adapta números, símbolos e categorias factuais da [Tabela Periódica PubChem](https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON), consultada em 9 de outubro de 2026. Referência de nomenclatura e disposição: [IUPAC](https://iupac.org/what-we-do/periodic-table-of-elements/). Nomes em português são rótulos editoriais locais. Períodos seguem a disposição padrão; as famílias são categorias GroupBlock do snapshot PubChem, não números de grupo. A classificação de elementos superpesados pode variar por fonte. Nenhuma massa, descoberta ou propriedade não utilizada foi incorporada ao jogo.
+
+`src/js/data/passages.js` contém 24 trechos originais (10 em português, 8 em inglês e 6 de código) escritos para treino; cada partida combina de dois a cinco trechos sem repetir dentro do texto. As capas novas são SVGs locais e o jogo de Pokémon não depende de downloads de imagens.
+
+## Arena Improvável
+
+A expansão RPG contém 131 personagens e 131 retratos locais em `src/assets/characters/`. O [manifesto de fontes](src/assets/characters/sources.json) registra origem, tipo (personagem, intérprete ou ilustração), data, bytes e SHA-256. Os bytes não foram alterados. Desenhos dos mapas, textos de eventos e regras são próprios; nomes de personagens e obras pertencem às franquias representadas.
+
+Metadados de elencos e parte dos retratos vêm da [TVmaze API](https://www.tvmaze.com/api), que fornece personagens e intérpretes separadamente e permite hotlink/cache de imagens. O snapshot de iCarly (2007), Friends, The Office, Stranger Things e Breaking Bad foi adaptado para IDs locais, classificação por tipo/obra e seleção de campos. Metadados derivados mantêm CC BY-SA 4.0 e a atribuição; o aviso está em `src/data-licenses/TVmaze-notice.md`. A busca por novas séries é opcional e ocorre apenas por ação do usuário.
+
+Retratos da Wikipédia foram obtidos pela [MediaWiki PageImages](https://www.mediawiki.org/wiki/Extension:PageImages), com seleção de imagens que representavam os personagens, sem usar logos de obras como retratos. Autoria e condições das imagens permanecem nas páginas dos arquivos apontadas pelo manifesto; várias imagens são retratos promocionais ou reproduções não livres, portanto a licença do texto da Wikipédia não deve ser aplicada automaticamente a elas. O retrato de Totoro usa a [AniList API](https://docs.anilist.co/guide/introduction), com origem indicada no manifesto. A integração Rick and Morty da primeira versão permanece no adaptador por compatibilidade, mas a interface agora busca séries e elencos via TVmaze.
+
+Fotos enviadas pelo próprio usuário ficam no IndexedDB local e acompanham os backups novos de biblioteca, elencos, configuração e partida como data URLs. URLs digitadas continuam externas. A distribuição para Pages incorpora os 131 retratos locais no HTML. Veja [Arena RPG](docs/ARENA_RPG.md) e [a evolução da arena](docs/ARENA_EVOLUCAO.md) para funcionamento, fontes e limitações.
+
+## Catálogo de filmes — Arena viva
+
+A busca consulta [Wikidata](https://www.wikidata.org/wiki/Help:Data_access) e usa dados estruturados CC0 de filmes, subclasses, atores, vozes e papéis identificados (P453/P4633). Os retratos externos usam Wikimedia Commons; a ficha liga à página do arquivo e suas condições próprias. Fotos de intérpretes são identificadas. Não existe chave privada incluída no site. Nenhuma fotografia nova de filmes é incorporada no pacote local automaticamente.
+
+A busca de videogames confirma a classe do jogo (`Q7889`) e usa vínculos de personagens (`P674`). Não usa a equipe de desenvolvimento ou dubladores como personagens. Dados Wikidata são CC0; cada imagem mantém as condições da página do arquivo em Commons, indicada na ficha. A cobertura depende dos vínculos disponíveis para a edição escolhida.

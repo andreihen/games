@@ -147,3 +147,98 @@ const VocabularyEngine = Object.freeze({
         ].sort();
     }
 });
+function KnowledgeDeduction(session, config, spec) {
+    const recent = config.options.recentItems || [];
+    const secret = ReplayEngine.deck(session.random, spec.bank, recent, (p) => String(p.id)).next();
+    Progress.remember(spec.id, [String(secret.id)]);
+    const seen = new Set();
+    const $ = GameUI.shell(
+        session,
+        spec.title,
+        spec.intro,
+        `<p id="ded-count" class="status-line">0/${spec.attempts} tentativas · ${spec.bank.length} candidatos</p><details class="ded-reference"><summary>Consultar candidatos e atributos</summary><label>Filtrar candidatos <input id="ded-filter" class="compact-field" autocomplete="off"></label><div id="ded-reference-list"></div></details><form id="ded-form" class="controls"><input id="ded-input" class="compact-field" list="ded-names" aria-label="Seu palpite" placeholder="Digite um nome para comparar" autocomplete="off" autocapitalize="off"><datalist id="ded-names">${spec.bank.map((p) => `<option value="${GameArt.escape(p.name)}"></option>`).join('')}</datalist><button class="button button-primary">Comparar</button></form><p id="ded-feedback" role="status"></p><div id="ded-history" class="ded-history"></div>`
+    );
+    function reference() {
+        const query = GameArt.normalize($('#ded-filter').value);
+        $('#ded-reference-list').replaceChildren();
+        for (const p of spec.bank
+            .filter((p) =>
+                GameArt.normalize(`${p.name} ${p.symbol || ''} ${p.alias}`).includes(query)
+            )
+            .slice(0, 60)) {
+            const button = document.createElement('button');
+            button.className = 'ded-candidate';
+            button.type = 'button';
+            button.textContent = spec.reveal(p);
+            button.dataset.candidate = p.id;
+            $('#ded-reference-list').append(button);
+        }
+    }
+    session.listen($('#ded-reference-list'), 'click', (event) => {
+        const button = event.target.closest('[data-candidate]');
+        if (!button) return;
+        const candidate = spec.bank.find((p) => String(p.id) === button.dataset.candidate);
+        $('#ded-input').value = candidate.name;
+        $('#ded-input').focus({ preventScroll: true });
+    });
+    reference();
+    session.listen($('#ded-filter'), 'input', reference);
+    session.listen($('#ded-form'), 'submit', (event) => {
+        event.preventDefault();
+        const value = GameArt.normalize($('#ded-input').value.trim());
+        const guess = spec.bank.find((p) =>
+            [p.name, p.alias, p.symbol].filter(Boolean).some((n) => GameArt.normalize(n) === value)
+        );
+        if (!guess) {
+            $('#ded-feedback').textContent =
+                'Escolha um candidato do banco desta partida. Consulte a lista se precisar.';
+            return;
+        }
+        if (seen.has(guess.id)) {
+            $('#ded-feedback').textContent =
+                'Esse palpite já foi comparado. Tente outro candidato.';
+            return;
+        }
+        seen.add(guess.id);
+        const row = document.createElement('article');
+        row.className = 'ded-row';
+        const title = document.createElement('strong');
+        title.textContent = guess.name;
+        row.append(title);
+        for (const field of spec.fields) {
+            const a = field.value(guess),
+                b = field.value(secret),
+                mark = field.compare
+                    ? field.compare(guess, secret)
+                    : a === b
+                      ? '✓'
+                      : field.numeric
+                        ? a < b
+                            ? '↑'
+                            : '↓'
+                        : '✕';
+            const cell = document.createElement('span');
+            cell.className =
+                'ded-cell ' + (mark === '✓' ? 'matched' : mark === '≈' ? 'partial' : '');
+            cell.textContent = `${field.label}: ${a} ${mark}`;
+            cell.setAttribute(
+                'aria-label',
+                `${field.label}: ${a}; ${mark === '✓' ? 'igual ao segredo' : mark === '↑' ? 'segredo maior' : mark === '↓' ? 'segredo menor' : mark === '≈' ? 'parcialmente igual' : 'diferente'}`
+            );
+            row.append(cell);
+        }
+        $('#ded-history').prepend(row);
+        $('#ded-count').textContent =
+            `${seen.size}/${spec.attempts} tentativas · ${spec.bank.length} candidatos`;
+        $('#ded-input').value = '';
+        const correct = guess.id === secret.id;
+        session.score.attempt(correct);
+        if (correct || seen.size === spec.attempts) {
+            if (correct) session.score.add((spec.attempts - seen.size + 1) * 100);
+            session.complete(correct, { text: spec.reveal(secret) });
+        } else
+            $('#ded-feedback').textContent =
+                'Comparação adicionada. Combine as pistas antes do próximo palpite.';
+    });
+    $('#ded-input').focus({ preventScroll: true });
+}

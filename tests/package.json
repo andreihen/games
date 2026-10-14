@@ -2,10 +2,11 @@
     "name": "desafio-logico-total-tests",
     "private": true,
     "version": "1.0.0",
-    "description": "Verificações opcionais; o jogo não depende de Node.js.",
+    "description": "VerificaÃ§Ãµes opcionais; o jogo nÃ£o depende de Node.js.",
     "scripts": {
-        "test": "node games.test.cjs && node app.test.cjs && node playthrough.test.cjs && node catalog.test.cjs && node ux.test.cjs && node arcade.test.cjs",
-        "test:deploy": "node deployment.test.cjs"
+        "test": "node games.test.cjs && node app.test.cjs && node playthrough.test.cjs && node catalog.test.cjs && node ux.test.cjs && node arcade.test.cjs && node refinement.test.cjs && node colors.test.cjs && node perception.test.cjs && node expansion.test.cjs && node orbita.test.cjs && node arena.test.cjs && node arena-rpg.test.cjs && node arena-world.test.cjs && node arena-evolution.test.cjs && node classics.test.cjs",
+        "test:deploy": "node deployment.test.cjs",
+        "test:arena-evolution": "node arena.test.cjs && node arena-rpg.test.cjs && node arena-world.test.cjs && node arena-evolution.test.cjs"
     },
     "devDependencies": {
         "jsdom": "30.1.1"

@@ -1,0 +1,510 @@
+{
+  "initial390": [
+    {
+      "fields": [],
+      "game": "Cor Relâmpago",
+      "pageOverflow": 0,
+      "stageOverflow": 54
+    },
+    {
+      "fields": [],
+      "game": "Nota de Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Relógio Interno",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Forma de Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Padrão Partido",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Construtor de Ritmo",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Ateliê de Cores",
+      "pageOverflow": 0,
+      "stageOverflow": 19
+    },
+    {
+      "fields": [],
+      "game": "Cor de Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 26
+    },
+    {
+      "fields": [],
+      "game": "Decifrando Cores",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Apague as Luzes",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Balança Lógica",
+      "pageOverflow": 0,
+      "stageOverflow": 37
+    },
+    {
+      "fields": [],
+      "game": "Sudoku",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Bloco Fit",
+      "pageOverflow": 0,
+      "stageOverflow": 32
+    },
+    {
+      "fields": [],
+      "game": "Conecte os Pontos",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Nonogram",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Quebra-Cabeça Deslizante",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Torre de Hanói",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Velha: Peças Móveis",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Jogo da Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Simon Diz",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Trilha da Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Prateleira da Memória",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Inspetor",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Qual a Diferença?",
+      "pageOverflow": 0,
+      "stageOverflow": 209
+    },
+    {
+      "fields": [],
+      "game": "Impulso Certo",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 355.40625,
+          "id": "mm-answer",
+          "visible": true
+        }
+      ],
+      "game": "Arena de Cálculo",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Chuva de Palavras",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Resta Um",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Termo",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Capitais",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Bandeiras",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Mapa Mundi",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Dia da Semana",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Cores: Stroop",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Ordenar Cores",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Cor Diferente",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 728,
+          "id": "quiz-input",
+          "visible": true
+        }
+      ],
+      "game": "Matriz Rápida",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Regra Mutante",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "N-Back",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Memória de Trabalho",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 728,
+          "id": "quiz-input",
+          "visible": true
+        }
+      ],
+      "game": "Operador Mutante",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Checklist",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Ordem Temporal",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Subitização",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Maior ou Menor",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Estimativa",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Memória Espacial",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Rotação Mental",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Par ou Ímpar Dinâmico",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Linha do Tempo",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 589.109375,
+          "id": "identity-input",
+          "visible": true
+        }
+      ],
+      "game": "Quem Sou Eu?",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Conexões",
+      "pageOverflow": 0,
+      "stageOverflow": 3
+    },
+    {
+      "fields": [
+        {
+          "bottom": 509.328125,
+          "id": "ded-input",
+          "visible": true
+        }
+      ],
+      "game": "Pokédex Misteriosa",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 509.328125,
+          "id": "ded-input",
+          "visible": true
+        }
+      ],
+      "game": "Elemento Secreto",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [
+        {
+          "bottom": 398.734375,
+          "id": "eq-input",
+          "visible": true
+        }
+      ],
+      "game": "Equação Oculta",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    },
+    {
+      "fields": [],
+      "game": "Soma Exata",
+      "pageOverflow": 0,
+      "stageOverflow": 0
+    }
+  ],
+  "adjusted": [
+    {
+      "game": "Cor Relâmpago",
+      "overflow": 0,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Cor de Memória",
+      "overflow": 0,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Ateliê de Cores",
+      "overflow": 19,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Balança Lógica",
+      "overflow": 0,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Bloco Fit",
+      "overflow": 0,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Qual a Diferença?",
+      "overflow": 0,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Conexões",
+      "overflow": 3,
+      "pageHorizontal": 0
+    },
+    {
+      "game": "Chuva de Palavras",
+      "overflow": 0,
+      "pageHorizontal": 0
+    }
+  ],
+  "finalMixFit": {
+    "game": "Ateliê de Cores",
+    "overflow": 2
+  },
+  "flagResponsive": [
+    {
+      "height": 740,
+      "horizontal": 0,
+      "inputBottom": 728,
+      "overflow": 0,
+      "visible": true,
+      "width": 320
+    },
+    {
+      "afterAnswer": true,
+      "height": 740,
+      "nextVisible": true,
+      "overflow": 0,
+      "width": 320
+    },
+    {
+      "height": 740,
+      "horizontal": 0,
+      "inputBottom": 728,
+      "overflow": 0,
+      "visible": true,
+      "width": 390
+    },
+    {
+      "afterAnswer": true,
+      "height": 740,
+      "nextVisible": true,
+      "overflow": 0,
+      "width": 390
+    },
+    {
+      "height": 900,
+      "horizontal": 0,
+      "inputBottom": 888,
+      "overflow": 0,
+      "visible": true,
+      "width": 768
+    },
+    {
+      "afterAnswer": true,
+      "height": 900,
+      "nextVisible": true,
+      "overflow": 0,
+      "width": 768
+    },
+    {
+      "height": 720,
+      "horizontal": 0,
+      "inputBottom": 708,
+      "overflow": 0,
+      "visible": true,
+      "width": 1280
+    },
+    {
+      "afterAnswer": true,
+      "height": 720,
+      "nextVisible": true,
+      "overflow": 0,
+      "width": 1280
+    },
+    {
+      "height": 390,
+      "horizontal": 0,
+      "inputBottom": 378,
+      "overflow": 0,
+      "visible": true,
+      "width": 390
+    },
+    {
+      "afterAnswer": true,
+      "height": 390,
+      "nextVisible": true,
+      "overflow": 0,
+      "width": 390
+    }
+  ],
+  "helpProof": {
+    "open": true,
+    "visibility": "hidden"
+  },
+  "console": []
+}

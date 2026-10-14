@@ -29,8 +29,9 @@ const ChallengeRunner = Object.freeze({
             session,
             spec.title,
             spec.instructions || 'Responda a cada rodada. O feedback explica o resultado.',
-            `<p id="quiz-progress" class="status-line"></p><progress id="quiz-meter" class="challenge-meter" value="0" aria-label="Rodadas respondidas"></progress><div id="quiz-visual" class="large-stimulus"></div><h3 id="quiz-prompt" class="text-center"></h3><div id="quiz-choices" class="option-grid"></div><form id="quiz-form" class="controls hidden"><input id="quiz-input" class="compact-field" autocomplete="off" aria-label="Resposta"><button class="button button-primary">Responder</button></form><p id="quiz-feedback" class="notice hidden" role="status"></p>${GameUI.button('Próxima rodada', 'quiz-next', 'primary')}`
+            `<p id="quiz-progress" class="status-line"></p><progress id="quiz-meter" class="challenge-meter" value="0" aria-label="Rodadas respondidas"></progress><div class="quiz-stage"><div id="quiz-visual" class="large-stimulus"></div><h3 id="quiz-prompt" class="text-center"></h3></div><div class="quiz-action-zone"><div id="quiz-choices" class="option-grid"></div><form id="quiz-form" class="controls hidden"><input id="quiz-input" class="compact-field" autocomplete="off" aria-label="Resposta" placeholder="Digite sua resposta"><button class="button button-primary">Responder</button></form><p id="quiz-feedback" class="notice hidden" role="status"></p>${GameUI.button('Próxima rodada', 'quiz-next', 'primary')}</div>`
         );
+        $('#quiz-progress').closest('.play-panel').classList.add('quiz-panel');
         let index = 0,
             locked = false,
             question = null;
@@ -45,6 +46,9 @@ const ChallengeRunner = Object.freeze({
             if (locked) return;
             locked = true;
             const correct = check(value);
+            $('#quiz-progress').closest('.play-panel').dataset.answer = correct
+                ? 'correct'
+                : 'wrong';
             session.score.answer(correct);
             spec.record?.(question, correct);
             $('#quiz-feedback').classList.remove('hidden');
@@ -69,6 +73,7 @@ const ChallengeRunner = Object.freeze({
                     }
                 });
             $('#quiz-form').querySelector('button').disabled = true;
+            $('#quiz-input').readOnly = true;
             $('#quiz-next').classList.remove('hidden');
             $('#quiz-next').focus({ preventScroll: true });
         }
@@ -80,6 +85,7 @@ const ChallengeRunner = Object.freeze({
                 });
             }
             locked = false;
+            delete $('#quiz-progress').closest('.play-panel').dataset.answer;
             question = spec.generate(index++, session.random, config);
             $('#quiz-progress').textContent = `Rodada ${index}/${total}`;
             $('#quiz-meter').max = total;
@@ -94,6 +100,7 @@ const ChallengeRunner = Object.freeze({
             const typing = question.typing || false;
             $('#quiz-form').classList.toggle('hidden', !typing);
             $('#quiz-form').querySelector('button').disabled = false;
+            $('#quiz-input').readOnly = false;
             $('#quiz-input').value = '';
             if (typing) {
                 $('#quiz-input').inputMode = question.numeric ? 'decimal' : 'text';

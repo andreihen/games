@@ -107,7 +107,7 @@ GameRegistry.register('lightsout', (session) => {
             buttons.forEach((b, i) => {
                 b.classList.toggle('light-on', Boolean(board[i]));
                 b.classList.toggle('light-off', !board[i]);
-                b.textContent = board[i] ? '●' : '○';
+                b.textContent = '';
                 b.setAttribute('aria-pressed', Boolean(board[i]));
                 b.setAttribute(
                     'aria-label',

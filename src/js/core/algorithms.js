@@ -189,3 +189,46 @@ const GameAlgorithms = (() => {
     }
     return Object.freeze({ shuffle, sliding, pegPuzzle, blockPuzzle, snake, route, flowPuzzle });
 })();
+
+// Modelo de mistura virtual por absorção; não representa tintas comerciais específicas.
+const ColorMath = Object.freeze({
+    mix(colors, amounts) {
+        const total = amounts.reduce((sum, n) => sum + n, 0);
+        if (!total) return [255, 255, 255];
+        return [0, 1, 2].map((channel) => {
+            const k = colors.reduce((sum, rgb, i) => {
+                const r = Math.max(0.015, rgb[channel] / 255);
+                return sum + ((amounts[i] / total) * (1 - r) ** 2) / (2 * r);
+            }, 0);
+            return Math.round(255 / (1 + k + Math.sqrt(k * k + 2 * k)));
+        });
+    },
+    hsv(h, s, v) {
+        s /= 100;
+        v /= 100;
+        const f = (n) => {
+            const k = (n + h / 60) % 6;
+            return Math.round(255 * v * (1 - s * Math.max(0, Math.min(k, 4 - k, 1))));
+        };
+        return [f(5), f(3), f(1)];
+    },
+    lab(rgb) {
+        const [r, g, b] = rgb.map((n) => {
+            n /= 255;
+            return n <= 0.04045 ? n / 12.92 : ((n + 0.055) / 1.055) ** 2.4;
+        });
+        const f = (n) => (n > 216 / 24389 ? Math.cbrt(n) : (n * 841) / 108 + 4 / 29);
+        const x = f((r * 0.4124564 + g * 0.3575761 + b * 0.1804375) / 0.95047),
+            y = f(r * 0.2126729 + g * 0.7151522 + b * 0.072175),
+            z = f((r * 0.0193339 + g * 0.119192 + b * 0.9503041) / 1.08883);
+        return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
+    },
+    similarity(a, b) {
+        const x = ColorMath.lab(a),
+            y = ColorMath.lab(b);
+        return Math.max(0, Math.round(100 - Math.hypot(...x.map((n, i) => n - y[i]))));
+    },
+    css(rgb) {
+        return `rgb(${rgb.join(',')})`;
+    }
+});

@@ -1,0 +1,24 @@
+{
+  "screens": [
+    {
+      "scroll": 305,
+      "title": "Elemento Secreto",
+      "width": 320
+    },
+    {
+      "scroll": 305,
+      "title": "Equação Oculta",
+      "width": 320
+    },
+    {
+      "scroll": 305,
+      "title": "Soma Exata",
+      "width": 320
+    }
+  ],
+  "typing": {
+    "width": 320,
+    "characters": 1301
+  },
+  "console": []
+}

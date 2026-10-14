@@ -4,7 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
         phaseDisplay: $('phase-display'),
         limitDisplay: $('phase-limit-display'),
         noticeDisplay: $('game-notice'),
-        updateStats
+        updateStats,
+        answerFeedback
     };
     const screens = ['game-main-menu', 'phase-selection-screen', 'roguelike-game-area'];
     let selected = null,
@@ -18,19 +19,169 @@ document.addEventListener('DOMContentLoaded', () => {
         category = 'Todos',
         libraryFilter = 'all',
         configuredOptions = {};
+    const pageKey = 'desafio-logico-total:page';
+    let navigationTrail = [],
+        routingReady = false,
+        restoringRoute = false,
+        activeScreen = 'game-main-menu';
+    function pageState(includeTrail = true) {
+        const state = {
+            version: 1,
+            screen: activeScreen,
+            mode,
+            recent,
+            library: {
+                category,
+                filter: libraryFilter,
+                query: $('game-search').value,
+                sort: $('game-sort').value
+            },
+            scroll: window.scrollY || document.documentElement.scrollTop
+        };
+        if (activeScreen === 'roguelike-game-area' && current && challenge)
+            state.challenge = structuredClone(challenge);
+        else if (activeScreen === 'phase-selection-screen' && selected) {
+            const options = { ...configuredOptions };
+            for (const option of selected.options)
+                options[option.key] =
+                    $('game-options').querySelector(`[data-option="${option.key}"]`)?.value ||
+                    option.values[0].value;
+            state.challenge = {
+                game: selected.id,
+                difficulty: $('difficulty-select').value,
+                seed: $('seed-input').value,
+                options
+            };
+        }
+        if (includeTrail) state.trail = navigationTrail;
+        return state;
+    }
+    function rememberPage(push = false) {
+        if (!routingReady || restoringRoute) return;
+        const state = pageState(),
+            url = new URL(location.href);
+        for (const key of ['game', 'difficulty', 'seed', 'options', 'view'])
+            url.searchParams.delete(key);
+        url.searchParams.set(
+            'view',
+            state.screen === 'roguelike-game-area'
+                ? 'play'
+                : state.screen === 'phase-selection-screen'
+                  ? 'setup'
+                  : 'library'
+        );
+        if (state.challenge)
+            for (const key of ['game', 'difficulty', 'seed', 'options']) {
+                const value = state.challenge[key];
+                if (value !== '' && value !== undefined)
+                    url.searchParams.set(key, key === 'options' ? JSON.stringify(value) : value);
+            }
+        try {
+            history[push && url.href !== location.href ? 'pushState' : 'replaceState'](
+                state,
+                '',
+                url
+            );
+            localStorage.setItem(pageKey, JSON.stringify(state));
+        } catch {
+            /* Navigation still works when browser storage is unavailable. */
+        }
+    }
+    async function restorePage(state) {
+        if (!state || state.version !== 1 || !screens.includes(state.screen)) return false;
+        const game = GAMES_CONFIG.find((g) => g.id === state.challenge?.game);
+        if (
+            state.screen !== 'game-main-menu' &&
+            (!game || !DifficultyEngine.keys.includes(state.challenge?.difficulty))
+        )
+            return false;
+        restoringRoute = true;
+        try {
+            navigationTrail = Array.isArray(state.trail)
+                ? state.trail
+                      .filter((entry) => entry && screens.includes(entry.screen))
+                      .slice(-12)
+                      .map((entry) => {
+                          const { trail, ...route } = entry;
+                          return route;
+                      })
+                : [];
+            category = ['Todos', ...Object.keys(GameLibrary.categories)].includes(
+                state.library?.category
+            )
+                ? state.library.category
+                : 'Todos';
+            libraryFilter = ['all', 'new', 'perception', 'favorites', 'recent'].includes(
+                state.library?.filter
+            )
+                ? state.library.filter
+                : 'all';
+            $('game-search').value =
+                typeof state.library?.query === 'string' ? state.library.query.slice(0, 120) : '';
+            if (['recommended', 'az', 'recent'].includes(state.library?.sort))
+                $('game-sort').value = state.library.sort;
+            mode = ['practice', 'daily', 'journey'].includes(state.mode) ? state.mode : 'practice';
+            recent = Array.isArray(state.recent)
+                ? state.recent.filter((id) => GAMES_CONFIG.some((g) => g.id === id)).slice(-5)
+                : [];
+            renderCatalog();
+            if (state.screen === 'roguelike-game-area') await start(game, state.challenge);
+            else if (state.screen === 'phase-selection-screen') configure(game, state.challenge);
+            else {
+                stop();
+                screen('game-main-menu');
+            }
+            window.scrollTo?.(0, Math.max(0, Number(state.scroll) || 0));
+        } finally {
+            restoringRoute = false;
+        }
+        rememberPage();
+        return true;
+    }
     const journeyRandom = SeededRandom.create(SeededRandom.fresh());
     function screen(id) {
+        if (activeScreen !== id) {
+            rememberPage();
+            if (routingReady && !restoringRoute)
+                navigationTrail = [...navigationTrail, pageState(false)].slice(-12);
+        }
+        activeScreen = id;
+        document.body.classList.toggle('in-game', id === 'roguelike-game-area');
         screens.forEach((key) => $(key).classList.toggle('hidden', key !== id));
         const heading = $(id).querySelector('h1,h2');
         if (heading) {
             heading.tabIndex = -1;
-            heading.focus();
+            heading.focus({ preventScroll: true });
         }
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        rememberPage(true);
     }
     function updateStats(stats) {
         $('hud-score').textContent = stats.score.toLocaleString('pt-BR');
         $('hud-streak').textContent = stats.streak;
         $('hud-time').textContent = ScoreEngine.time(stats.time);
+    }
+    function answerFeedback(event) {
+        if (
+            !current ||
+            current.type === 'simulation' ||
+            [
+                'wordrain',
+                'termo',
+                'mini_sudoku',
+                'simonsays',
+                'memorypath',
+                'spatialmemory'
+            ].includes(current.id)
+        )
+            return;
+        const pulse = $('answer-pulse');
+        pulse.className = `answer-pulse ${event.success ? 'is-correct' : 'is-wrong'}`;
+        $('answer-pulse-symbol').textContent = event.success ? '✓' : '✕';
+        $('answer-pulse-label').textContent = event.success ? 'Acertou' : 'Tente outra vez';
+        void pulse.offsetWidth;
+        pulse.classList.add('show-pulse');
     }
     function closeModal() {
         $('messageModal').classList.add('hidden');
@@ -49,11 +200,31 @@ document.addEventListener('DOMContentLoaded', () => {
         ui.noticeDisplay.textContent = '';
         $('pause-notice').classList.add('hidden');
         $('pause-current-game').textContent = 'Pausar';
+        $('answer-pulse').className = 'answer-pulse';
+        $('roguelike-game-area').querySelector('.session-tools').open = false;
     }
     function quit() {
         stop();
         renderCatalog();
         screen('game-main-menu');
+    }
+    async function returnToPrevious() {
+        const trail = [...navigationTrail];
+        const previous =
+            trail.pop() ||
+            (activeScreen === 'roguelike-game-area' && current
+                ? {
+                      version: 1,
+                      screen: 'phase-selection-screen',
+                      challenge: structuredClone(challenge),
+                      library: pageState(false).library
+                  }
+                : { version: 1, screen: 'game-main-menu', library: pageState(false).library });
+        try {
+            if (!(await restorePage({ ...previous, trail }))) quit();
+        } catch {
+            quit();
+        }
     }
     function optionsFor(game, supplied = {}, difficulty = $('difficulty-select').value) {
         const options = {};
@@ -64,13 +235,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (
             [
                 'termo',
+                'pokemon',
+                'element',
                 'wordrain',
                 'capitals',
                 'flags',
                 'worldmap',
                 'timeline',
                 'identity',
-                'connections'
+                'connections',
+                'temporalorder'
             ].includes(game.id)
         )
             options.recentItems = (
@@ -118,12 +292,15 @@ document.addEventListener('DOMContentLoaded', () => {
         $('game-control-info').textContent = `Controles: ${game.controls.join(' · ')}`;
         $('config-error').textContent = '';
         $('difficulty-select').value = supplied?.difficulty || 'easy';
-        $('difficulty-select')
-            .closest('label')
-            .classList.toggle('hidden', game.id === 'simonsays');
+        $('difficulty-field').classList.toggle(
+            'hidden',
+            game.id === 'simonsays' || game.type === 'simulation'
+        );
         $('seed-input').value = supplied?.seed || '';
         $('game-options').replaceChildren();
         for (const option of game.options) {
+            const field = document.createElement('div');
+            field.dataset.optionField = option.key;
             const label = document.createElement('label');
             label.textContent = option.label;
             const select = document.createElement('select');
@@ -136,9 +313,102 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (supplied?.options?.[option.key]) select.value = supplied.options[option.key];
             label.append(select);
-            $('game-options').append(label);
+            field.append(label);
+            if (option.key === 'mode' || option.values.length <= 4) {
+                label.classList.add('select-fallback');
+                select.setAttribute('aria-hidden', 'true');
+                select.tabIndex = -1;
+                const group = document.createElement('fieldset');
+                group.className = 'choice-field';
+                const legend = document.createElement('legend');
+                legend.textContent = option.key === 'mode' ? 'Modo de jogo' : option.label;
+                const choices = document.createElement('div');
+                choices.className = 'choice-grid';
+                group.append(legend, choices);
+                const hints = {
+                    memory_game: {
+                        classic: 'Encontre duas cartas iguais.',
+                        sequence: 'Observe quadrados que acendem e repita a ordem.',
+                        association: 'Combine coisas relacionadas.',
+                        concepts: 'Termo e definição.',
+                        english: 'Palavra em inglês e tradução.',
+                        math: 'Multiplicação e resultado.',
+                        symbols: 'Símbolo e significado.'
+                    },
+                    memorypath: {
+                        spatial: 'Repita as posições na ordem em que acendem.',
+                        directions: 'Memorize uma rota e use as setas.',
+                        interference: 'Lembre a sequência depois de uma distração.',
+                        rotation: 'Repita as posições com a grade girada 90°.'
+                    },
+                    simonsays: {
+                        classic: 'Repita as luzes na mesma ordem.',
+                        inverse: 'Responda pelo botão oposto; a regra muda a cada três rodadas.'
+                    },
+                    checklist: {
+                        expedition: 'Mochilas e suprimentos para explorar.',
+                        space: 'Prepare a tripulação para cada destino.',
+                        potions: 'Separe os ingredientes de cada etapa.'
+                    }
+                };
+                option.values.forEach((entry) => {
+                    const choice = document.createElement('label');
+                    choice.className = 'choice-option';
+                    const radio = document.createElement('input');
+                    radio.type = 'radio';
+                    radio.name = `setup-${option.key}`;
+                    radio.value = entry.value;
+                    radio.checked = select.value === entry.value;
+                    const content = document.createElement('span');
+                    const title = document.createElement('strong');
+                    title.textContent = entry.label;
+                    content.append(title);
+                    const hint =
+                        option.key === 'mode' || option.key === 'theme'
+                            ? hints[game.id]?.[entry.value]
+                            : null;
+                    if (hint) {
+                        const description = document.createElement('small');
+                        description.textContent = hint;
+                        content.append(description);
+                    }
+                    radio.onchange = () => {
+                        if (radio.checked) {
+                            select.value = radio.value;
+                            select.dispatchEvent(new Event('change', { bubbles: true }));
+                        }
+                    };
+                    choice.append(radio, content);
+                    choices.append(choice);
+                });
+                field.append(group);
+            }
+            $('game-options').append(field);
         }
+        const difficultyChoices = $('difficulty-choices').querySelector('.choice-grid');
+        difficultyChoices.replaceChildren();
+        DifficultyEngine.keys.forEach((key) => {
+            const label = document.createElement('label');
+            label.className = 'choice-option';
+            const radio = document.createElement('input');
+            radio.type = 'radio';
+            radio.name = 'setup-difficulty';
+            radio.value = key;
+            radio.checked = $('difficulty-select').value === key;
+            const text = document.createElement('span');
+            text.textContent = DifficultyEngine.names[key];
+            radio.onchange = () => {
+                if (radio.checked) {
+                    $('difficulty-select').value = key;
+                    $('difficulty-select').dispatchEvent(new Event('change', { bubbles: true }));
+                }
+            };
+            label.append(radio, text);
+            difficultyChoices.append(label);
+        });
         updateDifficultyExplanation();
+        $('start-practice-game-btn').textContent =
+            game.type === 'simulation' ? 'Montar arena →' : 'Jogar →';
         screen('phase-selection-screen');
     }
     function showResult(success, details, error = false) {
@@ -164,6 +434,9 @@ document.addEventListener('DOMContentLoaded', () => {
             : success
               ? 'Desafio concluído'
               : 'Resultado';
+        $('result-signal').textContent = error ? '!' : success ? '✓' : '↻';
+        $('result-signal').className =
+            `result-signal ${error ? 'technical-result' : success ? 'won-result' : 'retry-result'}`;
         const stats = [
             ['Pontuação', metrics.score.toLocaleString('pt-BR')],
             ['Precisão', metrics.accuracy === null ? '—' : `${Math.round(metrics.accuracy)}%`],
@@ -206,8 +479,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const version = loadVersion;
         screen('roguelike-game-area');
         $('current-mode-title').textContent = game.name;
+        $('skill-chip').textContent = GameLibrary.skill(game);
+        $('roguelike-game-area').style.setProperty(
+            '--play-accent',
+            GameLibrary.categories[game.category]?.color || '#9ccaf9'
+        );
+        $('roguelike-game-area').dataset.game = game.id;
         $('run-status').textContent =
-            `${game.id === 'simonsays' ? 'Progressão contínua' : DifficultyEngine.names[challenge.difficulty]} · Seed: ${challenge.seed}`;
+            `${game.type === 'simulation' ? 'Simulação narrativa' : game.id === 'simonsays' ? 'Progressão contínua' : DifficultyEngine.names[challenge.difficulty]} · Seed: ${challenge.seed}`;
         $('hud-time-wrap').classList.toggle(
             'hidden',
             game.id === 'mini_sudoku' && challenge.options.timer === 'off'
@@ -289,6 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
             'Matemática',
             'Conhecimento',
             'Digitação e Palavras',
+            'Simuladores',
             'Extras'
         ];
         const prefs = Progress.library();
@@ -311,7 +591,14 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             $('category-tabs').append(button);
         }
-        $('library-title').textContent = category === 'Todos' ? 'Todos os jogos' : category;
+        $('library-title').textContent =
+            libraryFilter === 'perception'
+                ? category === 'Todos'
+                    ? 'Jogos de percepção'
+                    : `Percepção · ${category}`
+                : category === 'Todos'
+                  ? 'Todos os jogos'
+                  : category;
         $('library-filters')
             .querySelectorAll('button')
             .forEach((button) =>
@@ -374,7 +661,7 @@ document.addEventListener('DOMContentLoaded', () => {
             footer.className = 'game-card-footer';
             const stats = Progress.get(game.id);
             const record = document.createElement('small');
-            record.textContent = `${game.id === 'simonsays' && stats?.bestSequence ? `Recorde: ${stats.bestSequence} estímulos` : stats?.bestScore ? `Recorde: ${stats.bestScore.toLocaleString('pt-BR')}` : 'Seu próximo desafio'}`;
+            record.textContent = `${game.id === 'simonsays' && stats?.bestSequence ? `Recorde: ${stats.bestSequence} estímulos` : stats?.bestScore ? `Recorde: ${stats.bestScore.toLocaleString('pt-BR')}` : GameLibrary.skill(game)}`;
             const favorite = document.createElement('button');
             favorite.dataset.favorite = game.id;
             favorite.className = 'favorite-game';
@@ -412,6 +699,24 @@ document.addEventListener('DOMContentLoaded', () => {
         $('game-options')
             .querySelectorAll('select')
             .forEach((el) => (options[el.dataset.option] = el.value));
+        $('phase-selection-screen')
+            .querySelectorAll('input[type="radio"]')
+            .forEach((radio) => {
+                radio.checked =
+                    radio.name === 'setup-difficulty'
+                        ? radio.value === $('difficulty-select').value
+                        : radio.value === options[radio.name.slice('setup-'.length)];
+            });
+        if (selected.id === 'memory_game') {
+            $('game-options')
+                .querySelector('[data-option-field="category"]')
+                .classList.toggle('hidden', options.mode !== 'association');
+        }
+        if (selected.id === 'wordrain') {
+            $('game-options')
+                .querySelector('[data-option-field="bank"]')
+                .classList.toggle('hidden', options.mode === 'text' || options.language !== 'pt');
+        }
         $('difficulty-explanation').textContent = GameLibrary.difficulty(
             selected,
             $('difficulty-select').value,
@@ -421,12 +726,18 @@ document.addEventListener('DOMContentLoaded', () => {
     function togglePause() {
         if (!session?.alive) return;
         manualPause = !manualPause;
-        if (manualPause) session.pause();
-        else session.resume();
+        syncGamePause();
         ui.phaseDisplay.inert = manualPause;
         ui.phaseDisplay.classList.toggle('paused-panel', manualPause);
         $('pause-notice').classList.toggle('hidden', !manualPause);
         $('pause-current-game').textContent = manualPause ? 'Retomar' : 'Pausar';
+    }
+    function syncGamePause() {
+        const consulting = $('roguelike-game-area').querySelector(
+            '.game-help[open],.session-tools[open]'
+        );
+        if (manualPause || document.hidden || consulting) session?.pause();
+        else session?.resume();
     }
     async function share() {
         const url = new URL(location.href);
@@ -472,7 +783,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mode = 'practice';
         const seed = SeededRandom.daily(),
             rng = SeededRandom.create(seed);
-        const game = rng.pick(GAMES_CONFIG.filter((g) => g.primary));
+        const game = rng.pick(GAMES_CONFIG.filter((g) => g.primary && g.type !== 'simulation'));
         configure(game, {
             difficulty: 'medium',
             seed,
@@ -514,6 +825,19 @@ document.addEventListener('DOMContentLoaded', () => {
         configure(GAMES_CONFIG.find((game) => game.id === 'timeline'));
     };
     document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            const openPanel = $('roguelike-game-area').querySelector(
+                '.game-help[open],.session-tools[open]'
+            );
+            if (openPanel) {
+                event.preventDefault();
+                openPanel.open = false;
+                openPanel.querySelector('summary')?.focus({ preventScroll: true });
+                syncGamePause();
+                return;
+            }
+            if (document.fullscreenElement) return;
+        }
         if (
             event.key === 'Escape' &&
             session?.alive &&
@@ -523,9 +847,11 @@ document.addEventListener('DOMContentLoaded', () => {
             togglePause();
         }
     });
-    $('back-to-main-menu').onclick = quit;
-    $('quit-current-game').onclick = quit;
-    $('modalMenuButton').onclick = quit;
+    $('back-to-main-menu').textContent = '← Voltar';
+    $('back-to-main-menu').onclick = returnToPrevious;
+    $('quit-current-game').onclick = returnToPrevious;
+    $('modalMenuButton').textContent = 'Voltar';
+    $('modalMenuButton').onclick = returnToPrevious;
     $('restart-current-game').onclick = () => start(current, challenge);
     $('new-current-game').onclick = () => start(current, newChallenge(current));
     $('game-settings').onclick = () => {
@@ -540,7 +866,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('messageModal').addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
             event.preventDefault();
-            quit();
+            returnToPrevious();
         }
         if (event.key === 'Tab') {
             const buttons = [...$('messageModal').querySelectorAll('button')],
@@ -556,12 +882,112 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
     document.addEventListener('visibilitychange', () => {
-        if (document.hidden) session?.pause();
-        else if (!manualPause) session?.resume();
+        syncGamePause();
     });
-    window.addEventListener('pagehide', () => session?.destroy());
+    document.addEventListener(
+        'toggle',
+        (event) => {
+            if (
+                event.target.isConnected &&
+                event.target.matches?.('.game-help,.session-tools') &&
+                event.target.closest('#roguelike-game-area')
+            )
+                syncGamePause();
+        },
+        true
+    );
+    window.addEventListener('pagehide', (event) => {
+        rememberPage();
+        if (event.persisted) session?.pause();
+        else session?.destroy();
+    });
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) syncGamePause();
+    });
+    window.addEventListener('popstate', (event) => {
+        restorePage(event.state || routeFromURL()).catch((error) => {
+            console.error(error);
+            quit();
+        });
+    });
+    document.addEventListener('change', () => rememberPage());
+    $('seed-input').addEventListener('input', () => rememberPage());
+    $('game-search').addEventListener('input', () => rememberPage());
+    $('category-tabs').addEventListener('click', () => rememberPage());
+    $('library-filters').addEventListener('click', () => rememberPage());
+    $('clear-library-filters').addEventListener('click', () => rememberPage());
+    window.addEventListener('scroll', () => rememberPage(), { passive: true });
+    function resizeArena() {
+        $('roguelike-game-area').style.setProperty(
+            '--arena-height',
+            `${Math.floor(window.visualViewport?.height || window.innerHeight)}px`
+        );
+    }
+    window.visualViewport?.addEventListener('resize', resizeArena);
+    window.addEventListener('resize', resizeArena);
+    resizeArena();
+    $('expand-game').onclick = async () => {
+        try {
+            if (document.fullscreenElement) await document.exitFullscreen();
+            else if (document.documentElement.requestFullscreen)
+                await document.documentElement.requestFullscreen();
+            else
+                ui.noticeDisplay.textContent =
+                    'A partida já ocupa a janela. Este navegador não oferece tela cheia.';
+        } catch {
+            ui.noticeDisplay.textContent =
+                'Não foi possível entrar em tela cheia. A partida continua na janela.';
+        }
+    };
+    document.addEventListener('fullscreenchange', () => {
+        $('expand-game').setAttribute('aria-pressed', String(Boolean(document.fullscreenElement)));
+        $('expand-game').setAttribute(
+            'aria-label',
+            document.fullscreenElement ? 'Sair da tela cheia' : 'Entrar em tela cheia'
+        );
+        resizeArena();
+    });
+    function routeFromURL() {
+        const params = new URL(location.href).searchParams;
+        const game = GAMES_CONFIG.find((g) => g.id === params.get('game'));
+        if (!game) return { version: 1, screen: 'game-main-menu' };
+        const route = {
+            version: 1,
+            screen:
+                params.get('view') === 'play' ? 'roguelike-game-area' : 'phase-selection-screen',
+            challenge: {
+                game: game.id,
+                difficulty: params.get('difficulty') || 'easy',
+                seed: params.has('seed') ? SeededRandom.normalize(params.get('seed')) : '',
+                options: JSON.parse(params.get('options') || '{}')
+            }
+        };
+        // Only restore navigation context when the explicit challenge matches it.
+        try {
+            const cached = history.state || JSON.parse(localStorage.getItem(pageKey));
+            const c = cached?.challenge,
+                r = route.challenge;
+            if (
+                cached?.version === 1 &&
+                cached.screen === route.screen &&
+                c?.game === r.game &&
+                c.seed === r.seed &&
+                c.difficulty === r.difficulty &&
+                JSON.stringify(optionsFor(game, c.options, r.difficulty)) ===
+                    JSON.stringify(optionsFor(game, r.options, r.difficulty))
+            ) {
+                route.library = cached.library;
+                route.trail = cached.trail;
+                route.scroll = cached.scroll;
+            }
+        } catch {
+            /* A shared link still opens when stored context is unavailable. */
+        }
+        return route;
+    }
     renderCatalog();
     screen('game-main-menu');
+    routingReady = true;
     const params = new URL(location.href).searchParams,
         game = GAMES_CONFIG.find((g) => g.id === params.get('game'));
     if (game)
@@ -569,13 +995,38 @@ document.addEventListener('DOMContentLoaded', () => {
             const difficulty = params.get('difficulty') || 'easy';
             if (!DifficultyEngine.keys.includes(difficulty))
                 throw Error('Dificuldade inválida no link.');
-            configure(game, {
-                difficulty,
-                seed: SeededRandom.normalize(params.get('seed')),
-                options: JSON.parse(params.get('options') || '{}')
-            });
+            const linked = routeFromURL();
+            if (['play', 'setup'].includes(params.get('view')))
+                restorePage(linked).catch((error) => {
+                    configure(game);
+                    $('config-error').textContent = error.message;
+                });
+            else
+                configure(game, {
+                    ...linked.challenge,
+                    seed:
+                        params.get('view') === 'setup' && !params.has('seed')
+                            ? ''
+                            : SeededRandom.normalize(params.get('seed'))
+                });
         } catch (error) {
             configure(game);
             $('config-error').textContent = error.message;
         }
+    else {
+        let saved = null;
+        try {
+            if (!params.has('view')) saved = JSON.parse(localStorage.getItem(pageKey));
+        } catch {}
+        if (saved)
+            restorePage(saved)
+                .then((restored) => {
+                    if (!restored) rememberPage();
+                })
+                .catch(() => {
+                    quit();
+                    rememberPage();
+                });
+        else rememberPage();
+    }
 });

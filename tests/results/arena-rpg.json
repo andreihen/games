@@ -1,0 +1,42 @@
+[
+  {
+    "name": "RPG: orçamento exato e idempotente de 6–60 pontos, limites 1–10 e edição sem balanceamento",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: seis desenhos e quatro topologias conectadas, fontes reais, rotas abertas preservadas pelo cerco",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: fotos locais de todo o catálogo, identidade iCarly, proveniência e bytes originais",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: chances de ataque e persuasão usam atributos do ator e do alvo",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: armadilhas consomem material, respeitam posição e registram teste de detecção",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: armas próprias e munição entram no estado e no replay; opções inválidas são rejeitadas",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: perfis mudam decisões e frequência alta aumenta imprevistos em seeds fixas",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: confrontos continuam relevantes na sobrevivência sem kits, em seis arenas",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: painel por obra, primeiro personagem editável, foto por URL, orçamento e arma configurável",
+    "status": "PASS"
+  },
+  {
+    "name": "RPG: save antigo preservado, elenco recuperado e morto sempre com retrato sem cor",
+    "status": "PASS"
+  }
+]

@@ -42,7 +42,7 @@ Com as dependências de testes instaladas e Python no PATH:
 npm run test:deploy --prefix tests
 ```
 
-O teste gera um pacote temporário e serve o HTML na raiz e em `/games/`. Em ambos os caminhos, verifica o catálogo e os estilos, compara os quatro bancos de dados e as 250 bandeiras e inicializa os 44 jogos. Requisições a scripts, folhas de estilo ou imagens externas fazem o teste falhar. O relatório fica em `tests/results/deployment.json`.
+O teste gera um pacote temporário e serve o HTML na raiz e em `/games/`. Em ambos os caminhos, verifica o catálogo e os estilos, compara os oito bancos de dados e as 250 bandeiras e inicializa os 61 jogos. Requisições a scripts, folhas de estilo ou imagens externas fazem o teste falhar. O relatório fica em `tests/results/deployment.json`.
 
 A verificação de navegador complementa o DOM simulado: conferiu o layout do arcade, a renderização real de bandeiras incorporadas e o feedback de uma rodada. A correção local só aparecerá no site público depois do upload e da nova publicação; esta documentação não afirma que o repositório remoto já foi alterado.
 

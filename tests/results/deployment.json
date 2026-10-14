@@ -5,11 +5,11 @@
       "status": "PASS"
     },
     {
-      "name": "250 SVGs e quatro bancos de dados preservados em /",
+      "name": "250 SVGs e oito bancos de dados preservados em /",
       "status": "PASS"
     },
     {
-      "name": "44 jogos inicializam em / sem requests adicionais ou erros",
+      "name": "61 jogos inicializam em / sem requests adicionais ou erros",
       "status": "PASS"
     },
     {
@@ -17,11 +17,11 @@
       "status": "PASS"
     },
     {
-      "name": "250 SVGs e quatro bancos de dados preservados em /games/",
+      "name": "250 SVGs e oito bancos de dados preservados em /games/",
       "status": "PASS"
     },
     {
-      "name": "44 jogos inicializam em /games/ sem requests adicionais ou erros",
+      "name": "61 jogos inicializam em /games/ sem requests adicionais ou erros",
       "status": "PASS"
     }
   ],

@@ -139,10 +139,10 @@ function gf2(board, size, modifier) {
     return best;
 }
 async function run() {
-    await test('44 jogos: quatro dificuldades, todos os modos, seed repetível e encerramento sem recursos', async () => {
+    await test('61 jogos: quatro dificuldades, todos os modos, seed repetível e encerramento sem recursos', async () => {
         const t = setup();
-        assert.equal(t.config.length, 44);
-        assert.equal(t.config.filter((g) => g.primary).length, 43);
+        assert.equal(t.config.length, 61);
+        assert.equal(t.config.filter((g) => g.primary).length, 60);
         for (const g of t.config) {
             for (const difficulty of ['easy', 'medium', 'hard', 'expert']) {
                 await t.mount(g.id, difficulty);

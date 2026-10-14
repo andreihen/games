@@ -1,7 +1,15 @@
 GameRegistry.register('memory_game', (session) => {
-    function init(config) {
+    async function init(config) {
         const mode = config.options.mode || 'classic',
             category = config.options.category || 'mixed';
+        if (mode === 'sequence') {
+            const game = GAMES_CONFIG.find((entry) => entry.id === 'memorypath');
+            const factory = await GameRegistry.load(game);
+            return factory(session).init({
+                ...DifficultyEngine.resolve('memorypath', config.difficulty, { mode: 'spatial' }),
+                seed: config.seed
+            });
+        }
         const pools = {
             classic: '🐶 🍎 🚗 🐝 🌙 🌻 🐢 🎵 ⚽ 🐟 🏠 🔑 📷 🌈 🚀 🍋 🧩 ⛵ 🦋 🍇 ☕ 🕯️ 🪴 📕'
                 .split(' ')
@@ -122,26 +130,28 @@ GameRegistry.register('memory_game', (session) => {
             );
         let open = [],
             matched = new Set(),
-            locked = false;
+            locked = false,
+            attempts = 0;
         const $ = GameUI.shell(
             session,
             'Jogo da Memória',
             mode === 'classic'
                 ? 'Encontre os pares iguais.'
                 : `Combine pares relacionados. Modo: ${mode === 'association' ? 'Associação' : mode === 'math' ? 'Matemática' : mode === 'english' ? 'Inglês' : mode === 'symbols' ? 'Símbolos' : 'Conceitos'}.`,
-            `<p id="mg-progress" class="status-line"></p><div id="mg-board" class="memory-board"></div>`
+            `<p id="mg-progress" class="status-line" role="status"></p><div id="mg-board" class="memory-board"></div><p class="muted memory-help">Abra duas cartas para formar um par. Os pares encontrados ficam à vista.</p>`
         );
         const buttons = deck.map((card, i) => {
             const button = document.createElement('button');
             button.className = 'memory-card closed';
             button.dataset.card = i;
+            button.dataset.kind = mode;
             $('#mg-board').append(button);
             return button;
         });
         function render() {
             buttons.forEach((button, i) => {
                 const visible = open.includes(i) || matched.has(deck[i].pair);
-                button.textContent = visible ? deck[i].text : '?';
+                button.textContent = visible ? deck[i].text : '◇';
                 button.className = `memory-card${visible ? '' : ' closed'}${matched.has(deck[i].pair) ? ' matched' : ''}`;
                 button.disabled = locked || matched.has(deck[i].pair) || open.includes(i);
                 button.setAttribute(
@@ -149,7 +159,8 @@ GameRegistry.register('memory_game', (session) => {
                     visible ? deck[i].text : `Carta ${i + 1}, fechada`
                 );
             });
-            $('#mg-progress').textContent = `Pares: ${matched.size}/${pairs.length}`;
+            $('#mg-progress').textContent =
+                `${matched.size} de ${pairs.length} pares · ${attempts} tentativas`;
         }
         session.listen($('#mg-board'), 'click', (event) => {
             const button = event.target.closest('[data-card]');
@@ -160,8 +171,14 @@ GameRegistry.register('memory_game', (session) => {
             render();
             if (open.length === 2) {
                 locked = true;
+                attempts++;
                 const same = deck[open[0]].pair === deck[open[1]].pair;
                 session.score.answer(same);
+                session.notify(
+                    same
+                        ? 'Par encontrado.'
+                        : 'Essas cartas não formam um par. Tente outra combinação.'
+                );
                 if (same) {
                     matched.add(deck[i].pair);
                     open = [];
